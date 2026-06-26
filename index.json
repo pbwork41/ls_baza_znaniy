@@ -13,6 +13,19 @@
       "updated": "2026-06-26",
       "author": "Pavel",
       "isNew": true
+    },
+    {
+      "id": "g001",
+      "title": "Мини-гайд к первой тренировке",
+      "category": "guides",
+      "file": "guides/g001.md",
+      "tags": [
+        "гайд",
+        "новичок",
+        "первая тренировка"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
