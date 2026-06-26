@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гайд по дашборду</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7c3aed;--purple-bg:#f5f3ff;--purple-light:#ede9fe;
+  --green:#16a34a;--green-bg:#f0fdf4;
+  --amber:#d97706;--amber-bg:#fffbeb;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --blue:#2563eb;--blue-bg:#eff6ff;
+  --border:#e5e7eb;--bg:#f9fafb;--surface:#fff;
+  --text:#111827;--muted:#6b7280;
+  --radius:10px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:860px;margin:0 auto}
+.hero{background:var(--purple);color:#fff;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.hero-title{font-size:22px;font-weight:700;margin-bottom:6px}
+.hero-sub{font-size:14px;opacity:.85}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px}
+.toc-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.toc-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--purple);text-decoration:none;border:1px solid var(--purple-light)}
+.toc-item:hover{background:var(--purple-light)}
+.toc-item .icon{font-size:16px}
+.section{margin-bottom:28px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--purple-light)}
+.section-icon{width:36px;height:36px;border-radius:8px;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.section-title{font-size:17px;font-weight:700}
+.section-sub{font-size:13px;color:var(--muted);margin-top:2px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.card-title{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.card-body{font-size:12px;color:var(--muted);line-height:1.6}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-purple{background:var(--purple-bg);color:var(--purple)}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.mockup{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.mockup-bar{background:var(--purple);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.mockup-bar-title{color:#fff;font-size:13px;font-weight:600}
+.mockup-body{padding:14px}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.metric-box{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.metric-val{font-size:18px;font-weight:700}
+.metric-val.green{color:var(--green)}
+.metric-val.amber{color:var(--amber)}
+.metric-val.red{color:var(--red)}
+.funnel{display:flex;flex-direction:column;gap:4px}
+.funnel-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.funnel-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.funnel-label{flex:1;font-size:12px;color:var(--muted)}
+.funnel-val{font-size:13px;font-weight:600}
+.funnel-bar-wrap{width:100px;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden}
+.funnel-bar{height:100%;border-radius:3px}
+.tip{background:var(--amber-bg);border:1px solid #fcd34d;border-radius:8px;padding:12px 14px;font-size:13px;color:#92400e;margin-bottom:12px;display:flex;gap:10px}
+.tip-icon{font-size:18px;flex-shrink:0}
+.tabs-mockup{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.tab-pill{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:default}
+.tab-pill.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.step-body{font-size:13px;line-height:1.6;color:var(--text)}
+.step-body strong{color:var(--purple)}
+.divider-section{border:none;border-top:2px dashed var(--border);margin:28px 0}
+@media(max-width:600px){.metric-row{grid-template-columns:1fr 1fr}.toc-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-title">👑 Гайд по управленческой панели</div>
+  <div class="hero-sub">Lady Stretch · Полное руководство по дашборду руководителя</div>
+</div>
+
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+  <div class="toc-title">Разделы дашборда</div>
+  <div class="toc-grid">
+    <a class="toc-item" href="#overview"><span class="icon">📊</span> Сводка</a>
+    <a class="toc-item" href="#mom"><span class="icon">📈</span> Динамика</a>
+    <a class="toc-item" href="#studios"><span class="icon">🏢</span> Аналитика студий</a>
+    <a class="toc-item" href="#admins"><span class="icon">🏆</span> Рейтинг МПП</a>
+    <a class="toc-item" href="#marathons"><span class="icon">🏅</span> Марафоны</a>
+    <a class="toc-item" href="#reports"><span class="icon">📋</span> Отчёты</a>
+    <a class="toc-item" href="#salary"><span class="icon">💰</span> Зарплаты</a>
+    <a class="toc-item" href="#plans"><span class="icon">🎯</span> Планы</a>
+    <a class="toc-item" href="#motivation"><span class="icon">⚡</span> Мотивация</a>
+    <a class="toc-item" href="#staff"><span class="icon">👥</span> Сотрудники</a>
+    <a class="toc-item" href="#trainers"><span class="icon">🤸</span> Тренеры</a>
+    <a class="toc-item" href="#login"><span class="icon">🔐</span> Вход и доступ</a>
+  </div>
+</div>
+
+<!-- ВХОД -->
+<div class="section" id="login">
+  <div class="section-header">
+    <div class="section-icon">🔐</div>
+    <div>
+      <div class="section-title">Вход в дашборд</div>
+      <div class="section-sub">PIN-защита от случайного доступа</div>
+    </div>
+  </div>
+  <div class="tip"><span class="tip-icon">💡</span><span>При открытии дашборд запрашивает <strong>4-значный PIN-код</strong>. Это защита от случайного просмотра на рабочем месте. PIN знают только руководители.</span></div>
+  <div class="step"><div class="step-num">1</div><div class="step-body">Открываешь ссылку на дашборд в браузере</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">Вводишь <strong>4-значный PIN</strong> — экран разблокируется</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">Данные загружаются из Supabase автоматически — видишь актуальные цифры</div></div>
+</div>
+
+<hr class="divider-section">
+
+<!-- СВОДКА -->
+<div class="section" id="overview">
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <div>
+      <div class="section-title">Сводка</div>
+      <div class="section-sub">Главный экран — открывается первым при входе</div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="mockup-bar-title">📊 Сводка — текущий месяц</div>
+    </div>
+    <div class="mockup-body">
+      <div class="metric-row">
+        <div class="metric-box"><div class="metric-label">Выручка</div><div class="metric-val green">₽ 312к</div></div>
+        <div class="metric-box"><div class="metric-label">Лиды</div><div class="metric-val">84</div></div>
+        <div class="metric-box"><div class="metric-label">Пробные</div><div class="metric-val amber">31</div></div>
+        <div class="metric-box"><div class="metric-label">Продажи</div><div class="metric-val">18</div></div>
+      </div>
+      <div class="funnel">
+        <div class="funnel-row"><div class="funnel-dot" style="background:#7c3aed"></div><div class="funnel-label">Лиды</div><div class="funnel-val">84</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%;background:#7c3aed"></div></div></div>
+        <div class="funnel-row"><div class="funnel-dot" style="background:#2563eb"></div><div class="funnel-label">Записи на пробное</div><div class="funnel-val">54</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:64%;background:#2563eb"></div></div></div>
+        <div class="funnel-row"><div class="funnel-dot" style="background:#16a34a"></div><div class="funnel-label">Пришли</div><div class="funnel-val">31</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:37%;background:#16a34a"></div></div></div>
+        <div class="funnel-row"><div class="funnel-dot" style="background:#d97706"></div><div class="funnel-label">Купили</div><div class="funnel-val">18</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:21%;background:#d97706"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">💰 Выручка <span class="badge badge-green">главное</span></div>
+      <div class="card-body">Сумма всех продаж за текущий месяц. Сравнивается с планом — видишь % выполнения и отставание в рублях.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📞 Воронка продаж</div>
+      <div class="card-body">Лид → Запись → Приход → Покупка. На каждом этапе видишь количество и конверсию. Красный — тревога, зелёный — норма.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏢 По студиям</div>
+      <div class="card-body">Мечта и Империал отдельно. Сразу видно какая студия тянет вниз, а какая выполняет план.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔄 Продления</div>
+      <div class="card-body">Сколько клиентов продлили абонемент. Критичный показатель для выручки — продление дешевле нового привлечения.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- ДИНАМИКА -->
+<div class="section" id="mom">
+  <div class="section-header">
+    <div class="section-icon">📈</div>
+    <div>
+      <div class="section-title">Динамика (MoM)</div>
+      <div class="section-sub">Сравнение месяц к месяцу — видишь тренд</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">📅 История по месяцам</div>
+      <div class="card-body">График выручки, лидов и конверсий за все прошлые месяцы. Сразу видно: растём или падаем, есть ли сезонность.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Изменение показателей</div>
+      <div class="card-body">Каждая метрика показывает дельту к прошлому месяцу: +12% зелёным, −8% красным. Быстро видишь где провал.</div>
+    </div>
+  </div>
+  <div class="tip"><span class="tip-icon">⚠️</span><span>Если выручка упала более чем на 20% к прошлому месяцу — смотри сюда в первую очередь. Здесь увидишь когда началось падение и что именно просело.</span></div>
+</div>
+
+<hr class="divider-section">
+
+<!-- АНАЛИТИКА -->
+<div class="section" id="studios">
+  <div class="section-header">
+    <div class="section-icon">🏢</div>
+    <div>
+      <div class="section-title">Аналитика студий</div>
+      <div class="section-sub">Детальные показатели по Мечте и Империалу отдельно</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">🏢 Мечта <span class="badge badge-purple">филиал</span></div>
+      <div class="card-body">Лиды, пробные, продажи, выручка, продления. Конверсии по каждому этапу воронки отдельно для этой студии.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏢 Империал <span class="badge badge-blue">филиал</span></div>
+      <div class="card-body">То же самое для второй студии. Можно сравнивать — где конверсия лучше, где хуже.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📡 Источники лидов</div>
+      <div class="card-body">Сколько лидов пришло из каждого канала: ВК, Инстаграм, сарафан, другие. Помогает решить куда вкладывать бюджет.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- РЕЙТИНГ МПП -->
+<div class="section" id="admins">
+  <div class="section-header">
+    <div class="section-icon">🏆</div>
+    <div>
+      <div class="section-title">Рейтинг МПП</div>
+      <div class="section-sub">Менеджеры по продажам — кто как работает</div>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-bar"><div class="mockup-bar-title">🏆 Рейтинг администраторов</div></div>
+    <div class="mockup-body">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f0fdf4;border:1px solid #86efac;border-radius:6px">
+          <div style="font-size:20px">🥇</div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">Алина Д.</div><div style="font-size:11px;color:#6b7280">Империал · 12 продаж · конв. 38%</div></div>
+          <div style="font-size:15px;font-weight:700;color:#16a34a">₽ 187к</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fffbeb;border:1px solid #fcd34d;border-radius:6px">
+          <div style="font-size:20px">🥈</div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">Мария С.</div><div style="font-size:11px;color:#6b7280">Мечта · 8 продаж · конв. 29%</div></div>
+          <div style="font-size:15px;font-weight:700;color:#d97706">₽ 124к</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px">
+          <div style="font-size:20px">🥉</div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">Ольга К.</div><div style="font-size:11px;color:#6b7280">Мечта · 5 продаж · конв. 22%</div></div>
+          <div style="font-size:15px;font-weight:700;color:#6b7280">₽ 78к</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">📞 Звонки и записи</div>
+      <div class="card-body">Сколько звонков сделал каждый администратор, сколько записали на пробное. Видишь кто работает активно.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💰 Продажи и выручка</div>
+      <div class="card-body">Количество закрытых продаж и сумма. Ранжирование от лучшего к худшему за текущий месяц.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Конверсия пробное→покупка</div>
+      <div class="card-body">Главный показатель качества работы. Норма — 30%+. Если ниже 25% — нужен разбор звонков.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- МАРАФОНЫ -->
+<div class="section" id="marathons">
+  <div class="section-header">
+    <div class="section-icon">🏅</div>
+    <div>
+      <div class="section-title">Марафоны</div>
+      <div class="section-sub">Активность марафонов и прогресс участников</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">🏃 Активный марафон <span class="badge badge-amber">live</span></div>
+      <div class="card-body">Название, приз, даты старта и финиша. Прогресс-бар сколько дней осталось. Количество участников.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Таблица лидеров</div>
+      <div class="card-body">Кто сколько баллов набрал. Динамика — кто поднялся, кто упал. Помогает видеть кого мотивировать дополнительно.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚙️ Управление</div>
+      <div class="card-body">Запустить новый марафон, завершить текущий, редактировать условия и призы.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- ОТЧЁТЫ -->
+<div class="section" id="reports">
+  <div class="section-header">
+    <div class="section-icon">📋</div>
+    <div>
+      <div class="section-title">Отчёты</div>
+      <div class="section-sub">Ежедневные отчёты администраторов</div>
+    </div>
+  </div>
+  <div class="tip"><span class="tip-icon">📌</span><span>Администраторы заполняют отчёт каждый день — здесь ты видишь все отчёты в хронологии и можешь проверить без созвона.</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">📅 Лента отчётов</div>
+      <div class="card-body">Все отчёты по дням. Видишь кто сдал, кто не сдал. Нажимаешь — читаешь содержимое.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">✅ Проверка и статус</div>
+      <div class="card-body">Можно отметить отчёт как проверенный. Администратор видит что ты прочитал — дисциплинирует.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔔 Пендинг-бейдж</div>
+      <div class="card-body">Если есть непроверенные отчёты — в шапке дашборда горит жёлтый бейдж с цифрой. Не пропустишь.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- ЗАРПЛАТЫ -->
+<div class="section" id="salary">
+  <div class="section-header">
+    <div class="section-icon">💰</div>
+    <div>
+      <div class="section-title">Зарплаты</div>
+      <div class="section-sub">Расчёт зарплат администраторов по формуле</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">🧮 Автоматический расчёт</div>
+      <div class="card-body">Оклад + % от продаж + бонусы за выполнение плана. Цифры тянутся из данных — не нужно считать вручную.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Детализация</div>
+      <div class="card-body">Видишь из чего сложилась зарплата каждого: базовая часть, сколько заработал бонусами, итог к выплате.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 История выплат</div>
+      <div class="card-body">Архив по месяцам. Можно сверить что и когда выплачивалось.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- ПЛАНЫ -->
+<div class="section" id="plans">
+  <div class="section-header">
+    <div class="section-icon">🎯</div>
+    <div>
+      <div class="section-title">Планы</div>
+      <div class="section-sub">Установка и отслеживание планов на месяц</div>
+    </div>
+  </div>
+  <div class="step"><div class="step-num">1</div><div class="step-body">Нажимаешь <strong>"Поставить план"</strong> — выбираешь месяц и студию</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">Вводишь плановые значения: <strong>выручка, лиды, пробные, продажи, продления</strong></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">В Сводке и других разделах сразу появляются прогресс-бары <strong>факт / план</strong></div></div>
+  <div class="tip"><span class="tip-icon">💡</span><span>Планы ставятся отдельно для каждой студии и каждого месяца. Без плана — нет прогресс-баров, нет понимания выполнения.</span></div>
+</div>
+
+<hr class="divider-section">
+
+<!-- МОТИВАЦИЯ -->
+<div class="section" id="motivation">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <div class="section-title">Мотивация</div>
+      <div class="section-sub">Бонусная система и условия премирования</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">🎁 Бонусные условия</div>
+      <div class="card-body">Видишь текущие условия для получения бонуса: выполнение плана на 100%, дополнительные % за перевыполнение.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Прогресс к бонусу</div>
+      <div class="card-body">Каждый администратор видит сколько ему осталось до бонуса. Мотивирует дожать в конце месяца.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- СОТРУДНИКИ -->
+<div class="section" id="staff">
+  <div class="section-header">
+    <div class="section-icon">👥</div>
+    <div>
+      <div class="section-title">Сотрудники</div>
+      <div class="section-sub">Управление командой администраторов</div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">➕ Добавить сотрудника</div>
+      <div class="card-body">Имя, студия, роль, дата выхода. После добавления сотрудник появляется во всех разделах.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">✏️ Редактировать</div>
+      <div class="card-body">Изменить данные, перевести в другую студию, изменить ставку.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🗑️ Деактивировать</div>
+      <div class="card-body">При увольнении — деактивируешь сотрудника. Его данные сохраняются в истории, но он пропадает из активных.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-section">
+
+<!-- ТРЕНЕРЫ -->
+<div class="section" id="trainers">
+  <div class="section-header">
+    <div class="section-icon">🤸</div>
+    <div>
+      <div class="section-title">Тренеры</div>
+      <div class="section-sub">Четыре раздела: Команда, Марафоны, Зарплата, Мотивация</div>
+    </div>
+  </div>
+  <div class="tabs-mockup">
+    <div class="tab-pill active">👥 Команда</div>
+    <div class="tab-pill">🏅 Марафоны</div>
+    <div class="tab-pill">💰 Зарплата</div>
+    <div class="tab-pill">⚡ Мотивация</div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">👥 Команда тренеров</div>
+      <div class="card-body">Список тренеров по студиям, направления, занятость. Добавление и редактирование аналогично сотрудникам.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏅 Марафоны тренеров</div>
+      <div class="card-body">Отдельный марафон для тренеров со своими условиями и призами. Независим от марафона администраторов.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💰 Зарплата тренеров</div>
+      <div class="card-body">Расчёт по своей формуле: ставка за занятие + % за продления + бонусы. Отдельно от администраторов.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚡ Мотивация тренеров</div>
+      <div class="card-body">Условия бонусирования тренеров. Отдельная система от административной команды.</div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--purple);color:#fff;border-radius:14px;padding:20px 24px;margin-top:24px;text-align:center">
+  <div style="font-size:16px;font-weight:700;margin-bottom:6px">Есть вопросы по дашборду?</div>
+  <div style="font-size:13px;opacity:.85">Обращайся к руководителю или в чат поддержки</div>
+</div>
+
+</body>
+</html>
