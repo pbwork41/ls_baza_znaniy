@@ -76,7 +76,7 @@
       "isNew": true
     },
     {
-      "id": "s001",
+      "id": "st_s001",
       "title": "1.1 Принципы компании Lady Stretch",
       "category": "start",
       "file": "start/01-principles.md",
@@ -90,7 +90,7 @@
       "isNew": true
     },
     {
-      "id": "s002",
+      "id": "st_s002",
       "title": "1.2 Работа с клиентом на всех этапах",
       "category": "start",
       "file": "start/02-client-stages.md",
@@ -104,7 +104,7 @@
       "isNew": true
     },
     {
-      "id": "s003",
+      "id": "st_s003",
       "title": "2.5 Где брать продажи и от чего зависит результат",
       "category": "start",
       "file": "start/03-where-sales.md",
