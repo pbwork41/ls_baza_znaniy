@@ -59,6 +59,20 @@
       ],
       "updated": "2026-06-26",
       "isNew": true
+    },
+    {
+      "id": "k001",
+      "title": "Гайд по управленческой панели (дашборд)",
+      "category": "kpi",
+      "url": "https://pbwork41.github.io/ls_baza_znaniy/kpi/dashboard-guide.html",
+      "tags": [
+        "дашборд",
+        "руководитель",
+        "аналитика",
+        "отчёты"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
