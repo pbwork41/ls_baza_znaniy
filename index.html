@@ -84,6 +84,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #content-view strong{font-weight:600}
 #content-view hr{border:none;border-top:1px solid var(--border);margin:8px 0}
 #content-view p{margin:2px 0}
+#content-view .remark{color:var(--muted);font-style:italic;font-size:13px;margin:4px 0 4px 0;padding-left:10px;border-left:2px solid var(--border)}
+#content-view .line{background:var(--surface2);border-radius:6px;padding:7px 12px;margin:4px 0;font-size:13px;line-height:1.5}
+#content-view h2{font-size:15px;font-weight:600;margin:16px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+#content-view h3{font-size:13px;font-weight:600;margin:12px 0 4px;color:var(--accent)}
+#content-view ul{padding-left:18px;margin:4px 0}
+#content-view li{margin:3px 0;font-size:13px}
 #content-view blockquote{border-left:3px solid var(--border2);padding:4px 10px;margin:4px 0;color:var(--muted);font-size:13px}
 .no-items{padding:32px;text-align:center;color:var(--muted);font-size:13px}
 #toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
@@ -377,19 +383,48 @@ async function openMaterial(id) {
 function mdToHtml(md) {
   const lines = md.split('\n');
   let html = '';
+  let inList = false;
   for (let i = 0; i < lines.length; i++) {
     let l = lines[i];
+    // форматирование
     l = l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
     l = l.replace(/\*(.+?)\*/g,'<em>$1</em>');
-    if (/^---+$/.test(l.trim())) { html += '<hr>'; continue; }
-    if (/^### /.test(l)) { html += '<h3>' + l.slice(4) + '</h3>'; continue; }
-    if (/^## /.test(l)) { html += '<h2>' + l.slice(3) + '</h2>'; continue; }
-    if (/^# /.test(l)) { html += '<h1>' + l.slice(2) + '</h1>'; continue; }
-    if (/^> /.test(l)) { html += '<blockquote>' + l.slice(2) + '</blockquote>'; continue; }
-    if (/^- /.test(l)) { html += '<li>' + l.slice(2) + '</li>'; continue; }
+
+    if (/^---+$/.test(l.trim())) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<hr>'; continue;
+    }
+    if (/^### /.test(l)) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<h3>' + l.slice(4) + '</h3>'; continue;
+    }
+    if (/^## /.test(l)) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<h2>' + l.slice(3) + '</h2>'; continue;
+    }
+    if (/^# /.test(l)) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<h1>' + l.slice(2) + '</h1>'; continue;
+    }
+    if (/^- /.test(l)) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += '<li>' + l.slice(2) + '</li>'; continue;
+    }
+    if (inList) { html += '</ul>'; inList = false; }
+
     if (l.trim() === '') { continue; }
+
+    // Курсив-ремарка (строка полностью в em после замены)
+    if (/^<em>.*<\/em>$/.test(l.trim())) {
+      html += '<div class="remark">' + l.trim() + '</div>'; continue;
+    }
+    // Реплика администратора/тренера
+    if (/^<strong>(Администратор|Тренер|Admin)/.test(l.trim())) {
+      html += '<div class="line">' + l.trim() + '</div>'; continue;
+    }
     html += '<p>' + l + '</p>';
   }
+  if (inList) html += '</ul>';
   return html;
 }
 
