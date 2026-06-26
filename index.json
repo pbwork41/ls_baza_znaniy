@@ -74,6 +74,48 @@
       ],
       "updated": "2026-06-26",
       "isNew": true
+    },
+    {
+      "id": "s001",
+      "title": "1.1 Принципы компании Lady Stretch",
+      "category": "start",
+      "file": "start/01-principles.md",
+      "tags": [
+        "принципы",
+        "ценности",
+        "онбординг",
+        "старт"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
+    },
+    {
+      "id": "s002",
+      "title": "1.2 Работа с клиентом на всех этапах",
+      "category": "start",
+      "file": "start/02-client-stages.md",
+      "tags": [
+        "клиент",
+        "этапы",
+        "воронка",
+        "старт"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
+    },
+    {
+      "id": "s003",
+      "title": "2.5 Где брать продажи и от чего зависит результат",
+      "category": "start",
+      "file": "start/03-where-sales.md",
+      "tags": [
+        "продажи",
+        "результат",
+        "система",
+        "старт"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
