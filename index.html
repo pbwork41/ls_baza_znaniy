@@ -144,8 +144,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         Работа в AmoCRM <span class="nav-count" id="cnt-amocrm">0</span>
       </div>
       <div class="nav-item" onclick="showPage('kpi',this)">
-        <svg viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        KPI <span class="nav-count" id="cnt-kpi">0</span>
+        <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+        Дашборд <span class="nav-count" id="cnt-kpi">0</span>
       </div>
     </div>
     <div class="main">
@@ -194,8 +194,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="material-list" id="list-amocrm"></div>
       </div>
       <div class="page" id="page-kpi">
-        <div class="page-title">KPI и отчёты</div>
-        <div class="page-sub">Метрики менеджера</div>
+        <div class="page-title">Работа с дашбордом</div>
+        <div class="page-sub">Гайды и материалы по управленческой панели</div>
         <div class="material-list" id="list-kpi"></div>
       </div>
       <div class="page" id="page-search">
@@ -270,7 +270,7 @@ const CAT = {
   onec:       { label: 'Работа в 1С', icon: '🖥️', color: '#fef9ee' },
   banks:      { label: 'Работа с банками', icon: '🏦', color: '#f0fdf4' },
   amocrm:     { label: 'Работа в AmoCRM', icon: '📊', color: '#eff6ff' },
-  kpi:        { label: 'KPI',         icon: '📈', color: '#fef2f2' },
+  kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
 async function init() {
