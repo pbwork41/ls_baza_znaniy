@@ -2,17 +2,34 @@
   "materials": [
     {
       "id": "s001",
-      "title": "Скрипт первого звонка — блоки 1–6",
+      "title": "Скрипт первого звонка — базовый",
       "category": "scripts",
       "file": "scripts/first-call-v1.md",
-      "tags": ["первый звонок", "входящий"],
-      "updated": "2026-06-20",
-      "author": "Pavel"
+      "tags": [
+        "первый звонок",
+        "входящий",
+        "базовый"
+      ],
+      "updated": "2026-06-26",
+      "author": "Pavel",
+      "isNew": true
     }
   ],
   "videos": [],
   "users": [
-    {"id": "u1", "name": "Алина Д.", "role": "manager", "token": "demo-token-1", "active": true},
-    {"id": "u2", "name": "Мария С.", "role": "manager", "token": "demo-token-2", "active": true}
+    {
+      "id": "u1",
+      "name": "Алина Д.",
+      "role": "manager",
+      "token": "demo-token-1",
+      "active": true
+    },
+    {
+      "id": "u2",
+      "name": "Мария С.",
+      "role": "manager",
+      "token": "demo-token-2",
+      "active": true
+    }
   ]
 }
