@@ -44,6 +44,21 @@
       ],
       "updated": "2026-06-26",
       "isNew": true
+    },
+    {
+      "id": "s003",
+      "title": "Полный скрипт — администратор + тренер + закрытие",
+      "category": "scripts",
+      "file": "scripts/full-client-script.md",
+      "tags": [
+        "администратор",
+        "тренер",
+        "закрытие",
+        "анкета",
+        "полный"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
