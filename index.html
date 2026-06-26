@@ -332,6 +332,17 @@ async function saveIndex() {
   if (res.content) state.indexSha = res.content.sha;
 }
 
+// Делегирование событий для материалов
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
+  const id = btn.dataset.id;
+  if (action === 'rename') { e.stopPropagation(); renameMaterial(id); }
+  else if (action === 'delete') { e.stopPropagation(); removeMaterial(id); }
+  else if (action === 'open') { openMaterial(id); }
+});
+
 function renderAll() {
   renderHome();
   ['start','scripts','videos','documents','onec','banks','amocrm','kpi'].forEach(cat => {
@@ -371,15 +382,15 @@ function renderList(cat) {
 
 function materialHTML(m) {
   const meta = CAT[m.category] || {};
-  return `<div class="material-item" onclick="openMaterial('${m.id}')">
+  return `<div class="material-item" data-id="${m.id}" data-action="open">
     <div class="m-icon" style="background:${meta.color||'#f5f5f5'}">${meta.icon||'📄'}</div>
     <div class="m-info">
       <div class="m-title">${m.title}${m.isNew?'<span class="m-tag">Новый</span>':''}</div>
       <div class="m-meta">${meta.label||''} · ${m.updated||''}</div>
     </div>
-    <div class="m-actions" onclick="event.stopPropagation()">
-      <button class="icon-btn" title="Переименовать" onclick="renameMaterial('${m.id}')">✏️</button>
-      <button class="icon-btn" title="Удалить" onclick="removeMaterial('${m.id}')">🗑</button>
+    <div class="m-actions">
+      <button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button>
+      <button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>
     </div>
   </div>`;
 }
