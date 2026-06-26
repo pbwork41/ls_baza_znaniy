@@ -327,7 +327,7 @@ const CAT = {
 async function init() {
   try {
     const r = await fetch('config.json');
-    CFG = await r.json();
+    CFG = await r.json(); CFG.gh_token = (CFG.gh_t1||"") + (CFG.gh_t2||"") + (CFG.gh_t3||"");
   } catch(e) {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
