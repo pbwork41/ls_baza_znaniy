@@ -117,6 +117,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         Скрипты <span class="nav-count" id="cnt-scripts">0</span>
       </div>
+      <div class="nav-item" onclick="showPage('guides',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Гайды <span class="nav-count" id="cnt-guides">0</span>
+      </div>
       <div class="nav-item" onclick="showPage('videos',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         Видео <span class="nav-count" id="cnt-videos">0</span>
@@ -146,6 +150,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Скрипты продаж</div>
         <div class="page-sub">Финальные версии скриптов</div>
         <div class="material-list" id="list-scripts"></div>
+      </div>
+      <div class="page" id="page-guides">
+        <div class="page-title">Гайды</div>
+        <div class="page-sub">Обучающие материалы для клиентов и сотрудников</div>
+        <div class="material-list" id="list-guides"></div>
       </div>
       <div class="page" id="page-videos">
         <div class="page-title">Обучающие видео</div>
@@ -232,6 +241,7 @@ let state = { index: null, indexSha: null, allMaterials: [], currentPage: 'home'
 
 const CAT = {
   scripts:    { label: 'Скрипты',    icon: '📄', color: '#f0ebff' },
+  guides:     { label: 'Гайды',      icon: '📘', color: '#e0f2fe' },
   videos:     { label: 'Видео',       icon: '🎬', color: '#f0fdf4' },
   documents:  { label: 'Документы',   icon: '📋', color: '#fffbeb' },
   objections: { label: 'Возражения',  icon: '💬', color: '#eff6ff' },
@@ -288,7 +298,7 @@ async function saveIndex() {
 
 function renderAll() {
   renderHome();
-  ['scripts','videos','documents','objections','kpi'].forEach(cat => {
+  ['scripts','guides','videos','documents','objections','kpi'].forEach(cat => {
     renderList(cat);
     const el = document.getElementById('cnt-' + cat);
     if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
