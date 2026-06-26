@@ -17,15 +17,6 @@
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
 #loading-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;font-size:14px;color:var(--muted)}
-#auth-screen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:360px;text-align:center}
-.auth-logo{font-size:22px;font-weight:600;margin-bottom:4px}
-.auth-sub{font-size:13px;color:var(--muted);margin-bottom:32px}
-.auth-input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;margin-bottom:12px;font-family:var(--font)}
-.auth-input:focus{border-color:var(--accent)}
-.auth-btn{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer}
-.auth-btn:hover{background:#5b35b1}
-.auth-err{color:var(--danger);font-size:13px;margin-top:10px;display:none}
 #app{display:none;height:100vh;overflow:hidden;flex-direction:column}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .logo{font-size:15px;font-weight:600;margin-right:8px;white-space:nowrap}
@@ -40,8 +31,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .btn-primary:hover{background:#5b35b1}
 .btn-danger{background:#fff;color:var(--danger);border-color:var(--danger)}
 .btn-danger:hover{background:var(--danger-bg)}
-.user-pill{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:20px;border:1px solid var(--border);font-size:13px;cursor:default}
-.avatar{width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent-text);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
 .body-wrap{display:flex;flex:1;overflow:hidden}
 .sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);padding:12px 8px;flex-shrink:0;overflow-y:auto}
 .nav-section{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;padding:8px 10px 4px;margin-top:8px}
@@ -87,14 +76,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent)}
 .form-textarea{min-height:140px;resize:vertical}
-.team-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.t-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;background:var(--accent-bg);color:var(--accent-text)}
-.t-info{flex:1}
-.t-name{font-size:14px;font-weight:500}
-.t-role{font-size:12px;color:var(--muted)}
-.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
-.badge-active{background:var(--success-bg);color:var(--success)}
-.badge-inactive{background:var(--danger-bg);color:var(--danger)}
 #content-view{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;line-height:1.7;font-size:14px}
 #content-view h1{font-size:20px;font-weight:600;margin:16px 0 8px}
 #content-view h2{font-size:16px;font-weight:600;margin:16px 0 8px}
@@ -102,11 +83,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #content-view em{font-style:italic;color:#555}
 #content-view strong{font-weight:600}
 #content-view hr{border:none;border-top:1px solid var(--border);margin:16px 0}
-#content-view br{display:block;margin:2px 0}
 .no-items{padding:32px;text-align:center;color:var(--muted);font-size:13px}
 #toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
 #toast.show{opacity:1}
-.token-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;font-family:monospace;font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 @media(max-width:600px){.sidebar{display:none}.cards-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -114,30 +93,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 <div id="loading-screen">Загрузка...</div>
 
-<div id="auth-screen">
-  <div class="auth-card">
-    <div class="auth-logo">Lady Stretch</div>
-    <div class="auth-sub">База знаний</div>
-    <input class="auth-input" id="auth-name" type="text" placeholder="Ваше имя" />
-    <input class="auth-input" id="auth-token" type="password" placeholder="Код доступа" />
-    <button class="auth-btn" onclick="doLogin()">Войти</button>
-    <div class="auth-err" id="auth-err">Неверный код доступа</div>
-  </div>
-</div>
-
 <div id="app">
   <div class="topbar">
-    <div class="logo">Lady Stretch</div>
+    <div class="logo">Lady Stretch · База знаний</div>
     <div class="search-wrap">
       <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input id="search" type="text" placeholder="Поиск по базе знаний..." oninput="doSearch(this.value)" />
     </div>
     <div class="topbar-right">
-      <span class="user-pill">
-        <div class="avatar" id="user-avatar">АД</div>
-        <span id="user-name-display">—</span>
-      </span>
-      <button class="btn" onclick="logout()">Выйти</button>
+      <button class="btn btn-primary" onclick="openAddModal()">+ Добавить</button>
     </div>
   </div>
   <div class="body-wrap">
@@ -167,20 +131,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         KPI <span class="nav-count" id="cnt-kpi">0</span>
       </div>
-      <div class="nav-section">Управление</div>
-      <div class="nav-item" id="team-nav" style="display:none" onclick="showPage('team',this)">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Команда
-      </div>
-      <div class="nav-item" id="add-nav" style="display:none" onclick="openAddModal()">
-        <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        Добавить
-      </div>
     </div>
     <div class="main">
       <div class="page active" id="page-home">
-        <div class="page-title">Добро пожаловать</div>
-        <div class="page-sub">База знаний — менеджеры по продажам</div>
+        <div class="page-title">База знаний</div>
+        <div class="page-sub">Lady Stretch — менеджеры по продажам</div>
         <div class="cards-grid" id="home-cats"></div>
         <div class="section-label">Последние добавленные</div>
         <div class="material-list" id="recent-list"></div>
@@ -210,14 +165,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-sub">Метрики менеджера</div>
         <div class="material-list" id="list-kpi"></div>
       </div>
-      <div class="page" id="page-team">
-        <div class="page-title">Команда</div>
-        <div class="page-sub">Управление доступом сотрудников</div>
-        <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
-          <button class="btn btn-primary" onclick="openInviteModal()">+ Добавить сотрудника</button>
-        </div>
-        <div id="team-list"></div>
-      </div>
       <div class="page" id="page-search">
         <div class="page-title">Результаты поиска</div>
         <div class="page-sub" id="search-sub"></div>
@@ -232,7 +179,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             <div class="page-sub" id="content-meta" style="margin-bottom:0"></div>
           </div>
         </div>
-        <div id="content-view">Загрузка...</div>
+        <div id="content-view"></div>
       </div>
     </div>
   </div>
@@ -261,7 +208,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
       <div class="form-group">
         <label class="form-label">Содержимое или ссылка</label>
-        <textarea class="form-textarea" id="add-content" placeholder="Вставьте текст скрипта или ссылку на видео (https://...)"></textarea>
+        <textarea class="form-textarea" id="add-content" placeholder="Вставьте текст скрипта или ссылку (https://...)"></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">Теги (через запятую)</label>
@@ -275,130 +222,33 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-invite">
-  <div class="modal">
-    <div class="modal-head">
-      <div class="modal-title">Добавить сотрудника</div>
-      <button class="modal-close" onclick="closeModal('modal-invite')">×</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Имя сотрудника</label>
-        <input class="form-input" id="inv-name" type="text" placeholder="Имя Фамилия" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Роль</label>
-        <select class="form-select" id="inv-role">
-          <option value="manager">Менеджер продаж</option>
-          <option value="trainer">Тренер</option>
-          <option value="admin">Руководитель</option>
-        </select>
-      </div>
-      <div id="inv-result" style="display:none">
-        <div style="font-size:13px;font-weight:500;margin-bottom:4px">Код доступа создан:</div>
-        <div class="token-box">
-          <span id="inv-token" style="word-break:break-all"></span>
-          <button class="btn" style="padding:4px 10px;font-size:12px;flex-shrink:0" onclick="copyToken()">Копировать</button>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:8px">Передайте этот код сотруднику. При входе — имя + этот код.</div>
-      </div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn" onclick="closeModal('modal-invite')">Закрыть</button>
-      <button class="btn btn-primary" id="inv-btn" onclick="createInvite()">Создать доступ</button>
-    </div>
-  </div>
-</div>
-
 <div id="toast"></div>
 
 <script>
 let CFG = {};
-let state = { user: null, index: null, indexSha: null, allMaterials: [], currentPage: 'home', prevPage: 'home' };
+let state = { index: null, indexSha: null, allMaterials: [], currentPage: 'home', prevPage: 'home' };
 
 const CAT = {
-  scripts:    { label: 'Скрипты',      icon: '📄', color: '#f0ebff' },
-  videos:     { label: 'Видео',         icon: '🎬', color: '#f0fdf4' },
-  documents:  { label: 'Документы',     icon: '📋', color: '#fffbeb' },
-  objections: { label: 'Возражения',    icon: '💬', color: '#eff6ff' },
-  kpi:        { label: 'KPI',           icon: '📊', color: '#fef2f2' },
+  scripts:    { label: 'Скрипты',    icon: '📄', color: '#f0ebff' },
+  videos:     { label: 'Видео',       icon: '🎬', color: '#f0fdf4' },
+  documents:  { label: 'Документы',   icon: '📋', color: '#fffbeb' },
+  objections: { label: 'Возражения',  icon: '💬', color: '#eff6ff' },
+  kpi:        { label: 'KPI',         icon: '📊', color: '#fef2f2' },
 };
 
 async function init() {
   try {
     const r = await fetch('config.json');
-    CFG = await r.json(); CFG.gh_token = (CFG.gh_t1||"") + (CFG.gh_t2||"") + (CFG.gh_t3||"");
+    CFG = await r.json();
+    CFG.gh_token = (CFG.gh_t1||'') + (CFG.gh_t2||'') + (CFG.gh_t3||'');
   } catch(e) {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
-  const saved = sessionStorage.getItem('ls_user');
-  if (saved) {
-    state.user = JSON.parse(saved);
-    await startApp();
-  } else {
-    document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('auth-screen').style.display = 'flex';
-  }
-}
-
-async function doLogin() {
-  const name = document.getElementById('auth-name').value.trim();
-  const token = document.getElementById('auth-token').value.trim();
-  if (!name || !token) return;
-  const { data } = await sbQuery('users', `token=eq.${encodeURIComponent(token)}&active=eq.true`);
-  if (!data || data.length === 0) {
-    document.getElementById('auth-err').style.display = 'block';
-    return;
-  }
-  state.user = { ...data[0], displayName: name };
-  sessionStorage.setItem('ls_user', JSON.stringify(state.user));
-  startApp();
-}
-
-function logout() { sessionStorage.removeItem('ls_user'); location.reload(); }
-
-async function startApp() {
-  document.getElementById('loading-screen').style.display = 'none';
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  const initials = state.user.displayName.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('user-avatar').textContent = initials;
-  document.getElementById('user-name-display').textContent = state.user.displayName;
-  if (state.user.role === 'admin') {
-    document.getElementById('team-nav').style.display = 'flex';
-    document.getElementById('add-nav').style.display = 'flex';
-  }
   await loadIndex();
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
   renderAll();
-}
-
-async function sbQuery(table, q = '') {
-  try {
-    const res = await fetch(`${CFG.supabase_url}/rest/v1/${table}${q ? '?' + q : ''}`, {
-      headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}` }
-    });
-    return { data: await res.json() };
-  } catch(e) { return { data: null, error: e }; }
-}
-
-async function sbInsert(table, row) {
-  try {
-    const res = await fetch(`${CFG.supabase_url}/rest/v1/${table}`, {
-      method: 'POST',
-      headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-      body: JSON.stringify(row)
-    });
-    return { data: await res.json() };
-  } catch(e) { return { error: e }; }
-}
-
-async function sbPatch(table, q, updates) {
-  await fetch(`${CFG.supabase_url}/rest/v1/${table}?${q}`, {
-    method: 'PATCH',
-    headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(updates)
-  });
 }
 
 async function ghGet(path) {
@@ -438,15 +288,13 @@ function renderAll() {
   renderHome();
   ['scripts','videos','documents','objections','kpi'].forEach(cat => {
     renderList(cat);
-    const cnt = state.allMaterials.filter(m => m.category === cat).length;
     const el = document.getElementById('cnt-' + cat);
-    if (el) el.textContent = cnt;
+    if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
   });
 }
 
 function renderHome() {
-  const cats = document.getElementById('home-cats');
-  cats.innerHTML = Object.entries(CAT).map(([key, meta]) => {
+  document.getElementById('home-cats').innerHTML = Object.entries(CAT).map(([key, meta]) => {
     const cnt = state.allMaterials.filter(m => m.category === key).length;
     return `<div class="cat-card" onclick="showPage('${key}',null)">
       <div class="cat-icon" style="background:${meta.color}">${meta.icon}</div>
@@ -454,8 +302,10 @@ function renderHome() {
       <div class="cat-count">${cnt} материалов</div>
     </div>`;
   }).join('');
-  const recent = [...state.allMaterials].sort((a,b) => (b.updated||'') > (a.updated||'') ? 1 : -1).slice(0,5);
-  document.getElementById('recent-list').innerHTML = recent.length ? recent.map(materialHTML).join('') : '<div class="no-items">Пока нет материалов</div>';
+  const recent = [...state.allMaterials].sort((a,b)=>(b.updated||'')>(a.updated||'')?1:-1).slice(0,5);
+  document.getElementById('recent-list').innerHTML = recent.length
+    ? recent.map(materialHTML).join('')
+    : '<div class="no-items">Пока нет материалов</div>';
 }
 
 function renderList(cat) {
@@ -466,7 +316,6 @@ function renderList(cat) {
 
 function materialHTML(m) {
   const meta = CAT[m.category] || {};
-  const isAdmin = state.user?.role === 'admin';
   return `<div class="material-item" onclick="openMaterial('${m.id}')">
     <div class="m-icon" style="background:${meta.color||'#f5f5f5'}">${meta.icon||'📄'}</div>
     <div class="m-info">
@@ -474,7 +323,7 @@ function materialHTML(m) {
       <div class="m-meta">${meta.label||''} · ${m.updated||''}</div>
     </div>
     <div class="m-actions" onclick="event.stopPropagation()">
-      ${isAdmin ? `<button class="icon-btn" title="Удалить" onclick="removeMaterial('${m.id}')">🗑</button>` : ''}
+      <button class="icon-btn" title="Удалить" onclick="removeMaterial('${m.id}')">🗑</button>
     </div>
   </div>`;
 }
@@ -487,15 +336,15 @@ async function openMaterial(id) {
   document.getElementById('content-title').textContent = m.title;
   document.getElementById('content-meta').textContent = `${CAT[m.category]?.label||''} · ${m.updated||''}`;
   const view = document.getElementById('content-view');
-  view.innerHTML = '<div style="color:var(--muted);padding:20px">Загрузка...</div>';
-  if (m.file && CFG.gh_token) {
+  view.innerHTML = '<div style="color:var(--muted);padding:20px 0">Загрузка...</div>';
+  if (m.url) {
+    view.innerHTML = `<div style="padding:20px 0"><a href="${m.url}" target="_blank" style="color:var(--accent);font-size:15px">${m.title}</a><div style="font-size:13px;color:var(--muted);margin-top:8px">${m.url}</div></div>`;
+  } else if (m.file) {
     try {
       const f = await ghGet(m.file);
       const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
       view.innerHTML = mdToHtml(raw);
-    } catch(e) { view.textContent = 'Ошибка загрузки.'; }
-  } else if (m.url) {
-    view.innerHTML = `<a href="${m.url}" target="_blank" style="color:var(--accent);font-size:14px">${m.url}</a>`;
+    } catch(e) { view.textContent = 'Ошибка загрузки файла.'; }
   } else if (m.content) {
     view.innerHTML = mdToHtml(m.content);
   }
@@ -518,63 +367,12 @@ function doSearch(q) {
   if (!q.trim()) { if (state.currentPage === 'search') showPage('home',null); return; }
   const ql = q.toLowerCase();
   const results = state.allMaterials.filter(m =>
-    m.title.toLowerCase().includes(ql) ||
-    (m.tags||[]).some(t => t.toLowerCase().includes(ql))
+    m.title.toLowerCase().includes(ql) || (m.tags||[]).some(t=>t.toLowerCase().includes(ql))
   );
   document.getElementById('search-sub').textContent = `Найдено: ${results.length}`;
   document.getElementById('search-list').innerHTML = results.map(materialHTML).join('');
   document.getElementById('no-results').style.display = results.length ? 'none' : 'block';
   showPage('search', null);
-}
-
-async function renderTeam() {
-  const { data } = await sbQuery('users');
-  if (!data) return;
-  document.getElementById('team-list').innerHTML = data.map(u => {
-    const ini = u.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    const roles = { manager: 'Менеджер продаж', trainer: 'Тренер', admin: 'Руководитель' };
-    return `<div class="team-item">
-      <div class="t-avatar">${ini}</div>
-      <div class="t-info"><div class="t-name">${u.name}</div><div class="t-role">${roles[u.role]||u.role}</div></div>
-      <span class="badge ${u.active?'badge-active':'badge-inactive'}">${u.active?'Активен':'Отключён'}</span>
-      ${u.active
-        ? `<button class="btn btn-danger" onclick="deactivateUser('${u.id}')">Отключить</button>`
-        : `<button class="btn" onclick="activateUser('${u.id}')">Активировать</button>`}
-    </div>`;
-  }).join('');
-}
-
-async function deactivateUser(id) {
-  await sbPatch('users', `id=eq.${id}`, { active: false });
-  toast('Доступ отключён'); renderTeam();
-}
-async function activateUser(id) {
-  await sbPatch('users', `id=eq.${id}`, { active: true });
-  toast('Доступ активирован'); renderTeam();
-}
-
-function openInviteModal() {
-  document.getElementById('inv-name').value = '';
-  document.getElementById('inv-result').style.display = 'none';
-  document.getElementById('inv-btn').style.display = 'inline-flex';
-  document.getElementById('modal-invite').classList.add('open');
-}
-
-async function createInvite() {
-  const name = document.getElementById('inv-name').value.trim();
-  const role = document.getElementById('inv-role').value;
-  if (!name) return;
-  const token = 'ls-' + Math.random().toString(36).slice(2,10);
-  await sbInsert('users', { name, role, token, active: true });
-  document.getElementById('inv-token').textContent = token;
-  document.getElementById('inv-result').style.display = 'block';
-  document.getElementById('inv-btn').style.display = 'none';
-  renderTeam();
-}
-
-function copyToken() {
-  navigator.clipboard.writeText(document.getElementById('inv-token').textContent);
-  toast('Код скопирован');
 }
 
 function openAddModal() {
@@ -597,12 +395,11 @@ async function addMaterial() {
     url = content;
   } else {
     file = `${category}/${id}.md`;
-    if (CFG.gh_token) await ghPut(file, content, `add: ${title}`);
+    await ghPut(file, content, `add: ${title}`);
   }
-  const material = { id, title, category, file, url, tags, updated: date, isNew: true, author: state.user.displayName };
-  state.index.materials.push(material);
+  state.index.materials.push({ id, title, category, file, url, tags, updated: date, isNew: true });
   state.allMaterials = state.index.materials;
-  if (CFG.gh_token) await saveIndex();
+  await saveIndex();
   renderAll();
   closeModal('modal-add');
   toast('Материал добавлен');
@@ -612,21 +409,19 @@ async function removeMaterial(id) {
   if (!confirm('Удалить материал?')) return;
   state.index.materials = state.index.materials.filter(m => m.id !== id);
   state.allMaterials = state.index.materials;
-  if (CFG.gh_token) await saveIndex();
+  await saveIndex();
   renderAll();
   toast('Удалено');
 }
 
 function showPage(name, navEl) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const pg = document.getElementById('page-' + name);
-  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name)?.classList.add('active');
   if (navEl) navEl.classList.add('active');
   state.prevPage = state.currentPage;
   state.currentPage = name;
   if (name !== 'search') document.getElementById('search').value = '';
-  if (name === 'team') renderTeam();
 }
 
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
@@ -635,7 +430,7 @@ function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
 window.addEventListener('load', init);
