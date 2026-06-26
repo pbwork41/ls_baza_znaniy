@@ -115,6 +115,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <div class="body-wrap">
     <div class="sidebar">
       <div class="nav-section">Разделы</div>
+      <div class="nav-item" onclick="showPage('start',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Старт в LS <span class="nav-count" id="cnt-start">0</span>
+      </div>
       <div class="nav-item active" onclick="showPage('home',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Главная
@@ -155,6 +159,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="cards-grid" id="home-cats"></div>
         <div class="section-label">Последние добавленные</div>
         <div class="material-list" id="recent-list"></div>
+      </div>
+      <div class="page" id="page-start">
+        <div class="page-title">Старт работы в Lady Stretch</div>
+        <div class="page-sub">Онбординг — читай в первую очередь</div>
+        <div class="material-list" id="list-start"></div>
       </div>
       <div class="page" id="page-scripts">
         <div class="page-title">Скрипты продаж</div>
@@ -232,6 +241,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="form-group">
         <label class="form-label">Раздел</label>
         <select class="form-select" id="add-category">
+          <option value="start">Старт в LS</option>
           <option value="scripts">Скрипты</option>
           <option value="videos">Видео</option>
           <option value="documents">Документы</option>
@@ -264,6 +274,7 @@ let CFG = {};
 let state = { index: null, indexSha: null, allMaterials: [], currentPage: 'home', prevPage: 'home' };
 
 const CAT = {
+  start:      { label: 'Старт в LS', icon: '🚀', color: '#ecfdf5' },
   scripts:    { label: 'Скрипты',    icon: '📄', color: '#f0ebff' },
   videos:     { label: 'Видео',       icon: '🎬', color: '#f0fdf4' },
   documents:  { label: 'Документы',   icon: '📋', color: '#fffbeb' },
@@ -323,7 +334,7 @@ async function saveIndex() {
 
 function renderAll() {
   renderHome();
-  ['scripts','videos','documents','onec','banks','amocrm','kpi'].forEach(cat => {
+  ['start','scripts','videos','documents','onec','banks','amocrm','kpi'].forEach(cat => {
     renderList(cat);
     const el = document.getElementById('cnt-' + cat);
     if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
