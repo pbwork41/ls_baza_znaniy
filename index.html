@@ -349,7 +349,15 @@ async function openMaterial(id) {
   document.getElementById('content-meta').textContent = `${CAT[m.category]?.label||''} · ${m.updated||''}`;
   const view = document.getElementById('content-view');
   view.innerHTML = '<div style="color:var(--muted);padding:20px 0">Загрузка...</div>';
-  if (m.url) {
+  if (m.download_url) {
+    view.innerHTML = `<div style="padding:16px 0;display:flex;align-items:center;gap:12px">
+      <div style="font-size:32px">📄</div>
+      <div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:6px">${m.title}</div>
+        <a href="${m.download_url}" download target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:var(--radius);font-size:13px;text-decoration:none">⬇ Скачать PDF</a>
+      </div>
+    </div>`;
+  } else if (m.url) {
     view.innerHTML = `<div style="padding:20px 0"><a href="${m.url}" target="_blank" style="color:var(--accent);font-size:15px">${m.title}</a><div style="font-size:13px;color:var(--muted);margin-top:8px">${m.url}</div></div>`;
   } else if (m.file) {
     try {
