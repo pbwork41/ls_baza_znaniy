@@ -2,7 +2,7 @@
   "materials": [
     {
       "id": "s001",
-      "title": "Скрипт первого звонка — базовый",
+      "title": "Скрипт первого звонка",
       "category": "scripts",
       "file": "scripts/first-call-v1.md",
       "tags": [
