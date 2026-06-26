@@ -29,6 +29,21 @@
       "pdf": "guides/mini-guide-first-workout.pdf",
       "download_url": "https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/guides/mini-guide-first-workout.pdf",
       "subcategory": "guides"
+    },
+    {
+      "id": "s002",
+      "title": "Скрипт администратора — работа с новым клиентом",
+      "category": "scripts",
+      "file": "scripts/admin-new-client.md",
+      "tags": [
+        "администратор",
+        "новый клиент",
+        "анкета",
+        "закрытие",
+        "возражения"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
