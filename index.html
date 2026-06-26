@@ -334,13 +334,19 @@ async function saveIndex() {
 
 // Делегирование событий для материалов
 document.addEventListener('click', function(e) {
-  const btn = e.target.closest('[data-action]');
-  if (!btn) return;
-  const action = btn.dataset.action;
-  const id = btn.dataset.id;
-  if (action === 'rename') { e.stopPropagation(); renameMaterial(id); }
-  else if (action === 'delete') { e.stopPropagation(); removeMaterial(id); }
-  else if (action === 'open') { openMaterial(id); }
+  // Сначала проверяем кнопки (rename/delete) — только точный target или его иконка
+  const btn = e.target.closest('button[data-action]');
+  if (btn) {
+    e.stopPropagation();
+    const action = btn.dataset.action;
+    const id = btn.dataset.id;
+    if (action === 'rename') renameMaterial(id);
+    else if (action === 'delete') removeMaterial(id);
+    return;
+  }
+  // Потом проверяем открытие карточки
+  const card = e.target.closest('.material-item[data-action="open"]');
+  if (card) openMaterial(card.dataset.id);
 });
 
 function renderAll() {
