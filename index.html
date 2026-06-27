@@ -78,13 +78,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .form-textarea{min-height:140px;resize:vertical}
 #content-edit:focus{border-color:var(--accent)}
 #content-view{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;line-height:1.6;font-size:14px}
-#content-view h1{font-size:18px;font-weight:600;margin:10px 0 3px}
-#content-view h2{font-size:15px;font-weight:600;margin:8px 0 3px}
-#content-view h3{font-size:13px;font-weight:600;margin:6px 0 2px}
+#content-view h1{font-size:18px;font-weight:600;margin:10px 0 10px}
+#content-view h2{font-size:15px;font-weight:600;margin:22px 0 8px}
+#content-view h3{font-size:13px;font-weight:600;margin:18px 0 6px}
 #content-view em{font-style:italic;color:#555}
 #content-view strong{font-weight:600}
-#content-view hr{border:none;border-top:1px solid var(--border);margin:8px 0}
-#content-view p{margin:2px 0}
+#content-view hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+#content-view p{margin:6px 0 10px 0}
 #content-view .remark{color:var(--muted);font-style:italic;font-size:13px;margin:4px 0 4px 0;padding-left:10px;border-left:2px solid var(--border)}
 #content-view .line{background:var(--surface2);border-radius:6px;padding:7px 12px;margin:4px 0;font-size:13px;line-height:1.5}
 #content-view h2{font-size:15px;font-weight:600;margin:16px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
@@ -455,7 +455,7 @@ function mdToHtml(md) {
     // форматирование
     l = l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
     l = l.replace(/\*(.+?)\*/g,'<em>$1</em>');
-    l = l.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1" style="max-width:100%;border-radius:8px;margin:16px 0;display:block;border:1px solid var(--border)">'); 
+    l = l.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1" style="max-width:100%;border-radius:8px;margin:24px 0 8px 0;display:block;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06)">'); 
     l = l.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" style="color:var(--accent);text-decoration:underline">$1</a>');
     l = l.replace(/(?<![">])(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:var(--accent);text-decoration:underline">$1</a>');
 
