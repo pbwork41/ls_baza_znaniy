@@ -95,7 +95,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #toast.show{opacity:1}
 #fab-edit{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(107,70,193,.4);z-index:50;transition:transform .15s}
 #fab-edit:hover{transform:scale(1.1)}
-@media(max-width:600px){.sidebar{display:none}.cards-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){
+  .sidebar{display:none}
+  .cards-grid{grid-template-columns:1fr 1fr}
+  #mobile-back{display:flex}
+}
+#mobile-back{display:none;align-items:center;gap:8px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);font-size:13px;color:var(--accent);cursor:pointer;font-weight:500}
 </style>
 </head>
 <body>
@@ -113,6 +118,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <button class="btn btn-primary" onclick="openAddModal()">+ Добавить</button>
     </div>
   </div>
+  <div id="mobile-back" onclick="showPage('home',null)">← Главная</div>
   <div class="body-wrap">
     <div class="sidebar">
       <div class="nav-section">Разделы</div>
