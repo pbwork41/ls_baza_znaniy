@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ссылки на оплату — QR-коды</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563eb;--blue-bg:#eff6ff;
+  --green:#16a34a;--green-bg:#f0fdf4;
+  --purple:#7c3aed;--purple-bg:#f5f3ff;
+  --amber:#d97706;--amber-bg:#fffbeb;
+  --border:#e5e7eb;--bg:#f9fafb;--surface:#fff;
+  --text:#111827;--muted:#6b7280;
+  --r:12px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:900px;margin:0 auto}
+.hero{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.hero-title{font-size:19px;font-weight:700;margin-bottom:4px}
+.hero-sub{font-size:13px;opacity:.85}
+.section-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:24px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:8px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:#93c5fd;box-shadow:0 4px 16px rgba(37,99,235,.08)}
+.card-qr{width:140px;height:140px;border-radius:8px;margin-bottom:12px;border:1px solid var(--border)}
+.card-title{font-size:13px;font-weight:600;margin-bottom:4px;line-height:1.4}
+.card-price{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:10px}
+.card-price.empty{font-size:13px;color:var(--muted);font-weight:400}
+.btn-copy{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;margin-bottom:6px;width:100%;justify-content:center;font-family:var(--font)}
+.btn-copy:hover{background:#1d4ed8}
+.btn-copy.copied{background:var(--green)}
+.btn-link{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;width:100%;justify-content:center;text-decoration:none;font-family:var(--font)}
+.btn-link:hover{background:var(--bg)}
+.tip{background:var(--amber-bg);border:1px solid #fde68a;border-radius:8px;padding:10px 14px;font-size:13px;color:#92400e;margin-bottom:16px;display:flex;gap:8px}
+.tip-i{flex-shrink:0}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr}.card-qr{width:120px;height:120px}}
+@media print{.btn-copy,.btn-link{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-title">💳 Ссылки на оплату — QR-коды</div>
+  <div class="hero-sub">Lady Stretch · Система быстрой оплаты через СБП</div>
+</div>
+
+<div class="tip">
+  <span class="tip-i">💡</span>
+  <span>QR-код сканируется камерой телефона или через банковское приложение. Кнопка «Копировать ссылку» — для отправки клиенту в мессенджер.</span>
+</div>
+
+<div class="section-label">Абонементы и занятия</div>
+<div class="grid">
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/probnoe.png" alt="QR пробное">
+    <div class="card-title">Пробное занятие</div>
+    <div class="card-price">750 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/BS10004VCJJRVUQC8F6QD5ETEKGD2Q79', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/BS10004VCJJRVUQC8F6QD5ETEKGD2Q79" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/razovoe.png" alt="QR разовое">
+    <div class="card-title">Разовое занятие</div>
+    <div class="card-price">1 500 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/AS1000428JETMSR18Q6B1EAENOUQPLS4', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/AS1000428JETMSR18Q6B1EAENOUQPLS4" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/legky.png" alt="QR лёгкий старт">
+    <div class="card-title">Лёгкий старт (24+12 занятий)</div>
+    <div class="card-price empty">цена по прайсу</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/AS10007OEAI175MU9K3BRR1AG09O3U2P', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/AS10007OEAI175MU9K3BRR1AG09O3U2P" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/ideal.png" alt="QR идеальный результат">
+    <div class="card-title">Идеальный результат (60 занятий, скидка 15%)</div>
+    <div class="card-price">46 750 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/BS10000VSV84OI8888OQ7OUB84VOGNPI', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/BS10000VSV84OI8888OQ7OUB84VOGNPI" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/bezlimit.png" alt="QR безлимит">
+    <div class="card-title">Безлимит (скидка 20%)</div>
+    <div class="card-price">67 200 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/BS10003JUOTPOBML89HB2FOS8P9VVNVO', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/BS10003JUOTPOBML89HB2FOS8P9VVNVO" target="_blank">🔗 Открыть</a>
+  </div>
+
+</div>
+
+<div class="section-label">Продление срока действия</div>
+<div class="grid">
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/prodl_1w.png" alt="QR продление 1 неделя">
+    <div class="card-title">Продление срока — 1 неделя</div>
+    <div class="card-price">2 000 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/AS100047GLD9NENL9SFOE7C3QO6NNUD1', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/AS100047GLD9NENL9SFOE7C3QO6NNUD1" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/prodl_2w.png" alt="QR продление 2 недели">
+    <div class="card-title">Продление срока — 2 недели</div>
+    <div class="card-price">3 500 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/AS10005JNK6CER969NIR3L61F31SB4F7', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/AS10005JNK6CER969NIR3L61F31SB4F7" target="_blank">🔗 Открыть</a>
+  </div>
+
+  <div class="card">
+    <img class="card-qr" src="https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/qr/prodl_1m.png" alt="QR продление 1 месяц">
+    <div class="card-title">Продление срока — 1 месяц</div>
+    <div class="card-price">5 000 ₽</div>
+    <button class="btn-copy" onclick="copyLink('https://qr.nspk.ru/BS10007E4JRSNL4V9KLA4EN4V23BF8LQ', this)">📋 Копировать ссылку</button>
+    <a class="btn-link" href="https://qr.nspk.ru/BS10007E4JRSNL4V9KLA4EN4V23BF8LQ" target="_blank">🔗 Открыть</a>
+  </div>
+
+</div>
+
+<script>
+function copyLink(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ Скопировано';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
