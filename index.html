@@ -102,6 +102,60 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 <div id="loading-screen">Загрузка...</div>
 
+<div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:200;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;width:100%;max-width:380px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:22px;font-weight:700;margin-bottom:4px">Lady Stretch</div>
+      <div style="font-size:13px;color:var(--muted)">База знаний</div>
+    </div>
+    <div style="display:flex;background:var(--surface2);border-radius:8px;padding:3px;gap:3px;margin-bottom:20px">
+      <button id="tab-login" onclick="switchTab('login')" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;font-family:var(--font)">Вход</button>
+      <button id="tab-reg" onclick="switchTab('reg')" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;cursor:pointer;background:transparent;color:var(--muted);font-family:var(--font)">Регистрация</button>
+    </div>
+
+    <!-- ВХОД -->
+    <div id="form-login">
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Имя</div>
+        <input id="login-fname" type="text" placeholder="Имя" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Фамилия</div>
+        <input id="login-lname" type="text" placeholder="Фамилия" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Пароль</div>
+        <input id="login-pass" type="password" placeholder="Пароль" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div id="login-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none"></div>
+      <button onclick="doLogin()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Войти</button>
+    </div>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <div id="form-reg" style="display:none">
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Имя</div>
+        <input id="reg-fname" type="text" placeholder="Имя" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Фамилия</div>
+        <input id="reg-lname" type="text" placeholder="Фамилия" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Пароль</div>
+        <input id="reg-pass" type="password" placeholder="Придумайте пароль" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Повторите пароль</div>
+        <input id="reg-pass2" type="password" placeholder="Повторите пароль" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
+      </div>
+      <div id="reg-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none"></div>
+      <div id="reg-ok" style="color:var(--success);font-size:13px;margin-bottom:12px;display:none;background:var(--success-bg);padding:10px 12px;border-radius:var(--radius)"></div>
+      <button onclick="doRegister()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
+
 <div id="app">
   <div class="topbar">
     <div class="logo">Lady Stretch · База знаний</div>
@@ -110,7 +164,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <input id="search" type="text" placeholder="Поиск по базе знаний..." oninput="doSearch(this.value)" />
     </div>
     <div class="topbar-right">
+      <span style="font-size:13px;color:var(--muted)" id="user-display"></span>
       <button class="btn btn-primary" onclick="openAddModal()">+ Добавить</button>
+    </div>
+        <button class="btn" onclick="logout()">Выйти</button>
     </div>
   </div>
   <div class="body-wrap">
@@ -208,6 +265,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-sub">Гайды и материалы по управленческой панели</div>
         <div class="material-list" id="list-kpi"></div>
       </div>
+      <div class="page" id="page-team">
+        <div class="page-title">Команда</div>
+        <div class="page-sub">Управление доступом сотрудников</div>
+        <div id="team-list" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
       <div class="page" id="page-search">
         <div class="page-title">Результаты поиска</div>
         <div class="page-sub" id="search-sub"></div>
@@ -290,6 +352,140 @@ const CAT = {
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
+let currentUser = null;
+
+async function hashPassword(pass) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function switchTab(tab) {
+  document.getElementById('form-login').style.display = tab==='login' ? 'block' : 'none';
+  document.getElementById('form-reg').style.display = tab==='reg' ? 'block' : 'none';
+  document.getElementById('tab-login').style.background = tab==='login' ? 'var(--accent)' : 'transparent';
+  document.getElementById('tab-login').style.color = tab==='login' ? '#fff' : 'var(--muted)';
+  document.getElementById('tab-reg').style.background = tab==='reg' ? 'var(--accent)' : 'transparent';
+  document.getElementById('tab-reg').style.color = tab==='reg' ? '#fff' : 'var(--muted)';
+}
+
+async function doLogin() {
+  const fname = document.getElementById('login-fname').value.trim();
+  const lname = document.getElementById('login-lname').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-err');
+  if (!fname || !lname || !pass) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
+  const hash = await hashPassword(pass);
+  const { data } = await sbQuery('users', `first_name=eq.${encodeURIComponent(fname)}&last_name=eq.${encodeURIComponent(lname)}&password_hash=eq.${hash}`);
+  if (!data || data.length === 0) { err.textContent='Неверное имя, фамилия или пароль'; err.style.display='block'; return; }
+  const user = data[0];
+  if (!user.active) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
+  err.style.display='none';
+  currentUser = user;
+  sessionStorage.setItem('ls_user', JSON.stringify(user));
+  startApp();
+}
+
+async function doRegister() {
+  const fname = document.getElementById('reg-fname').value.trim();
+  const lname = document.getElementById('reg-lname').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  const err = document.getElementById('reg-err');
+  const ok = document.getElementById('reg-ok');
+  err.style.display='none'; ok.style.display='none';
+  if (!fname || !lname || !pass) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
+  if (pass !== pass2) { err.textContent='Пароли не совпадают'; err.style.display='block'; return; }
+  if (pass.length < 6) { err.textContent='Пароль минимум 6 символов'; err.style.display='block'; return; }
+  const hash = await hashPassword(pass);
+  // Проверяем нет ли уже такого пользователя
+  const { data: exist } = await sbQuery('users', `first_name=eq.${encodeURIComponent(fname)}&last_name=eq.${encodeURIComponent(lname)}`);
+  if (exist && exist.length > 0) { err.textContent='Сотрудник с таким именем уже зарегистрирован'; err.style.display='block'; return; }
+  await sbInsert('users', { first_name: fname, last_name: lname, password_hash: hash, role: 'manager', active: false });
+  ok.textContent = `${fname}, вы зарегистрированы! Дождитесь активации руководителем.`;
+  ok.style.display='block';
+  document.getElementById('reg-fname').value='';
+  document.getElementById('reg-lname').value='';
+  document.getElementById('reg-pass').value='';
+  document.getElementById('reg-pass2').value='';
+}
+
+function logout() {
+  sessionStorage.removeItem('ls_user');
+  currentUser = null;
+  location.reload();
+}
+
+async function startApp() {
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  const u = currentUser;
+  document.getElementById('user-display').textContent = u.first_name + ' ' + u.last_name;
+  if (u.role === 'admin') {
+    document.getElementById('team-nav').style.display = 'flex';
+    document.getElementById('add-nav').style.display = 'flex';
+    // Показываем корзины на материалах
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'flex');
+  }
+  await loadIndex();
+  renderAll();
+}
+
+async function renderTeam() {
+  const { data } = await sbQuery('users');
+  if (!data) return;
+  const roles = { admin: 'Руководитель', manager: 'Администратор' };
+  document.getElementById('team-list').innerHTML = data.map(u => `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--accent-bg);color:var(--accent-text);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${u.first_name[0]}${u.last_name[0]}</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500">${u.first_name} ${u.last_name}</div>
+        <div style="font-size:12px;color:var(--muted)">${roles[u.role]||u.role}</div>
+      </div>
+      <select onchange="changeRole('${u.id}',this.value)" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font);margin-right:8px">
+        <option value="manager" ${u.role==='manager'?'selected':''}>Администратор</option>
+        <option value="admin" ${u.role==='admin'?'selected':''}>Руководитель</option>
+      </select>
+      <span style="padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;${u.active?'background:var(--success-bg);color:var(--success)':'background:var(--danger-bg);color:var(--danger)'}">${u.active?'Активен':'Ожидает'}</span>
+      ${u.active
+        ? `<button onclick="deactivateUser('${u.id}')" style="padding:5px 10px;font-size:12px;border:1px solid var(--danger);color:var(--danger);background:#fff;border-radius:6px;cursor:pointer;font-family:var(--font)">Отключить</button>`
+        : `<button onclick="activateUser('${u.id}')" style="padding:5px 10px;font-size:12px;border:1px solid var(--success);color:var(--success);background:#fff;border-radius:6px;cursor:pointer;font-family:var(--font)">Активировать</button>`
+      }
+    </div>`).join('');
+}
+
+async function activateUser(id) {
+  await sbPatch('users', `id=eq.${id}`, { active: true });
+  toast('Сотрудник активирован'); renderTeam();
+}
+async function deactivateUser(id) {
+  await sbPatch('users', `id=eq.${id}`, { active: false });
+  toast('Доступ отключён'); renderTeam();
+}
+async function changeRole(id, role) {
+  await sbPatch('users', `id=eq.${id}`, { role });
+  toast('Роль обновлена');
+}
+
+async function sbInsert(table, row) {
+  try {
+    const res = await fetch(`${CFG.supabase_url}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify(row)
+    });
+    return { data: await res.json() };
+  } catch(e) { return { error: e }; }
+}
+
+async function sbPatch(table, q, updates) {
+  await fetch(`${CFG.supabase_url}/rest/v1/${table}?${q}`, {
+    method: 'PATCH',
+    headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates)
+  });
+}
+
 async function init() {
   try {
     const r = await fetch('config.json');
@@ -299,10 +495,20 @@ async function init() {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
-  await loadIndex();
   document.getElementById('loading-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  renderAll();
+  const saved = sessionStorage.getItem('ls_user');
+  if (saved) {
+    currentUser = JSON.parse(saved);
+    // Проверяем что аккаунт ещё активен
+    const { data } = await sbQuery('users', `id=eq.${currentUser.id}&active=eq.true`);
+    if (data && data.length > 0) {
+      currentUser = data[0];
+      await startApp();
+      return;
+    }
+    sessionStorage.removeItem('ls_user');
+  }
+  document.getElementById('auth-screen').style.display = 'flex';
 }
 
 async function ghGet(path) {
@@ -648,9 +854,9 @@ function showPage(name, navEl) {
   state.prevPage = state.currentPage;
   state.currentPage = name;
   if (name !== 'search') document.getElementById('search').value = '';
-  // Скрываем FAB если уходим со страницы контента
   const fab = document.getElementById('fab-edit');
   if (fab && name !== 'content') fab.style.display = 'none';
+  if (name === 'team') renderTeam();
 }
 
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
