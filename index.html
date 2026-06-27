@@ -654,6 +654,8 @@ function showPage(name, navEl) {
   state.prevPage = state.currentPage;
   state.currentPage = name;
   if (name !== 'search') document.getElementById('search').value = '';
+  const mb = document.getElementById('mobile-back');
+  if (mb) mb.style.display = (name !== 'home' && window.innerWidth <= 600) ? 'flex' : 'none';
   // Скрываем FAB если уходим со страницы контента
   const fab = document.getElementById('fab-edit');
   if (fab && name !== 'content') fab.style.display = 'none';
