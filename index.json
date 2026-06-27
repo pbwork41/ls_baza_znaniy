@@ -187,6 +187,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "d003",
+      "title": "F.Doc — онлайн подписание документов",
+      "category": "documents",
+      "file": "documents/fdoc-guide.md",
+      "tags": [
+        "fdoc",
+        "документы",
+        "подписание",
+        "доступы"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
