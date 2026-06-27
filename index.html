@@ -428,18 +428,18 @@ async function doRegister() {
 }
 
 async function startApp() {
-  document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
+  document.getElementById('loading-screen').style.display = 'flex';
+  document.getElementById('loading-screen').textContent = 'Загрузка материалов...';
   const u = currentUser;
-  document.getElementById('user-display').textContent = u.first_name + ' ' + u.last_name;
   if (u.role === 'admin') {
     document.getElementById('team-nav').style.display = 'flex';
     document.getElementById('add-nav').style.display = 'flex';
-    // Показываем корзины на материалах
-    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'flex');
   }
   await loadIndex();
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('user-display').textContent = u.first_name + ' ' + u.last_name;
   renderAll();
 }
 
