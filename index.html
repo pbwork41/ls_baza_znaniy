@@ -341,14 +341,16 @@ async function showApp() {
   document.getElementById('loading-screen').style.display = 'flex';
   document.getElementById('loading-screen').textContent = 'Загрузка...';
   await loadIndex();
-  document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('user-label').textContent = currentUser.name;
   document.getElementById('logout-btn').style.display = 'inline-flex';
   if (currentUser.role === 'admin') {
     document.getElementById('add-nav').style.display = 'flex';
   }
-  setTimeout(() => renderAll(), 50);
+  document.getElementById('loading-screen').style.display = 'none';
+  renderAll();
+  // Дополнительный рендер через 300мс на случай если первый не сработал
+  setTimeout(() => { if (state.allMaterials.length > 0) renderAll(); }, 300);
 }
 
 async function init() {
