@@ -35,7 +35,7 @@
 
 ---
 
-## Видеоинструкции
+## Доп. инструкции 
 
 **Оформление если клиент в студии:**
 [Скачать PDF →](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/vanta-pdfs/vanta-in-studio.pdf)
