@@ -549,9 +549,7 @@ async function init() {
 }
 
 async function ghGet(path) {
-  const res = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`, {
-    headers: { 'Authorization': `token ${CFG.gh_token}` }
-  });
+  const res = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`);
   return res.json();
 }
 
