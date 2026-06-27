@@ -216,6 +216,21 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "amo001",
+      "title": "Чек-лист менеджера — воронка продаж в AmoCRM",
+      "category": "amocrm",
+      "file": "amocrm/voronka-checklist.md",
+      "tags": [
+        "воронка",
+        "AmoCRM",
+        "чек-лист",
+        "этапы",
+        "сделки"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
