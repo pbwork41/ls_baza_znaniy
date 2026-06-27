@@ -444,7 +444,13 @@ async function startApp() {
 }
 
 async function renderTeam() {
-  const { data } = await sbQuery('users');
+  let data;
+  try {
+    const res = await fetch(CFG.supabase_url + '/rest/v1/users?order=created_at.asc', {
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key }
+    });
+    data = await res.json();
+  } catch(e) { return; }
   if (!data) return;
   const roles = { admin: 'Руководитель', manager: 'Администратор' };
   document.getElementById('team-list').innerHTML = data.map(u => `
@@ -466,16 +472,23 @@ async function renderTeam() {
     </div>`).join('');
 }
 
+async function patchUser(id, updates) {
+  await fetch(CFG.supabase_url + '/rest/v1/users?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key, 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates)
+  });
+}
 async function activateUser(id) {
-  await sbPatch('users', `id=eq.${id}`, { active: true });
+  await patchUser(id, { active: true });
   toast('Сотрудник активирован'); renderTeam();
 }
 async function deactivateUser(id) {
-  await sbPatch('users', `id=eq.${id}`, { active: false });
+  await patchUser(id, { active: false });
   toast('Доступ отключён'); renderTeam();
 }
 async function changeRole(id, role) {
-  await sbPatch('users', `id=eq.${id}`, { role });
+  await patchUser(id, { role });
   toast('Роль обновлена');
 }
 
@@ -521,7 +534,10 @@ async function init() {
   if (saved) {
     currentUser = JSON.parse(saved);
     // Проверяем что аккаунт ещё активен
-    const { data } = await sbQuery('users', `id=eq.${currentUser.id}&active=eq.true`);
+    const checkRes = await fetch(CFG.supabase_url + '/rest/v1/users?id=eq.' + currentUser.id + '&active=eq.true', {
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key }
+    });
+    const data = await checkRes.json();
     if (data && data.length > 0) {
       currentUser = data[0];
       await startApp();
