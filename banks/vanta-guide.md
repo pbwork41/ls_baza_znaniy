@@ -38,10 +38,10 @@
 ## Доп. инструкции 
 
 **Оформление если клиент в студии:**
-[Открыть PDF →](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/vanta-pdfs/vanta-in-studio.pdf)
+[📄 Оформление если клиент в студии](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/vanta-pdfs/vanta-in-studio.pdf)
 
 **Оформление удалённо (WIN-ссылка на самооформление):**
-[Открыть PDF →](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/vanta-pdfs/vanta-remote.pdf)
+[📄 Оформление удалённо](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/banks/vanta-pdfs/vanta-remote.pdf)
 
 ---
 
