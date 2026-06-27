@@ -130,7 +130,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
       <div class="nav-item" onclick="showPage('videos',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-        Видео <span class="nav-count" id="cnt-videos">0</span>
+        Вебинары <span class="nav-count" id="cnt-videos">0</span>
       </div>
       <div class="nav-item" onclick="showPage('documents',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -172,8 +172,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="material-list" id="list-scripts"></div>
       </div>
       <div class="page" id="page-videos">
-        <div class="page-title">Обучающие видео</div>
-        <div class="page-sub">Ссылки на обучающие материалы</div>
+        <div class="page-title">Вебинары</div>
+        <div class="page-sub">Обучающие видео и вебинары</div>
         <div class="material-list" id="list-videos"></div>
       </div>
       <div class="page" id="page-documents">
@@ -248,7 +248,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <select class="form-select" id="add-category">
           <option value="start">Старт в LS</option>
           <option value="scripts">Скрипты</option>
-          <option value="videos">Видео</option>
+          <option value="videos">Вебинары</option>
           <option value="documents">Документы</option>
           <option value="onec">Работа в 1С</option>
           <option value="banks">Работа с банками</option>
@@ -281,7 +281,7 @@ let state = { index: null, indexSha: null, allMaterials: [], currentPage: 'home'
 const CAT = {
   start:      { label: 'Старт в LS', icon: '🚀', color: '#ecfdf5' },
   scripts:    { label: 'Скрипты',    icon: '📄', color: '#f0ebff' },
-  videos:     { label: 'Видео',       icon: '🎬', color: '#f0fdf4' },
+  videos:     { label: 'Вебинары',    icon: '🎬', color: '#f0fdf4' },
   documents:  { label: 'Документы',   icon: '📋', color: '#fffbeb' },
   onec:       { label: 'Работа в 1С', icon: '🖥️', color: '#fef9ee' },
   banks:      { label: 'Работа с банками', icon: '🏦', color: '#f0fdf4' },
