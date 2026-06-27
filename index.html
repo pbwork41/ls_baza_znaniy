@@ -102,23 +102,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 <div id="loading-screen">Загрузка...</div>
 
-<div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:200;align-items:center;justify-content:center;padding:20px">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;width:100%;max-width:360px;text-align:center">
-    <div style="font-size:22px;font-weight:700;margin-bottom:4px">Lady Stretch</div>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:28px">База знаний</div>
-    <div style="text-align:left;margin-bottom:12px">
-      <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Имя</div>
-      <input id="auth-name" type="text" placeholder="Ваше имя" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-    </div>
-    <div style="text-align:left;margin-bottom:20px">
-      <div style="font-size:12px;font-weight:500;color:#444;margin-bottom:5px">Пароль</div>
-      <input id="auth-pass" type="password" placeholder="Пароль" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)" onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
-    <div id="auth-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none">Неверное имя или пароль</div>
-    <button onclick="doLogin()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Войти</button>
-  </div>
-</div>
-
 <div id="app">
   <div class="topbar">
     <div class="logo">Lady Stretch · База знаний</div>
@@ -127,8 +110,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <input id="search" type="text" placeholder="Поиск по базе знаний..." oninput="doSearch(this.value)" />
     </div>
     <div class="topbar-right">
-      <span id="user-label" style="font-size:13px;color:var(--muted)"></span>
-      <button class="btn" onclick="logout()" id="logout-btn" style="display:none">Выйти</button>
       <button class="btn btn-primary" onclick="openAddModal()">+ Добавить</button>
     </div>
   </div>
@@ -309,50 +290,6 @@ const CAT = {
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
-let currentUser = null;
-
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-async function doLogin() {
-  const name = document.getElementById('auth-name').value.trim();
-  const pass = document.getElementById('auth-pass').value;
-  const err = document.getElementById('auth-err');
-  if (!name || !pass) { err.style.display='block'; err.textContent='Заполните все поля'; return; }
-  const hash = await sha256(pass);
-  const res = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/users.json?t=' + Date.now());
-  const users = await res.json();
-  const user = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.password_hash === hash);
-  if (!user) { err.style.display='block'; err.textContent='Неверное имя или пароль'; return; }
-  currentUser = user;
-  sessionStorage.setItem('ls_user', JSON.stringify(user));
-  showApp();
-}
-
-function logout() {
-  sessionStorage.removeItem('ls_user');
-  location.reload();
-}
-
-async function showApp() {
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('loading-screen').style.display = 'flex';
-  document.getElementById('loading-screen').textContent = 'Загрузка...';
-  await loadIndex();
-  document.getElementById('app').style.display = 'flex';
-  document.getElementById('user-label').textContent = currentUser.name;
-  document.getElementById('logout-btn').style.display = 'inline-flex';
-  if (currentUser.role === 'admin') {
-    document.getElementById('add-nav').style.display = 'flex';
-  }
-  document.getElementById('loading-screen').style.display = 'none';
-  renderAll();
-  // Дополнительный рендер через 300мс на случай если первый не сработал
-  setTimeout(() => { if (state.allMaterials.length > 0) renderAll(); }, 300);
-}
-
 async function init() {
   try {
     const r = await fetch('config.json');
@@ -362,15 +299,10 @@ async function init() {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
+  await loadIndex();
   document.getElementById('loading-screen').style.display = 'none';
-  // Проверяем сессию
-  const saved = sessionStorage.getItem('ls_user');
-  if (saved) {
-    currentUser = JSON.parse(saved);
-    await showApp();
-    return;
-  }
-  document.getElementById('auth-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'flex';
+  renderAll();
 }
 
 async function ghGet(path) {
