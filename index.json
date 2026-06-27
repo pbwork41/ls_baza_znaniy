@@ -135,7 +135,7 @@
       "id": "v001",
       "title": "Типы клиентов — вебинар",
       "category": "videos",
-      "url": "https://rutube.ru/video/private/4afe708732c70bcaabdc550212023782/?p=qXtwCHlLljCvYDT9LW37Ew",
+      "url": null,
       "tags": [
         "типы клиентов",
         "вебинар",
@@ -144,7 +144,8 @@
       ],
       "updated": "2026-06-26",
       "isNew": true,
-      "description": "Как говорить с разными типами клиентов на их языке. Как закрывать возражения без давления."
+      "description": "Как говорить с разными типами клиентов на их языке. Как закрывать возражения без давления.",
+      "file": "videos/v001-client-types.md"
     }
   ],
   "videos": [],
