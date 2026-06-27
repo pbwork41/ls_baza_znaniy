@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lady Stretch — База знаний</title>
+<title>Lady Stretch — База знаний v2</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -428,6 +428,7 @@ async function doRegister() {
 }
 
 async function startApp() {
+  console.log('startApp: начало');
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('loading-screen').style.display = 'flex';
   document.getElementById('loading-screen').textContent = 'Загрузка материалов...';
@@ -436,11 +437,14 @@ async function startApp() {
     document.getElementById('team-nav').style.display = 'flex';
     document.getElementById('add-nav').style.display = 'flex';
   }
+  console.log('startApp: вызываю loadIndex');
   await loadIndex();
+  console.log('startApp: loadIndex завершён, материалов:', state.allMaterials.length);
   document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('user-display').textContent = u.first_name + ' ' + u.last_name;
   renderAll();
+  console.log('startApp: готово');
 }
 
 async function renderTeam() {
