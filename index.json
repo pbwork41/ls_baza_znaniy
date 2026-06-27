@@ -274,6 +274,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b005",
+      "title": "Рассрочка Сбербанк (Ю-касса) — инструкция",
+      "category": "banks",
+      "file": "banks/sber-guide.md",
+      "tags": [
+        "Сбер",
+        "рассрочка",
+        "Ю-касса",
+        "банк"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
