@@ -348,7 +348,7 @@ async function showApp() {
   if (currentUser.role === 'admin') {
     document.getElementById('add-nav').style.display = 'flex';
   }
-  renderAll();
+  setTimeout(() => renderAll(), 50);
 }
 
 async function init() {
