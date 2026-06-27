@@ -576,19 +576,28 @@ async function ghPut(path, content, message, sha = null) {
 
 async function loadIndex() {
   try {
-    const f = await ghGet('index.json');
-    if (!f || !f.content) { console.error('index.json empty:', f); return; }
-    const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+    const res = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/index.json?t=' + Date.now());
+    const raw = await res.text();
     state.index = JSON.parse(raw);
-    state.indexSha = f.sha;
     state.allMaterials = state.index.materials || [];
+    // SHA получаем отдельно только для записи
+    state.indexSha = null;
   } catch(e) {
     console.error('loadIndex error:', e);
   }
 }
 
+async function getFileSha(path) {
+  const res = await fetch('https://api.github.com/repos/' + CFG.repo + '/contents/' + path, {
+    headers: { 'Authorization': 'token ' + CFG.gh_token }
+  });
+  const d = await res.json();
+  return d.sha;
+}
+
 async function saveIndex() {
-  const res = await ghPut('index.json', JSON.stringify(state.index, null, 2), 'update: каталог материалов', state.indexSha);
+  const sha = await getFileSha('index.json');
+  const res = await ghPut('index.json', JSON.stringify(state.index, null, 2), 'update: каталог материалов', sha);
   if (res.content) state.indexSha = res.content.sha;
 }
 
@@ -693,8 +702,8 @@ async function openMaterial(id) {
     view.innerHTML = `<div style="padding:20px 0"><a href="${m.url}" target="_blank" style="color:var(--accent);font-size:15px">${m.title}</a><div style="font-size:13px;color:var(--muted);margin-top:8px">${m.url}</div></div>`;
   } else if (m.file) {
     try {
-      const f = await ghGet(m.file);
-      const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+      const fileRes = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/' + m.file + '?t=' + Date.now());
+      const raw = await fileRes.text();
       _editRawContent = raw;
       view.innerHTML = mdToHtml(raw);
     } catch(e) { view.textContent = 'Ошибка загрузки файла.'; }
