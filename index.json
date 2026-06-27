@@ -288,6 +288,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b006",
+      "title": "Рассрочка ОТП Банк — инструкция",
+      "category": "banks",
+      "file": "banks/otp-guide.md",
+      "tags": [
+        "ОТП",
+        "рассрочка",
+        "банк",
+        "кредит"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
