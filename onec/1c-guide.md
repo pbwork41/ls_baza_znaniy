@@ -40,6 +40,12 @@
 
 ![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image12.png)
 
+3. Клиент купил абонемент 
+
+1.  Заходим в карточку клиента (2 пересекающихся квадратика). Вводим Фамилию,  дату рождения.
+ 
+2. Заходим в продажи ⟶ СОЗДАТЬ.
+
 
 ![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image9.png)
 
