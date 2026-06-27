@@ -76,6 +76,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .form-input,.form-select,.form-textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent)}
 .form-textarea{min-height:140px;resize:vertical}
+#content-edit:focus{border-color:var(--accent)}
 #content-view{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;line-height:1.6;font-size:14px}
 #content-view h1{font-size:18px;font-weight:600;margin:10px 0 3px}
 #content-view h2{font-size:15px;font-weight:600;margin:8px 0 3px}
@@ -121,7 +122,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
       <div class="nav-item" onclick="showPage('start',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Старт в LS <span class="nav-count" id="cnt-start">0</span>
+        🚀 Старт в LS <span class="nav-count" id="cnt-start">0</span>
       </div>
       <div class="nav-item" onclick="showPage('scripts',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -214,14 +215,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="no-items" id="no-results" style="display:none">Ничего не найдено</div>
       </div>
       <div class="page" id="page-content">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap">
           <button class="btn" onclick="goBack()">← Назад</button>
-          <div>
+          <div style="flex:1">
             <div class="page-title" id="content-title" style="margin-bottom:0"></div>
             <div class="page-sub" id="content-meta" style="margin-bottom:0"></div>
           </div>
+          <button class="btn" id="btn-edit" onclick="toggleEdit()" style="display:none">✏️ Редактировать</button>
+          <button class="btn btn-primary" id="btn-save" onclick="saveEdit()" style="display:none">💾 Сохранить</button>
+          <button class="btn" id="btn-cancel" onclick="cancelEdit()" style="display:none">Отмена</button>
         </div>
         <div id="content-view"></div>
+        <textarea id="content-edit" style="display:none;width:100%;min-height:500px;padding:16px;font-size:14px;font-family:monospace;border:1px solid var(--border);border-radius:var(--radius);outline:none;resize:vertical;line-height:1.6;background:#fff" placeholder="Введите текст в формате Markdown..."></textarea>
       </div>
     </div>
   </div>
@@ -410,6 +415,15 @@ async function openMaterial(id) {
   document.getElementById('content-meta').textContent = `${CAT[m.category]?.label||''} · ${m.updated||''}`;
   const view = document.getElementById('content-view');
   view.innerHTML = '<div style="color:var(--muted);padding:20px 0">Загрузка...</div>';
+  // Показываем кнопку редактирования только для текстовых файлов
+  _editingMaterial = m;
+  _editRawContent = '';
+  document.getElementById('btn-edit').style.display = m.file ? 'inline-flex' : 'none';
+  document.getElementById('btn-save').style.display = 'none';
+  document.getElementById('btn-cancel').style.display = 'none';
+  document.getElementById('content-edit').style.display = 'none';
+  document.getElementById('content-view').style.display = 'block';
+
   if (m.download_url) {
     view.innerHTML = `<div style="padding:16px 0;display:flex;align-items:center;gap:12px">
       <div style="font-size:32px">📄</div>
@@ -424,6 +438,7 @@ async function openMaterial(id) {
     try {
       const f = await ghGet(m.file);
       const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+      _editRawContent = raw;
       view.innerHTML = mdToHtml(raw);
     } catch(e) { view.textContent = 'Ошибка загрузки файла.'; }
   } else if (m.content) {
@@ -477,6 +492,71 @@ function mdToHtml(md) {
   }
   if (inList) html += '</ul>';
   return html;
+}
+
+let _editingMaterial = null;
+let _editRawContent = '';
+
+function toggleEdit() {
+  const view = document.getElementById('content-view');
+  const edit = document.getElementById('content-edit');
+  const btnEdit = document.getElementById('btn-edit');
+  const btnSave = document.getElementById('btn-save');
+  const btnCancel = document.getElementById('btn-cancel');
+  edit.value = _editRawContent;
+  view.style.display = 'none';
+  edit.style.display = 'block';
+  btnEdit.style.display = 'none';
+  btnSave.style.display = 'inline-flex';
+  btnCancel.style.display = 'inline-flex';
+  edit.focus();
+}
+
+function cancelEdit() {
+  const view = document.getElementById('content-view');
+  const edit = document.getElementById('content-edit');
+  const btnEdit = document.getElementById('btn-edit');
+  const btnSave = document.getElementById('btn-save');
+  const btnCancel = document.getElementById('btn-cancel');
+  view.style.display = 'block';
+  edit.style.display = 'none';
+  btnEdit.style.display = 'inline-flex';
+  btnSave.style.display = 'none';
+  btnCancel.style.display = 'none';
+}
+
+async function saveEdit() {
+  const m = _editingMaterial;
+  if (!m || !m.file) return;
+  const newContent = document.getElementById('content-edit').value;
+  const btnSave = document.getElementById('btn-save');
+  btnSave.textContent = 'Сохраняю...';
+  btnSave.disabled = true;
+  try {
+    // Получаем текущий SHA файла
+    const res = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${m.file}`, {
+      headers: { 'Authorization': `token ${CFG.gh_token}` }
+    });
+    const fileData = await res.json();
+    // Сохраняем
+    const today = new Date().toISOString().slice(0,10);
+    await ghPut(m.file, newContent, `edit: ${m.title}`, fileData.sha);
+    // Обновляем дату в index
+    m.updated = today;
+    state.index.materials = state.allMaterials;
+    await saveIndex();
+    // Обновляем отображение
+    _editRawContent = newContent;
+    document.getElementById('content-view').innerHTML = mdToHtml(newContent);
+    document.getElementById('content-meta').textContent = `${CAT[m.category]?.label||''} · ${today}`;
+    cancelEdit();
+    toast('Сохранено');
+  } catch(e) {
+    toast('Ошибка сохранения');
+  } finally {
+    btnSave.textContent = '💾 Сохранить';
+    btnSave.disabled = false;
+  }
 }
 
 function goBack() { showPage(state.prevPage, null); }
