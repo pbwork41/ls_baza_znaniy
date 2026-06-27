@@ -160,6 +160,33 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "st_d001",
+      "title": "Распорядок дня администратора",
+      "category": "start",
+      "file": "documents/daily-schedule.md",
+      "tags": [
+        "распорядок",
+        "день",
+        "администратор",
+        "онбординг"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
+    },
+    {
+      "id": "d002",
+      "title": "Распорядок дня администратора",
+      "category": "documents",
+      "file": "documents/daily-schedule.md",
+      "tags": [
+        "распорядок",
+        "день",
+        "администратор"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
