@@ -302,6 +302,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b007",
+      "title": "Яндекс Сплит — инструкция по оформлению",
+      "category": "banks",
+      "file": "banks/split-guide.md",
+      "tags": [
+        "Сплит",
+        "Яндекс",
+        "рассрочка",
+        "оплата"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
