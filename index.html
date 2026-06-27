@@ -467,6 +467,15 @@ async function changeRole(id, role) {
   toast('Роль обновлена');
 }
 
+async function sbQuery(table, q = '') {
+  try {
+    const res = await fetch(`${CFG.supabase_url}/rest/v1/${table}${q ? '?' + q : ''}`, {
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': `Bearer ${CFG.supabase_key}` }
+    });
+    return { data: await res.json() };
+  } catch(e) { return { data: null, error: e }; }
+}
+
 async function sbInsert(table, row) {
   try {
     const res = await fetch(`${CFG.supabase_url}/rest/v1/${table}`, {
