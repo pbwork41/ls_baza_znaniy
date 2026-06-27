@@ -549,8 +549,16 @@ async function init() {
 }
 
 async function ghGet(path) {
-  const res = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`);
-  return res.json();
+  // Используем raw для чтения — быстрее и без CORS проблем
+  const rawUrl = `https://raw.githubusercontent.com/${CFG.repo}/main/${path}`;
+  const res = await fetch(rawUrl + '?t=' + Date.now());
+  if (!res.ok) throw new Error('ghGet failed: ' + res.status);
+  const text = await res.text();
+  // Для JSON файлов возвращаем в формате {content: base64, sha: ''}
+  if (path.endsWith('.json') || path.endsWith('.md')) {
+    return { content: btoa(unescape(encodeURIComponent(text))), sha: '', _raw: text };
+  }
+  return { content: btoa(unescape(encodeURIComponent(text))), sha: '' };
 }
 
 async function ghPut(path, content, message, sha = null) {
@@ -567,11 +575,16 @@ async function ghPut(path, content, message, sha = null) {
 }
 
 async function loadIndex() {
-  const f = await ghGet('index.json');
-  const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
-  state.index = JSON.parse(raw);
-  state.indexSha = f.sha;
-  state.allMaterials = state.index.materials || [];
+  try {
+    const f = await ghGet('index.json');
+    if (!f || !f.content) { console.error('index.json empty:', f); return; }
+    const raw = decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
+    state.index = JSON.parse(raw);
+    state.indexSha = f.sha;
+    state.allMaterials = state.index.materials || [];
+  } catch(e) {
+    console.error('loadIndex error:', e);
+  }
 }
 
 async function saveIndex() {
