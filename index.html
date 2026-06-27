@@ -373,16 +373,21 @@ async function doLogin() {
   const lname = document.getElementById('login-lname').value.trim();
   const pass = document.getElementById('login-pass').value;
   const err = document.getElementById('login-err');
+  err.style.display = 'none';
   if (!fname || !lname || !pass) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
   const hash = await hashPassword(pass);
-  const { data } = await sbQuery('users', `first_name=eq.${encodeURIComponent(fname)}&last_name=eq.${encodeURIComponent(lname)}&password_hash=eq.${hash}`);
-  if (!data || data.length === 0) { err.textContent='Неверное имя, фамилия или пароль'; err.style.display='block'; return; }
-  const user = data[0];
-  if (!user.active) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
-  err.style.display='none';
-  currentUser = user;
-  sessionStorage.setItem('ls_user', JSON.stringify(user));
-  startApp();
+  try {
+    const res = await fetch(CFG.supabase_url + '/rest/v1/users?first_name=eq.' + encodeURIComponent(fname) + '&last_name=eq.' + encodeURIComponent(lname) + '&password_hash=eq.' + hash, {
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key }
+    });
+    const data = await res.json();
+    if (!data || data.length === 0) { err.textContent='Неверное имя, фамилия или пароль'; err.style.display='block'; return; }
+    const user = data[0];
+    if (!user.active) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
+    currentUser = user;
+    sessionStorage.setItem('ls_user', JSON.stringify(user));
+    startApp();
+  } catch(e) { err.textContent='Ошибка соединения: ' + e.message; err.style.display='block'; }
 }
 
 async function doRegister() {
@@ -397,22 +402,29 @@ async function doRegister() {
   if (pass !== pass2) { err.textContent='Пароли не совпадают'; err.style.display='block'; return; }
   if (pass.length < 6) { err.textContent='Пароль минимум 6 символов'; err.style.display='block'; return; }
   const hash = await hashPassword(pass);
-  // Проверяем нет ли уже такого пользователя
-  const { data: exist } = await sbQuery('users', `first_name=eq.${encodeURIComponent(fname)}&last_name=eq.${encodeURIComponent(lname)}`);
-  if (exist && exist.length > 0) { err.textContent='Сотрудник с таким именем уже зарегистрирован'; err.style.display='block'; return; }
-  await sbInsert('users', { first_name: fname, last_name: lname, password_hash: hash, role: 'manager', active: false });
-  ok.textContent = `${fname}, вы зарегистрированы! Дождитесь активации руководителем.`;
-  ok.style.display='block';
-  document.getElementById('reg-fname').value='';
-  document.getElementById('reg-lname').value='';
-  document.getElementById('reg-pass').value='';
-  document.getElementById('reg-pass2').value='';
-}
-
-function logout() {
-  sessionStorage.removeItem('ls_user');
-  currentUser = null;
-  location.reload();
+  try {
+    const checkRes = await fetch(CFG.supabase_url + '/rest/v1/users?first_name=eq.' + encodeURIComponent(fname) + '&last_name=eq.' + encodeURIComponent(lname), {
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key }
+    });
+    const exist = await checkRes.json();
+    if (exist && exist.length > 0) { err.textContent='Сотрудник с таким именем уже зарегистрирован'; err.style.display='block'; return; }
+    const regRes = await fetch(CFG.supabase_url + '/rest/v1/users', {
+      method: 'POST',
+      headers: { 'apikey': CFG.supabase_key, 'Authorization': 'Bearer ' + CFG.supabase_key, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify({ first_name: fname, last_name: lname, password_hash: hash, role: 'manager', active: false })
+    });
+    if (regRes.ok) {
+      ok.textContent = fname + ', вы зарегистрированы! Дождитесь активации руководителем.';
+      ok.style.display='block';
+      document.getElementById('reg-fname').value='';
+      document.getElementById('reg-lname').value='';
+      document.getElementById('reg-pass').value='';
+      document.getElementById('reg-pass2').value='';
+    } else {
+      const e = await regRes.json();
+      err.textContent='Ошибка: ' + JSON.stringify(e); err.style.display='block';
+    }
+  } catch(e) { err.textContent='Ошибка соединения: ' + e.message; err.style.display='block'; }
 }
 
 async function startApp() {
