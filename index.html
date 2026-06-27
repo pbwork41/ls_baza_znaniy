@@ -95,12 +95,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #toast.show{opacity:1}
 #fab-edit{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(107,70,193,.4);z-index:50;transition:transform .15s}
 #fab-edit:hover{transform:scale(1.1)}
+@media(min-width:601px){#mobile-back{display:none!important}}
 @media(max-width:600px){
   .sidebar{display:none}
   .cards-grid{grid-template-columns:1fr 1fr}
-  #mobile-back{display:flex}
 }
-#mobile-back{display:none;align-items:center;gap:8px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);font-size:13px;color:var(--accent);cursor:pointer;font-weight:500}
+#mobile-back{display:none;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:var(--surface);border-bottom:1px solid var(--border);font-size:14px;color:var(--accent);cursor:pointer;font-weight:500}
 </style>
 </head>
 <body>
@@ -655,7 +655,7 @@ function showPage(name, navEl) {
   state.currentPage = name;
   if (name !== 'search') document.getElementById('search').value = '';
   const mb = document.getElementById('mobile-back');
-  if (mb) mb.style.display = (name !== 'home' && window.innerWidth <= 600) ? 'flex' : 'none';
+  if (mb) mb.style.display = name !== 'home' ? 'flex' : 'none';
   // Скрываем FAB если уходим со страницы контента
   const fab = document.getElementById('fab-edit');
   if (fab && name !== 'content') fab.style.display = 'none';
