@@ -386,7 +386,7 @@ async function doLogin() {
     if (!user.active) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
     currentUser = user;
     sessionStorage.setItem('ls_user', JSON.stringify(user));
-    startApp();
+    await startApp();
   } catch(e) { err.textContent='Ошибка соединения: ' + e.message; err.style.display='block'; }
 }
 
