@@ -245,6 +245,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b003",
+      "title": "Долями — инструкция по оформлению",
+      "category": "banks",
+      "file": "banks/dolami-guide.md",
+      "tags": [
+        "Долями",
+        "рассрочка",
+        "оплата",
+        "Т-Банк"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
