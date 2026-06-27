@@ -259,6 +259,21 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b004",
+      "title": "POS-кредит Ванта — инструкция по оформлению",
+      "category": "banks",
+      "file": "banks/vanta-guide.md",
+      "tags": [
+        "Ванта",
+        "POS",
+        "рассрочка",
+        "кредит",
+        "банк"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
