@@ -116,6 +116,20 @@
       ],
       "updated": "2026-06-26",
       "isNew": true
+    },
+    {
+      "id": "b001",
+      "title": "Ссылки на оплату — QR-коды",
+      "category": "banks",
+      "url": "https://pbwork41.github.io/ls_baza_znaniy/banks/qr-payments.html",
+      "tags": [
+        "оплата",
+        "QR",
+        "СБП",
+        "ссылки"
+      ],
+      "updated": "2026-06-26",
+      "isNew": true
     }
   ],
   "videos": [],
