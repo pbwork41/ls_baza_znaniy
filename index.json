@@ -231,6 +231,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "b002",
+      "title": "Рассрочка в Т-Банке — инструкция",
+      "category": "banks",
+      "file": "banks/tbank-guide.md",
+      "tags": [
+        "рассрочка",
+        "Т-Банк",
+        "оплата",
+        "банк"
+      ],
+      "updated": "2026-06-27",
+      "isNew": true
     }
   ],
   "videos": [],
