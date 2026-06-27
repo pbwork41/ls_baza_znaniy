@@ -2,8 +2,8 @@
 
 [Открыть 1С →](https://cloud.1c.fitness/app02_2077/2077/ru/)
 
-> **Важно:** 1С и AmoCRM не связаны.
-> В 1С ведём: продажи, посещаемость клиентов, расписание.
+> **ВАЖНО:** 1С и AmoCRM не связаны!
+> В 1С у нас: продажи, посещаемость клиентов, расписание.
 
 ---
 
@@ -11,98 +11,118 @@
 
 На панели слева нажимаем **бургер (4 полоски)** → Смена структурной единицы → в появившемся окне выбираем нужную студию.
 
-![image2.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image2.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image2.png)
+
+**ВАЖНО: 1С и AmoCRM не связаны!**
+В 1С у нас: продажи, посещаемость клиентов, расписание.
+
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image16.png)
 
 
-![image16.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image16.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image4.png)
 
 
-![image4.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image4.png)
-
-
-![image11.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image11.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image11.png)
 
 
 ---
 
 ## 1. Как создать нового клиента
 
-Вставляем номер телефона — если клиентка есть в базе, она найдётся. Если нет — создаём нового клиента (пункт №1).
+1. Проверяем, нет ли клиента в базе.
+2. Если нет — нажимаем **+**
+3. Вводим номер телефона без 8
+4. Заполняем поля: имя и номер
+5. Нажимаем **«Сохранить»**
 
-![image12.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image12.png)
+---
+
+## 2. Как записать пробника на пробное занятие
+
+Заходим в расписание нужной студии → день и время, которое выбрала клиентка →
+
+Вставляем номер если клиентка есть в базе, или создаём нового (пункт №1) →
+
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image12.png)
 
 
-![image9.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image9.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image9.png)
 
 
-После добавления клиент появляется в списке записанных. Записываем на тренировку.
+После того как добавили клиента — он появляется в списке записанных с основанием **«ПРОБНОЕ ЗАНЯТИЕ»**.
 
-![image15.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image15.png)
-
-
-![image8.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image8.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image15.png)
 
 
 ---
 
-## 2. Клиент купил абонемент
+## 3. Клиент купил абонемент
 
-Заходим в карточку клиента → выбираем абонемент → выбираем способ оплаты.
+1. Заходим в карточку клиента (2 пересекающихся квадратика). Вводим фамилию, дату рождения.
+2. Заходим в **Продажи** → **СОЗДАТЬ**
+3. Выбираем **КОМБО** → Петропавловск-Камчатский → выбираем необходимый абонемент
+
+4. Выбрали абонемент, далее выбираем способ оплаты:
+
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image8.png)
+
 
 ### Если оплата наличными / по карте / переводом
 
 Оплатить → выбираем способ оплаты → Оплатить → Сохранить
 
-![image13.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image13.png)
+**Если оплата в рассрочку:**
 
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image13.png)
 
-### Если оплата в рассрочку
 
 **Шаг 1.** Три полоски → Провести
 
-![image17.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image17.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image17.png)
 
 
 **Шаг 2.** Создать договор → выбираем нужный банк → Выбрать
 
-![image7.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image7.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image7.png)
 
 
 **Шаг 3.** Одобрен → заполняем номер договора (найти в верхнем левом углу) → Сохранить
 
-![image6.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image6.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image6.png)
 
 
 **Шаг 4.** Выбираем договор → Три полоски → Провести
 
-![image14.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image14.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image14.png)
 
 
 **Шаг 5.** Заходим в карточку договора (2 квадратика) → Создать на основании → Оплата от организации
 
-![image5.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image5.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image5.png)
 
 
 **Шаг 6.** В появившемся окне нажимаем Добавить → выбираем продажу → Сохранить
 
-![image18.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image18.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image18.png)
 
 
-> Не забываем брать доплату за пробное занятие. У клиента в личном кабинете в приложении должен отобразиться купленный абонемент.
+> Не забываем брать доплату за пробное занятие. У клиента в личном кабинете в приложении должен отобразиться абонемент, который вы пробили.
 
 ---
 
-## 3. Отчёт по выручке
+## 4. Отчёт по выручке
 
-Заходим в раздел отчётов:
+**а)** Начальная страница → Касса
 
-![image3.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image3.png)
-
-
-![image10.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image10.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image3.png)
 
 
-Выбираем нужную студию и период → нажимаем **Сформировать**
+**б)** Отчёт по выручке
 
-![image1.png](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image1.png)
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image10.png)
+
+
+**в)** Выбираем нужную студию, период → нажимаем **Сформировать**
+
+![скриншот](https://raw.githubusercontent.com/pbwork41/ls_baza_znaniy/main/onec/images/image1.png)
 
