@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "login": "Admin",
+    "password_hash": "93f2f56f3eea895609c9c3388e9853a82ad72d1c1193fdc9cc83b82afae4f2dc",
+    "role": "admin",
+    "name": "Руководитель"
+  }
+]
