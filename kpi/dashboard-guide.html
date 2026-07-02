@@ -17,27 +17,19 @@
   --r:10px;--rs:6px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:800px;margin:0 auto;line-height:1.5}
-
-/* HERO */
 .hero{background:linear-gradient(135deg,var(--blue-dark),var(--purple));color:#fff;border-radius:14px;padding:22px 26px;margin-bottom:20px}
 .hero-title{font-size:20px;font-weight:700;margin-bottom:4px}
 .hero-sub{font-size:13px;opacity:.85}
-
-/* TOC */
 .toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:20px}
 .toc-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.toc-a{display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;font-size:13px;color:var(--blue);border:1px solid var(--blue-light);text-decoration:none;transition:background .12s}
+.toc-a{display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;font-size:13px;color:var(--blue);border:1px solid var(--blue-light);text-decoration:none}
 .toc-a:hover{background:var(--blue-bg)}
-
-/* SECTION */
 .sec{margin-bottom:26px}
 .sec-h{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--blue-light)}
 .sec-icon{width:34px;height:34px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .sec-title{font-size:16px;font-weight:700}
 .sec-sub{font-size:12px;color:var(--muted);margin-top:2px}
-
-/* PHONE */
 .phone-wrap{display:flex;justify-content:center;margin-bottom:16px}
 .phone{width:270px;border-radius:20px;border:2px solid #d1d5db;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.1)}
 .topbar{background:var(--blue);padding:10px 14px}
@@ -45,88 +37,58 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .topbar-sub{color:rgba(255,255,255,.7);font-size:10px;margin-top:1px}
 .topbar-btns{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}
 .topbar-btn{padding:7px 4px;font-size:10px;font-weight:600;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:5px;text-align:center}
-.tabs-bar{display:flex;background:#fff;padding:4px;gap:3px;border-bottom:1px solid var(--border)}
-.ph-tab{flex:1;padding:6px 2px;font-size:10px;font-weight:500;text-align:center;border-radius:5px;color:var(--muted)}
+.tabs-bar{display:flex;background:#fff;padding:4px;gap:3px;border-bottom:1px solid var(--border);overflow-x:auto}
+.ph-tab{flex-shrink:0;padding:6px 8px;font-size:9px;font-weight:500;text-align:center;border-radius:5px;color:var(--muted);white-space:nowrap}
 .ph-tab.on{background:var(--blue);color:#fff}
 .ph-body{background:var(--bg);padding:10px}
-
-/* METRICS */
 .m4{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
 .mbox{background:#fff;border:1px solid var(--border);border-radius:5px;padding:7px 9px}
 .mlabel{font-size:9px;color:var(--light);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
 .mval{font-size:16px;font-weight:700}
 .mval.g{color:var(--green)}.mval.a{color:var(--amber)}.mval.r{color:var(--red)}
-
-/* FUNNEL */
 .frow{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #f3f4f6;font-size:11px}
 .frow:last-child{border:none}
 .fdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .flabel{flex:1;color:var(--muted)}
 .fval{font-weight:700;font-size:12px}
-.fpct{font-size:10px;color:var(--light);min-width:32px;text-align:right}
-
-/* MARATHON */
 .mb{border:2px solid var(--amber);background:var(--amber-bg);border-radius:7px;padding:8px 10px;margin-bottom:8px}
 .mb-title{font-size:11px;font-weight:700;color:#b45309}
 .mb-prize{font-size:17px;font-weight:800;color:#b45309}
 .mb-bar{height:4px;background:var(--amber-light);border-radius:2px;margin-top:5px;overflow:hidden}
 .mb-fill{height:100%;background:var(--amber);border-radius:2px}
-
-/* SALARY */
 .sal-box{background:linear-gradient(135deg,var(--blue-bg),#f0f4ff);border:1px solid #bfdbfe;border-radius:8px;padding:12px 14px;margin-bottom:8px}
 .sal-total{font-size:26px;font-weight:800;color:var(--blue-dark)}
 .sal-sub{font-size:11px;color:var(--blue);margin-top:3px}
-.sal-rows .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e5e7eb;font-size:12px}
-.sal-rows .row:last-child{border:none;font-weight:700;font-size:13px}
-
-/* FORM MOCK */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 14px}
+.card-t{font-size:13px;font-weight:600;margin-bottom:5px}
+.card-b{font-size:12px;color:var(--muted);line-height:1.6}
+.step{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.sn{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.sb{font-size:13px;line-height:1.6}
+.sb strong{color:var(--blue)}
+.tip{background:var(--amber-bg);border:1px solid var(--amber-light);border-radius:8px;padding:10px 13px;font-size:13px;color:#92400e;margin-bottom:12px;display:flex;gap:8px;align-items:flex-start}
+.tip.blue{background:var(--blue-bg);border-color:var(--blue-light);color:var(--blue-dark)}
+.tip.red{background:var(--red-bg);border-color:#fca5a5;color:#b91c1c}
+.tip.green{background:var(--green-bg);border-color:var(--green-light);color:#15803d}
+.tip-i{font-size:16px;flex-shrink:0;margin-top:1px}
 .form-mock{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .fl{font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:500}
 .fi{background:var(--bg);border:1px solid #d1d5db;border-radius:5px;padding:6px 9px;font-size:13px;color:#374151}
 .fsec{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 6px;padding-top:8px;border-top:1px solid var(--border)}
 .fta{min-height:44px;padding:6px 9px;font-size:12px;color:#9ca3af}
-
-/* CARDS */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:14px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 14px}
-.card-t{font-size:13px;font-weight:600;margin-bottom:5px}
-.card-b{font-size:12px;color:var(--muted);line-height:1.6}
-
-/* STEPS */
-.step{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
-.sn{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
-.sb{font-size:13px;line-height:1.6}
-.sb strong{color:var(--blue)}
-
-/* TIPS */
-.tip{background:var(--amber-bg);border:1px solid var(--amber-light);border-radius:8px;padding:10px 13px;font-size:13px;color:#92400e;margin-bottom:12px;display:flex;gap:8px;align-items:flex-start}
-.tip.blue{background:var(--blue-bg);border-color:var(--blue-light);color:var(--blue-dark)}
-.tip.red{background:var(--red-bg);border-color:#fca5a5;color:#b91c1c}
-.tip.green{background:var(--green-bg);border-color:var(--green-light);color:#15803d}
-.tip-i{font-size:16px;flex-shrink:0;margin-top:1px}
-
-/* AUTH */
-.auth-mock{background:#f9fafb;padding:14px}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:600}
+.badge.b{background:var(--blue-bg);color:var(--blue)}
+.badge.g{background:var(--green-bg);color:var(--green)}
+.badge.a{background:var(--amber-bg);color:var(--amber)}
+.badge.new{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.div{border:none;border-top:2px dashed var(--border);margin:24px 0}
 .pin-dots{display:flex;gap:8px;justify-content:center;margin:8px 0}
 .pin-dot{width:10px;height:10px;border-radius:50%;background:#d1d5db}
 .pin-dot.on{background:var(--blue)}
 .pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .pin-btn{padding:9px;text-align:center;font-size:15px;font-weight:600;border:1px solid #e5e7eb;border-radius:6px;background:#fff}
-
-/* DIVIDER */
-.div{border:none;border-top:2px dashed var(--border);margin:24px 0}
-
-/* HISTORY ROW */
-.hrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
-.hrow:last-child{border:none}
-
-.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:600}
-.badge.b{background:var(--blue-bg);color:var(--blue)}
-.badge.g{background:var(--green-bg);color:var(--green)}
-.badge.a{background:var(--amber-bg);color:var(--amber)}
-.chip{background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px;font-size:11px;color:var(--muted);display:inline-block}
-
 @media(max-width:540px){.toc-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.fg{grid-template-columns:1fr}}
 </style>
 </head>
@@ -134,7 +96,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 
 <div class="hero">
   <div class="hero-title">💪 Дашборд администратора — гайд</div>
-  <div class="hero-sub">Lady Stretch · Система учёта смен · Как пользоваться</div>
+  <div class="hero-sub">Lady Stretch · Система учёта смен · Актуальная версия</div>
 </div>
 
 <div class="toc">
@@ -145,10 +107,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     <a class="toc-a" href="#plan">🎯 План на день</a>
     <a class="toc-a" href="#shift">📋 Закрытие смены</a>
     <a class="toc-a" href="#interim">✅ Промежуточная продажа</a>
-    <a class="toc-a" href="#dashboard">📊 Вкладка Сводка</a>
-    <a class="toc-a" href="#shifts-tab">📅 Вкладка Смены</a>
-    <a class="toc-a" href="#profile">👤 Вкладка Кабинет</a>
-    <a class="toc-a" href="#salary">💰 Расчёт зарплаты</a>
+    <a class="toc-a" href="#dashboard">📊 Сводка</a>
+    <a class="toc-a" href="#schedule">📅 Расписание</a>
+    <a class="toc-a" href="#shifts-tab">📋 Смены</a>
+    <a class="toc-a" href="#refunds">↩ Возвраты</a>
+    <a class="toc-a" href="#profile">👤 Кабинет</a>
+    <a class="toc-a" href="#salary">💰 Зарплата</a>
     <a class="toc-a" href="#marathon">🏆 Марафон</a>
   </div>
 </div>
@@ -157,39 +121,39 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="login">
   <div class="sec-h">
     <div class="sec-icon">🔐</div>
-    <div><div class="sec-title">Вход и регистрация</div><div class="sec-sub">Первый раз — создай аккаунт. Потом — вход по PIN</div></div>
+    <div><div class="sec-title">Вход и регистрация</div><div class="sec-sub">Имя + Фамилия + PIN-код</div></div>
   </div>
-
   <div class="phone-wrap"><div class="phone">
-    <div class="topbar" style="background:linear-gradient(135deg,#1d4ed8,#7c3aed);padding:14px">
-      <div style="text-align:center;font-size:26px;margin-bottom:4px">💪</div>
-      <div style="color:#fff;font-size:14px;font-weight:800;text-align:center">Lady Stretch</div>
-      <div style="color:rgba(255,255,255,.7);font-size:10px;text-align:center;margin-top:2px">Система учёта смен</div>
+    <div class="topbar" style="background:linear-gradient(135deg,#1d4ed8,#7c3aed);padding:16px;text-align:center">
+      <div style="font-size:28px;margin-bottom:4px">💪</div>
+      <div style="color:#fff;font-size:15px;font-weight:800">Lady Stretch</div>
+      <div style="color:rgba(255,255,255,.7);font-size:11px;margin-top:2px">Система учёта смен</div>
     </div>
-    <div class="auth-mock">
-      <div style="display:flex;background:#fff;border-radius:6px;padding:3px;gap:3px;border:1px solid #e5e7eb;margin-bottom:12px">
-        <div style="flex:1;padding:6px;font-size:11px;font-weight:600;text-align:center;background:var(--blue);color:#fff;border-radius:4px">Вход</div>
+    <div style="background:#fff;padding:14px">
+      <div style="display:flex;background:#f3f4f6;border-radius:6px;padding:3px;gap:3px;margin-bottom:12px">
+        <div style="flex:1;padding:6px;font-size:11px;font-weight:600;text-align:center;background:#fff;color:var(--blue);border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1)">Вход</div>
         <div style="flex:1;padding:6px;font-size:11px;text-align:center;color:var(--muted)">Регистрация</div>
       </div>
-      <div class="fl">Имя</div><div class="fi" style="margin-bottom:7px;font-size:12px">Анна</div>
-      <div class="fl">Фамилия</div><div class="fi" style="margin-bottom:10px;font-size:12px">Иванова</div>
-      <div class="fl" style="margin-bottom:6px">Пин-код</div>
+      <div class="fl" style="margin-bottom:3px">Имя</div>
+      <div class="fi" style="margin-bottom:7px;font-size:12px">Анна</div>
+      <div class="fl" style="margin-bottom:3px">Фамилия</div>
+      <div class="fi" style="margin-bottom:10px;font-size:12px">Иванова</div>
+      <div class="fl" style="margin-bottom:7px">Пин-код</div>
       <div class="pin-dots">
         <div class="pin-dot on"></div><div class="pin-dot on"></div>
         <div class="pin-dot"></div><div class="pin-dot"></div>
       </div>
-      <div class="pin-pad">
+      <div class="pin-pad" style="margin-bottom:10px">
         <div class="pin-btn">1</div><div class="pin-btn">2</div><div class="pin-btn">3</div>
         <div class="pin-btn">4</div><div class="pin-btn">5</div><div class="pin-btn">6</div>
         <div class="pin-btn">7</div><div class="pin-btn">8</div><div class="pin-btn">9</div>
-        <div></div><div class="pin-btn">0</div><div class="pin-btn" style="font-size:11px;color:var(--muted)">⌫</div>
+        <div></div><div class="pin-btn">0</div><div class="pin-btn" style="font-size:11px">⌫</div>
       </div>
-      <div style="margin-top:10px;background:var(--blue);color:#fff;text-align:center;padding:9px;border-radius:6px;font-size:13px;font-weight:600">Войти</div>
+      <div style="background:var(--blue);color:#fff;text-align:center;padding:10px;border-radius:7px;font-size:13px;font-weight:600">Войти</div>
     </div>
   </div></div>
-
-  <div class="tip blue"><span class="tip-i">🆕</span><span><strong>Первый раз:</strong> вкладка «Регистрация» → имя, фамилия, придумай PIN из 4 цифр, введи дважды. После регистрации руководитель активирует аккаунт — без активации войти не получится.</span></div>
-  <div class="tip green"><span class="tip-i">🔁</span><span><strong>Уже есть аккаунт:</strong> вкладка «Вход» → имя, фамилия, PIN. Система загрузит твои данные автоматически.</span></div>
+  <div class="tip blue"><span class="tip-i">🆕</span><span><strong>Первый раз:</strong> вкладка «Регистрация» → имя, фамилия → придумай PIN (вводится дважды для подтверждения) → жди активации от руководителя.</span></div>
+  <div class="tip green"><span class="tip-i">🔁</span><span><strong>Уже есть аккаунт:</strong> вкладка «Вход» → имя, фамилия, PIN. Данные загрузятся автоматически.</span></div>
   <div class="tip red"><span class="tip-i">⚠️</span><span>Забыла PIN — обратись к руководителю. Самостоятельно сбросить нельзя.</span></div>
 </div>
 
@@ -199,13 +163,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="topbar">
   <div class="sec-h">
     <div class="sec-icon">🚀</div>
-    <div><div class="sec-title">Кнопки в шапке</div><div class="sec-sub">Три главных действия — доступны всегда поверх экрана</div></div>
+    <div><div class="sec-title">Кнопки в шапке</div><div class="sec-sub">Три главных действия — всегда наверху</div></div>
   </div>
-
   <div class="phone-wrap"><div class="phone">
     <div class="topbar">
       <div class="topbar-title">Lady Stretch</div>
-      <div class="topbar-sub">Июнь 2026 · синхронизировано</div>
+      <div class="topbar-sub">Июнь 2026</div>
       <div class="topbar-btns">
         <div class="topbar-btn">🚀 План на день</div>
         <div class="topbar-btn">✅ Пром. отчёт</div>
@@ -214,23 +177,24 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     </div>
     <div class="tabs-bar">
       <div class="ph-tab on">📊 Сводка</div>
-      <div class="ph-tab">📅 Смены</div>
+      <div class="ph-tab">📅 Расписание</div>
+      <div class="ph-tab">📋 Смены</div>
+      <div class="ph-tab">↩ Возвраты</div>
       <div class="ph-tab">👤 Кабинет</div>
     </div>
   </div></div>
-
   <div class="cards">
     <div class="card">
       <div class="card-t">🚀 План на день</div>
-      <div class="card-b">Заполняешь <strong>в начале смены</strong>. Ставишь цель: сколько лидов, записей, звонков планируешь. Потом сверяешься в Кабинете.</div>
+      <div class="card-b">Заполняешь <strong>в начале смены</strong>. Ставишь цель по выручке, пробным, звонкам.</div>
     </div>
     <div class="card">
       <div class="card-t">✅ Пром. отчёт</div>
-      <div class="card-b">Фиксируешь <strong>промежуточную продажу</strong> до конца смены — чтобы не потерялась. При закрытии смены она подтянется автоматически.</div>
+      <div class="card-b">Смотришь прогресс относительно плана в середине дня. Также фиксируешь промежуточную продажу если уже была.</div>
     </div>
     <div class="card">
       <div class="card-t">📋 Закрыть смену</div>
-      <div class="card-b">Заполняешь <strong>в конце рабочего дня</strong>. Вся воронка, все продажи, активность, самоанализ. Без этого день не засчитается в статистику.</div>
+      <div class="card-b">Заполняешь <strong>в конце рабочего дня</strong>. Воронка, продажи, йога, массаж, отзывы, самоанализ.</div>
     </div>
   </div>
 </div>
@@ -243,33 +207,32 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     <div class="sec-icon">🎯</div>
     <div><div class="sec-title">План на день</div><div class="sec-sub">Ставится в начале каждой смены</div></div>
   </div>
-
   <div class="form-mock">
-    <div class="fg" style="margin-bottom:10px">
-      <div><div class="fl">Дата</div><div class="fi">26.06.2026</div></div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Дата</div><div class="fi">27.06.2026</div></div>
       <div><div class="fl">Студия</div><div class="fi">Империал ▾</div></div>
     </div>
-    <div class="fsec">Входящий поток (план)</div>
-    <div class="fg" style="margin-bottom:10px">
-      <div><div class="fl">Лиды</div><div class="fi">5</div></div>
-      <div><div class="fl">Записей на пробное</div><div class="fi">3</div></div>
+    <div class="fsec">Пробные занятия (план)</div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Пробных придёт</div><div class="fi">3</div></div>
+      <div><div class="fl">Записей на пробное</div><div class="fi">4</div></div>
     </div>
-    <div class="fg">
-      <div><div class="fl">Пробных придёт</div><div class="fi">2</div></div>
+    <div class="fsec">Продажи (план)</div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Новые продажи, ₽</div><div class="fi">45 000</div></div>
+      <div><div class="fl">Архив (продления), ₽</div><div class="fi">0</div></div>
     </div>
     <div class="fsec">Активность (план)</div>
     <div class="fg">
-      <div><div class="fl">Исходящих звонков</div><div class="fi">10</div></div>
-      <div><div class="fl">Задач (сообщений)</div><div class="fi">15</div></div>
+      <div><div class="fl">Звонков</div><div class="fi">10</div></div>
+      <div><div class="fl">Задач</div><div class="fi">15</div></div>
     </div>
   </div>
-
   <div class="step"><div class="sn">1</div><div class="sb">Нажми <strong>«🚀 План на день»</strong> в начале смены</div></div>
-  <div class="step"><div class="sn">2</div><div class="sb">Выбери дату и <strong>студию</strong> (Империал или Мечта)</div></div>
-  <div class="step"><div class="sn">3</div><div class="sb">Введи плановые цифры по воронке и активности</div></div>
-  <div class="step"><div class="sn">4</div><div class="sb">Нажми <strong>«Сохранить план»</strong> — цифры появятся в Кабинете</div></div>
-
-  <div class="tip"><span class="tip-i">⚠️</span><span>Plan на день ставится <strong>один раз</strong>. Ошиблась — скажи руководителю, он исправит.</span></div>
+  <div class="step"><div class="sn">2</div><div class="sb">Выбери дату и <strong>студию</strong></div></div>
+  <div class="step"><div class="sn">3</div><div class="sb">Заполни план по пробным, продажам и активности</div></div>
+  <div class="step"><div class="sn">4</div><div class="sb">Нажми <strong>«Сохранить план»</strong></div></div>
+  <div class="tip"><span class="tip-i">⚠️</span><span>План ставится <strong>один раз</strong> в день. Ошиблась — скажи руководителю.</span></div>
 </div>
 
 <hr class="div">
@@ -280,19 +243,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     <div class="sec-icon">📋</div>
     <div><div class="sec-title">Закрытие смены</div><div class="sec-sub">Главное действие — каждый рабочий день</div></div>
   </div>
-
   <div class="form-mock">
     <div class="fg" style="margin-bottom:8px">
-      <div><div class="fl">Дата</div><div class="fi">26.06.2026</div></div>
+      <div><div class="fl">Дата</div><div class="fi">27.06.2026</div></div>
       <div><div class="fl">Студия</div><div class="fi">Империал ▾</div></div>
     </div>
-    <div class="fsec">Воронка</div>
-    <div class="fg" style="margin-bottom:6px">
-      <div><div class="fl">Лиды</div><div class="fi">6</div></div>
-      <div><div class="fl">Записей на пробное</div><div class="fi">4</div></div>
-    </div>
+    <div class="fsec">Пробное занятие</div>
     <div class="fg" style="margin-bottom:8px">
       <div><div class="fl">Пришло на пробное</div><div class="fi">3</div></div>
+      <div><div class="fl">Записей на пробное</div><div class="fi">4</div></div>
     </div>
     <div class="fsec">Продажи</div>
     <div class="fg" style="margin-bottom:6px">
@@ -301,46 +260,41 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     </div>
     <div class="fg" style="margin-bottom:8px">
       <div><div class="fl">Возврат клиента, ₽</div><div class="fi">0</div></div>
+      <div><div class="fl" style="display:flex;align-items:center;gap:4px">Йога, ₽ <span class="badge new">новое</span></div><div class="fi">0</div></div>
     </div>
     <div class="fsec">Активность</div>
     <div class="fg" style="margin-bottom:6px">
       <div><div class="fl">Исходящих звонков</div><div class="fi">8</div></div>
       <div><div class="fl">Задач</div><div class="fi">12</div></div>
     </div>
-    <div class="fg" style="margin-bottom:8px">
-      <div><div class="fl">Массаж (записей)</div><div class="fi">2</div></div>
-      <div><div class="fl">Отзывы</div><div class="fi">1</div></div>
+    <div class="fg" style="margin-bottom:6px">
+      <div><div class="fl">Массажей (шт)</div><div class="fi">2</div></div>
+      <div><div class="fl">Отзывов</div><div class="fi">1</div></div>
     </div>
-    <div class="fg" style="margin-bottom:8px">
-      <div><div class="fl">Йога (записей)</div><div class="fi">0</div></div>
-      <div><div class="fl">Мастер-класс</div><div class="fi">0</div></div>
-    </div>
-    <div class="fsec">Самоанализ</div>
-    <div style="margin-bottom:6px"><div class="fl">Что было сложно / слабое место</div><div class="fi fta">Сложно закрывать на дорогой пакет...</div></div>
-    <div><div class="fl">Что сделаю иначе завтра</div><div class="fi fta">Буду раньше называть цену рассрочки...</div></div>
+    <div class="fsec" style="display:flex;align-items:center;gap:6px;color:var(--amber)">⚠ Самоанализ</div>
+    <div style="margin-bottom:6px"><div class="fl">Что было сложно</div><div class="fi fta">...</div></div>
+    <div><div class="fl">Что сделаю иначе завтра</div><div class="fi fta">...</div></div>
   </div>
 
   <div class="cards">
     <div class="card">
-      <div class="card-t">📞 Воронка <span class="badge b">обязательно</span></div>
-      <div class="card-b"><strong>Лиды</strong> — все новые обращения за день. <strong>Записи</strong> — скольких записала на пробное. <strong>Пришло</strong> — реально дождалась на занятии.</div>
+      <div class="card-t">📞 Пробное занятие <span class="badge b">обязательно</span></div>
+      <div class="card-b">Сколько пришло на пробное и сколько записей сделала за день.</div>
     </div>
     <div class="card">
       <div class="card-t">💰 Продажи <span class="badge g">ключевое</span></div>
-      <div class="card-b"><strong>Новый абонемент</strong> — сумма новых продаж за день. <strong>Продление</strong> — архивники. <strong>Возврат клиента</strong> — отдельная категория. Вводи суммы точно по чекам.</div>
+      <div class="card-b">Новый абонемент, продление (архив), возврат клиента. <strong>Новое:</strong> отдельная строка для продаж йоги.</div>
     </div>
     <div class="card">
       <div class="card-t">📱 Активность</div>
-      <div class="card-b">Только <strong>исходящие</strong> — те, которые ты сама инициировала. Массаж, йога, МК — количество записей которые ты сделала за смену.</div>
+      <div class="card-b">Только исходящие звонки. Массажи — количество записей. Отзывы — сколько получила за день.</div>
     </div>
     <div class="card">
       <div class="card-t">💡 Самоанализ</div>
-      <div class="card-b">Руководитель это читает. Пиши честно: что было сложно и что сделаешь иначе. Это помогает расти — не для галочки.</div>
+      <div class="card-b">Что было сложно и что сделаешь иначе. Руководитель читает — пиши честно.</div>
     </div>
   </div>
-
-  <div class="tip red"><span class="tip-i">⚠️</span><span>Если <strong>план не выполнен</strong> — дашборд попросит выбрать причину (недоработка тренера, внешние факторы, другое) и написать комментарий. Это обязательное поле.</span></div>
-  <div class="tip"><span class="tip-i">📋</span><span>Если до закрытия смены вносила промежуточную продажу — она автоматически подставится в поля. Просто проверь и дополни фактом за весь день.</span></div>
+  <div class="tip red"><span class="tip-i">⚠️</span><span>Если план не выполнен — появится блок <strong>«Укажите причину»</strong>. Это обязательное поле.</span></div>
 </div>
 
 <hr class="div">
@@ -349,23 +303,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="interim">
   <div class="sec-h">
     <div class="sec-icon">✅</div>
-    <div><div class="sec-title">Промежуточная продажа</div><div class="sec-sub">Фиксация продажи до конца смены</div></div>
+    <div><div class="sec-title">Промежуточный отчёт</div><div class="sec-sub">Прогресс за день + фиксация продажи</div></div>
   </div>
-
-  <div class="tip blue"><span class="tip-i">💡</span><span>Продала абонемент в середине дня и боишься забыть к вечеру? Нажми <strong>«✅ Пром. отчёт»</strong> и зафикси сумму сразу. При закрытии смены она подтянется автоматически.</span></div>
-
-  <div class="form-mock">
-    <div class="fg" style="margin-bottom:8px">
-      <div><div class="fl">Дата</div><div class="fi">26.06.2026</div></div>
-      <div><div class="fl">Студия</div><div class="fi">Мечта ▾</div></div>
+  <div class="tip blue"><span class="tip-i">💡</span><span>Нажми <strong>«✅ Пром. отчёт»</strong> в середине дня — увидишь план и сколько уже сделала. Если уже была продажа — зафикси её здесь чтобы не потерять к вечеру.</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-t">📊 Прогресс к плану</div>
+      <div class="card-b">Показывает план на день и текущий факт. Видишь сколько осталось до выполнения.</div>
     </div>
-    <div class="fg">
-      <div><div class="fl">Новый абонемент, ₽</div><div class="fi">35 235</div></div>
-      <div><div class="fl">Архив (продление), ₽</div><div class="fi">0</div></div>
+    <div class="card">
+      <div class="card-t">💰 Промежуточная продажа</div>
+      <div class="card-b">Продала абонемент в 14:00? Зафиксируй сумму здесь. При закрытии смены она подтянется автоматически.</div>
     </div>
   </div>
-
-  <div class="tip red"><span class="tip-i">⚠️</span><span>Промежуточная продажа учитывается <strong>только за тобой</strong> — другой администратор её не видит как свою. При закрытии смены не вводи её повторно — система уже знает.</span></div>
 </div>
 
 <hr class="div">
@@ -374,28 +324,29 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="dashboard">
   <div class="sec-h">
     <div class="sec-icon">📊</div>
-    <div><div class="sec-title">Вкладка: Сводка</div><div class="sec-sub">Показатели твоей студии за текущий месяц</div></div>
+    <div><div class="sec-title">Вкладка: Сводка</div><div class="sec-sub">Показатели студии за месяц</div></div>
   </div>
-
   <div class="phone-wrap"><div class="phone">
     <div class="tabs-bar">
       <div class="ph-tab on">📊 Сводка</div>
-      <div class="ph-tab">📅 Смены</div>
+      <div class="ph-tab">📅 Расписание</div>
+      <div class="ph-tab">📋 Смены</div>
+      <div class="ph-tab">↩ Возвраты</div>
       <div class="ph-tab">👤 Кабинет</div>
     </div>
     <div class="mb" style="margin:10px 10px 0">
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div><div class="mb-title">🏆 Марафон — iPhone 17 Pro</div><div style="font-size:10px;color:#b45309;margin-top:2px">Цель: 10 продаж · 14 дней осталось</div></div>
+        <div><div class="mb-title">🏆 Марафон — iPhone 17 Pro</div><div style="font-size:10px;color:#b45309;margin-top:2px">Цель: 10 продаж · 14 дней</div></div>
         <div class="mb-prize">₽150к</div>
       </div>
       <div class="mb-bar"><div class="mb-fill" style="width:60%"></div></div>
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:#b45309;margin-top:3px"><span>6 / 10 продаж</span><span>60%</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:#b45309;margin-top:3px"><span>6/10 продаж</span><span>60%</span></div>
     </div>
     <div class="ph-body">
       <div style="background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span style="background:#eff6ff;color:#1d4ed8;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600">Империал</span>
-          <span style="background:var(--green-bg);color:var(--green);padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600">✓ 89%</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600">Империал</span>
+          <span style="background:var(--green-bg);color:var(--green);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600">✓ 89%</span>
         </div>
         <div class="m4">
           <div class="mbox"><div class="mlabel">Факт</div><div class="mval g">₽285к</div></div>
@@ -404,31 +355,35 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
         <div class="mbox" style="margin-bottom:8px"><div class="mlabel">Нужно в день</div><div class="mval" style="font-size:14px">₽4 200 · 14 дней</div></div>
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:5px;padding:8px">
           <div style="font-size:10px;font-weight:600;color:#374151;margin-bottom:5px">Воронка студии</div>
-          <div class="frow"><div class="fdot" style="background:#2563eb"></div><div class="flabel">Лиды</div><div class="fval">84</div><div class="fpct"></div></div>
-          <div class="frow"><div class="fdot" style="background:#7c3aed"></div><div class="flabel">Записи</div><div class="fval">54</div><div class="fpct">64%</div></div>
-          <div class="frow"><div class="fdot" style="background:#16a34a"></div><div class="flabel">Приход</div><div class="fval">31</div><div class="fpct">57%</div></div>
-          <div class="frow"><div class="fdot" style="background:#d97706"></div><div class="flabel">Продажи</div><div class="fval">18</div><div class="fpct">58%</div></div>
+          <div class="frow"><div class="fdot" style="background:#2563eb"></div><div class="flabel">Лиды</div><div class="fval">84</div></div>
+          <div class="frow"><div class="fdot" style="background:#7c3aed"></div><div class="flabel">Записи</div><div class="fval">54</div><span style="font-size:10px;color:var(--muted)">64%</span></div>
+          <div class="frow"><div class="fdot" style="background:#16a34a"></div><div class="flabel">Приход</div><div class="fval">31</div><span style="font-size:10px;color:var(--muted)">57%</span></div>
+          <div class="frow"><div class="fdot" style="background:#d97706"></div><div class="flabel">Продажи</div><div class="fval">18</div><span style="font-size:10px;color:var(--muted)">58%</span></div>
         </div>
       </div>
     </div>
   </div></div>
-
   <div class="cards">
-    <div class="card">
-      <div class="card-t">💰 Факт и ран рейт</div>
-      <div class="card-b"><strong>Факт</strong> — сколько продала за месяц. <strong>Ран рейт</strong> — прогноз если темп сохранится. Показывает выполнишь ли план к концу месяца.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">📅 Нужно в день</div>
-      <div class="card-b">Сколько рублей нужно делать каждый оставшийся день чтобы выполнить план. Если зелёный — план уже выполнен.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">🔽 Воронка студии</div>
-      <div class="card-b">Путь клиента: лид → запись → приход → покупка. Справа — конверсия на каждом переходе. Видишь где теряешь клиентов.</div>
-    </div>
+    <div class="card"><div class="card-t">💰 Факт и ран рейт</div><div class="card-b">Факт — сколько продала за месяц. Ран рейт — прогноз если темп сохранится.</div></div>
+    <div class="card"><div class="card-t">📅 Нужно в день</div><div class="card-b">Сколько рублей нужно делать каждый оставшийся день чтобы выполнить план.</div></div>
+    <div class="card"><div class="card-t">🔽 Воронка студии</div><div class="card-b">Лид → запись → приход → продажа. Видишь где теряешь клиентов.</div></div>
   </div>
+  <div class="tip"><span class="tip-i">💡</span><span>Сводка показывает данные <strong>всей студии</strong>. Свои личные показатели — во вкладке Кабинет.</span></div>
+</div>
 
-  <div class="tip"><span class="tip-i">💡</span><span>Сводка показывает данные <strong>всей студии</strong> (все администраторы). Свои личные показатели — во вкладке Кабинет.</span></div>
+<hr class="div">
+
+<!-- РАСПИСАНИЕ -->
+<div class="sec" id="schedule">
+  <div class="sec-h">
+    <div class="sec-icon">📅</div>
+    <div><div class="sec-title">Вкладка: Расписание <span class="badge new">новое</span></div><div class="sec-sub">Расписание занятий студии на месяц</div></div>
+  </div>
+  <div class="tip blue"><span class="tip-i">📅</span><span>Новая вкладка. Показывает расписание занятий студии по дням. Удобно проверить что стоит на ближайшие дни и сколько мест занято.</span></div>
+  <div class="cards">
+    <div class="card"><div class="card-t">📆 Календарь месяца</div><div class="card-b">Переключаешь месяц стрелками. Видишь все тренировки по дням.</div></div>
+    <div class="card"><div class="card-t">👥 Заполненность</div><div class="card-b">На каждой тренировке видно сколько клиентов записано и сколько мест осталось.</div></div>
+  </div>
 </div>
 
 <hr class="div">
@@ -436,53 +391,50 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <!-- СМЕНЫ -->
 <div class="sec" id="shifts-tab">
   <div class="sec-h">
-    <div class="sec-icon">📅</div>
-    <div><div class="sec-title">Вкладка: Смены</div><div class="sec-sub">История смен студии за текущий месяц</div></div>
+    <div class="sec-icon">📋</div>
+    <div><div class="sec-title">Вкладка: Смены</div><div class="sec-sub">История смен студии за месяц</div></div>
   </div>
-
-  <div class="phone-wrap"><div class="phone">
-    <div class="tabs-bar">
-      <div class="ph-tab">📊 Сводка</div>
-      <div class="ph-tab on">📅 Смены</div>
-      <div class="ph-tab">👤 Кабинет</div>
-    </div>
-    <div class="ph-body">
-      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:7px;padding:10px;margin-bottom:7px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
-          <div>
-            <div style="display:flex;gap:5px;align-items:center;margin-bottom:4px">
-              <span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600">Империал</span>
-              <span style="font-size:12px;font-weight:600">26 июня</span>
-              <span style="font-size:10px;color:var(--muted)">Анна И.</span>
-              <span style="font-size:9px;background:#eff6ff;color:#1d4ed8;padding:1px 5px;border-radius:10px;font-weight:600">моя</span>
-            </div>
-            <div style="display:flex;gap:4px;flex-wrap:wrap">
-              <span class="chip">Касса: 44 000 ₽</span>
-              <span class="chip">Новые: 44 000 ₽</span>
-            </div>
-            <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">
-              <span class="chip" style="background:var(--green-bg);color:var(--green);border-color:#86efac">Лиды: 6</span>
-              <span class="chip" style="background:var(--green-bg);color:var(--green);border-color:#86efac">Записи: 4</span>
-              <span class="chip" style="background:var(--green-bg);color:var(--green);border-color:#86efac">Звонки: 8</span>
-            </div>
-          </div>
-          <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:5px;padding:4px 8px;font-size:11px">✏️</div>
-        </div>
-      </div>
-    </div>
-  </div></div>
-
   <div class="cards">
-    <div class="card">
-      <div class="card-t">📋 Все смены студии</div>
-      <div class="card-b">Смены всех администраторов студии за текущий месяц. Твои помечены синим бейджем «моя».</div>
-    </div>
-    <div class="card">
-      <div class="card-t">✏️ Редактирование</div>
-      <div class="card-b">Можно исправить ошибку в своей смене — нажми на карточку, появится кнопка редактировать. Руководитель видит все изменения.</div>
-    </div>
+    <div class="card"><div class="card-t">📋 Все смены студии</div><div class="card-b">Смены всех администраторов. Твои помечены синим бейджем «моя».</div></div>
+    <div class="card"><div class="card-t">✏️ Редактирование</div><div class="card-b">Можно исправить ошибку в своей смене. Руководитель видит все правки.</div></div>
   </div>
-  <div class="tip red"><span class="tip-i">⚠️</span><span>Не редактируй смены задним числом без причины — руководитель видит все правки с временными метками.</span></div>
+  <div class="tip red"><span class="tip-i">⚠️</span><span>Не редактируй смены задним числом без причины — руководитель видит все изменения с временными метками.</span></div>
+</div>
+
+<hr class="div">
+
+<!-- ВОЗВРАТЫ -->
+<div class="sec" id="refunds">
+  <div class="sec-h">
+    <div class="sec-icon">↩</div>
+    <div><div class="sec-title">Вкладка: Возвраты <span class="badge new">новое</span></div><div class="sec-sub">Оформление возврата абонемента клиенту</div></div>
+  </div>
+  <div class="tip red"><span class="tip-i">⚠️</span><span>Возврат оформляется <strong>только по согласованию с руководителем</strong>. Самостоятельно не создавай.</span></div>
+  <div class="form-mock">
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">ФИО клиента</div><div class="fi">Иванова А.В.</div></div>
+      <div><div class="fl">Телефон</div><div class="fi">+7 914 ...</div></div>
+    </div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Абонемент</div><div class="fi">Идеальный результат</div></div>
+      <div><div class="fl">Кто продал</div><div class="fi">Анна И.</div></div>
+    </div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Стоимость, ₽</div><div class="fi">46 750</div></div>
+      <div><div class="fl">Всего занятий</div><div class="fi">60</div></div>
+    </div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><div class="fl">Осталось занятий</div><div class="fi">45</div></div>
+      <div><div class="fl">Штраф, ₽</div><div class="fi">0</div></div>
+    </div>
+    <div class="mbox" style="margin-bottom:8px;background:var(--green-bg);border-color:var(--green-light)"><div class="mlabel">К возврату</div><div class="mval g">₽35 063</div></div>
+    <div><div class="fl">Комментарий</div><div class="fi fta">Причина возврата...</div></div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="card-t">🧮 Автоматический расчёт</div><div class="card-b">Система сама считает сумму возврата: цена / всего занятий × осталось занятий − штраф.</div></div>
+    <div class="card"><div class="card-t">📎 Документ</div><div class="card-b">Можно прикрепить фото документа (заявление клиента). Загружается в хранилище.</div></div>
+    <div class="card"><div class="card-t">📋 История возвратов</div><div class="card-b">Все возвраты видны в ленте с статусами: новый, одобрен, отклонён.</div></div>
+  </div>
 </div>
 
 <hr class="div">
@@ -491,52 +443,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="profile">
   <div class="sec-h">
     <div class="sec-icon">👤</div>
-    <div><div class="sec-title">Вкладка: Кабинет</div><div class="sec-sub">Твои личные показатели, зарплата, история</div></div>
+    <div><div class="sec-title">Вкладка: Кабинет</div><div class="sec-sub">Личные показатели, зарплата, история</div></div>
   </div>
-
-  <div class="phone-wrap"><div class="phone">
-    <div class="tabs-bar">
-      <div class="ph-tab">📊 Сводка</div>
-      <div class="ph-tab">📅 Смены</div>
-      <div class="ph-tab on">👤 Кабинет</div>
-    </div>
-    <div class="ph-body">
-      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:7px;padding:12px;text-align:center;margin-bottom:8px">
-        <div style="width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;margin:0 auto 6px">А</div>
-        <div style="font-size:14px;font-weight:700;margin-bottom:3px">Анна Иванова</div>
-        <span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600">Империал</span>
-        <div style="display:flex;gap:6px;justify-content:center;margin-top:10px">
-          <div style="padding:5px 10px;font-size:11px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:5px">💰 Пром. продажа</div>
-          <div style="padding:5px 10px;font-size:11px;background:#fef2f2;border:1px solid #fca5a5;border-radius:5px;color:#b91c1c">Выйти</div>
-        </div>
-      </div>
-      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">📊 Мои показатели — июнь</div>
-      <div class="m4" style="margin-bottom:6px">
-        <div class="mbox"><div class="mlabel">Выручка</div><div class="mval g" style="font-size:14px">₽231к</div></div>
-        <div class="mbox"><div class="mlabel">Смен</div><div class="mval" style="font-size:14px">14</div></div>
-        <div class="mbox"><div class="mlabel">CV→продажа</div><div class="mval a" style="font-size:14px">25%</div></div>
-        <div class="mbox"><div class="mlabel">Лиды</div><div class="mval" style="font-size:14px">48</div></div>
-      </div>
-    </div>
-  </div></div>
-
   <div class="cards">
-    <div class="card">
-      <div class="card-t">📋 План на сегодня</div>
-      <div class="card-b">Отображает план который поставила утром. Факт / план по выручке, звонкам, задачам — с прогресс-барами.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">📊 Мои показатели</div>
-      <div class="card-b">Только твоя статистика: выручка, смены, конверсия пробное→покупка, лиды, записи, массаж, отзывы.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">💰 Зарплата</div>
-      <div class="card-b">Расчёт за текущий месяц и прогноз до конца месяца. Обновляется после каждого закрытия смены.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">📅 История смен</div>
-      <div class="card-b">Все твои смены за все месяцы. Фильтр по месяцу. Видишь сумму и количество смен по каждому месяцу.</div>
-    </div>
+    <div class="card"><div class="card-t">📋 План на сегодня</div><div class="card-b">Отображает план который поставила утром. Факт / план с прогресс-барами.</div></div>
+    <div class="card"><div class="card-t">📊 Мои показатели</div><div class="card-b">Только твоя статистика: выручка, смены, конверсия, лиды, массажи, отзывы, йога.</div></div>
+    <div class="card"><div class="card-t">💰 Зарплата</div><div class="card-b">Расчёт за текущий месяц и прогноз. Обновляется после каждого закрытия смены.</div></div>
+    <div class="card"><div class="card-t">📅 История смен</div><div class="card-b">Все твои смены за все месяцы. Фильтр по месяцу.</div></div>
   </div>
 </div>
 
@@ -546,39 +459,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="sec" id="salary">
   <div class="sec-h">
     <div class="sec-icon">💰</div>
-    <div><div class="sec-title">Как считается зарплата</div><div class="sec-sub">Автоматически на основе твоих смен</div></div>
+    <div><div class="sec-title">Как считается зарплата</div><div class="sec-sub">Автоматически на основе смен</div></div>
   </div>
-
   <div class="sal-box">
     <div style="font-size:11px;color:var(--blue);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">За 14 смен этого месяца</div>
     <div class="sal-total">₽ 38 420</div>
     <div class="sal-sub">Прогноз на месяц: ₽ 54 600</div>
   </div>
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px" class="sal-rows">
-    <div class="row"><span style="color:var(--muted)">Оклад (14 × 1 500 ₽)</span><span style="font-weight:600">21 000 ₽</span></div>
-    <div class="row"><span style="color:var(--muted)">Новые продажи (5%)</span><span style="font-weight:600">11 550 ₽</span></div>
-    <div class="row"><span style="color:var(--muted)">Продления (8%)</span><span style="font-weight:600">0 ₽</span></div>
-    <div class="row"><span style="color:var(--muted)">Возврат клиента (10%)</span><span style="font-weight:600">0 ₽</span></div>
-    <div class="row"><span style="color:var(--muted)">Бонус за кассу</span><span style="font-weight:600">5 870 ₽</span></div>
-    <div class="row" style="border-top:2px solid var(--border);margin-top:4px;padding-top:8px"><span>Итого</span><span>38 420 ₽</span></div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">Оклад (14 смен)</span><span style="font-weight:600">21 000 ₽</span></div>
+    <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">% с новых продаж</span><span style="font-weight:600">11 550 ₽</span></div>
+    <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">% с продлений</span><span style="font-weight:600">0 ₽</span></div>
+    <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">% с возврата клиента</span><span style="font-weight:600">0 ₽</span></div>
+    <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">Бонус за кассу</span><span style="font-weight:600">5 870 ₽</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 0 4px;font-size:13px;font-weight:700;border-top:2px solid var(--border);margin-top:4px"><span>Итого</span><span>38 420 ₽</span></div>
   </div>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-t">🏠 Оклад</div>
-      <div class="card-b">1 500 ₽ за каждую закрытую смену. Чем больше отработала дней — тем больше оклад.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">📈 % с продаж</div>
-      <div class="card-b"><strong>5%</strong> с новых абонементов, <strong>8%</strong> с продлений, <strong>10%</strong> с возврата клиентов. Чем больше продала — тем больше бонус.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">🎯 Бонус за кассу</div>
-      <div class="card-b">Дополнительная выплата при выполнении кассового плана. Размер зависит от условий текущего месяца.</div>
-    </div>
-  </div>
-  <div class="tip green"><span class="tip-i">✅</span><span>Зарплата пересчитывается <strong>автоматически</strong> после каждого закрытия смены. Ничего считать вручную не нужно.</span></div>
+  <div class="tip green"><span class="tip-i">✅</span><span>Зарплата пересчитывается <strong>автоматически</strong> после каждого закрытия смены.</span></div>
 </div>
 
 <hr class="div">
@@ -589,39 +485,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
     <div class="sec-icon">🏆</div>
     <div><div class="sec-title">Марафон</div><div class="sec-sub">Соревнование между администраторами</div></div>
   </div>
-
-  <div class="phone-wrap"><div class="phone">
-    <div class="ph-body" style="padding:10px">
-      <div class="mb">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
-          <div style="flex:1">
-            <div class="mb-title">🏆 Марафон июнь — iPhone 17 Pro</div>
-            <div style="font-size:10px;color:#b45309;opacity:.85;margin-top:2px">📅 1 июня — 30 июня</div>
-            <div style="font-size:10px;color:#b45309;font-weight:600;margin-top:3px">🎯 Цель: 10 продаж новых абонементов</div>
-            <div class="mb-bar" style="margin-top:6px"><div class="mb-fill" style="width:60%"></div></div>
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:#b45309;margin-top:3px"><span>Прогресс: 6 / 10</span><span>60%</span></div>
-          </div>
-          <div class="mb-prize">₽150к</div>
-        </div>
-      </div>
-    </div>
-  </div></div>
-
+  <div class="tip"><span class="tip-i">🏅</span><span>Когда руководитель запустит марафон — появится жёлтый баннер над вкладками с призом и прогресс-баром. Прогресс обновляется автоматически после закрытия смен.</span></div>
   <div class="cards">
-    <div class="card">
-      <div class="card-t">🏆 Баннер на Сводке</div>
-      <div class="card-b">Когда руководитель запустит марафон — появится жёлтый баннер над вкладками. Видишь цель, приз и свой прогресс в реальном времени.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">📊 Прогресс</div>
-      <div class="card-b">Прогресс-бар обновляется автоматически по мере закрытия смен. Чем больше закрытых смен с продажами — тем выше результат.</div>
-    </div>
-    <div class="card">
-      <div class="card-t">🎯 Условия</div>
-      <div class="card-b">Условие и цель указывает руководитель: количество продаж, выручка, активность. Читай описание в баннере.</div>
-    </div>
+    <div class="card"><div class="card-t">🎯 Условие</div><div class="card-b">Цель и приз указывает руководитель. Читай описание в баннере.</div></div>
+    <div class="card"><div class="card-t">📊 Прогресс</div><div class="card-b">Прогресс-бар обновляется по мере закрытия смен. Детальная история — в Кабинете.</div></div>
   </div>
-  <div class="tip"><span class="tip-i">💡</span><span>Свой детальный прогресс и историю марафонов смотри во вкладке <strong>Кабинет</strong> → раздел «Мои марафоны».</span></div>
 </div>
 
 <div style="background:var(--blue);color:#fff;border-radius:14px;padding:18px 22px;margin-top:20px;text-align:center">
