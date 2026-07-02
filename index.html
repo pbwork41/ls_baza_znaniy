@@ -428,8 +428,12 @@ function logout() {
   location.reload();
 }
 
-function launchApp() {
+async function launchApp() {
   document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display = 'flex';
+  document.getElementById('loading-screen').textContent = 'Загрузка...';
+  await loadIndex();
+  document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('user-label').textContent = currentUser.name || currentUser.login;
   document.getElementById('btn-logout').style.display = 'inline-flex';
