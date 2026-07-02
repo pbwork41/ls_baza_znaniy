@@ -4,5 +4,13 @@
   "gh_t2": "61Myc50edfXZP",
   "gh_t3": "DcNBJxGTC0xms31",
   "supabase_url": "https://rsjaqdeefmhevgyeunde.supabase.co",
-  "supabase_key": "sb_publishable_uMXbJo4MKy-ex0h_s3JDHg_ju0CkD5r"
+  "supabase_key": "sb_publishable_uMXbJo4MKy-ex0h_s3JDHg_ju0CkD5r",
+  "users": [
+    {
+      "login": "Admin",
+      "password_hash": "93f2f56f3eea895609c9c3388e9853a82ad72d1c1193fdc9cc83b82afae4f2dc",
+      "role": "admin",
+      "name": "Руководитель"
+    }
+  ]
 }
