@@ -442,7 +442,7 @@ async function launchApp() {
     document.getElementById('team-nav').style.display = 'flex';
     document.getElementById('add-nav').style.display = 'flex';
   }
-  renderAll();
+  requestAnimationFrame(() => { requestAnimationFrame(() => { renderAll(); }); });
 }
 
 async function addEmployee() {
