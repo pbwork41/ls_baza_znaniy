@@ -521,16 +521,17 @@ async function init() {
   // Проверяем сессию
   const saved = sessionStorage.getItem('ls_user');
   if (saved) {
-    const u = JSON.parse(saved);
-    // Перепроверяем что логин ещё существует
-    const users = CFG.users || [];
-    const found = users.find(x => x.login === u.login && x.password_hash === u.password_hash);
-    if (found) {
-      currentUser = found;
-      document.getElementById('loading-screen').style.display = 'none';
-      launchApp();
-      return;
-    }
+    try {
+      const u = JSON.parse(saved);
+      const users = CFG.users || [];
+      const found = u && u.login ? users.find(x => x.login === u.login && x.password_hash === u.password_hash) : null;
+      if (found && found.active !== false) {
+        currentUser = found;
+        document.getElementById('loading-screen').style.display = 'none';
+        launchApp();
+        return;
+      }
+    } catch(e) {}
     sessionStorage.removeItem('ls_user');
   }
   document.getElementById('loading-screen').style.display = 'none';
