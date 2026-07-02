@@ -415,7 +415,7 @@ async function doLogin() {
   if (!login || !pass) { err.style.display='block'; return; }
   const hash = await sha256(pass);
   const users = CFG.users || [];
-  const user = users.find(u => u.login.toLowerCase() === login.toLowerCase() && u.password_hash === hash);
+  const user = users.find(u => u.login && u.login.toLowerCase() === login.toLowerCase() && u.password_hash === hash);
   if (!user) { err.style.display='block'; return; }
   if (user.active === false) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
   currentUser = user;
