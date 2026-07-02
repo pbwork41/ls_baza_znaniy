@@ -4,5 +4,18 @@
     "password_hash": "93f2f56f3eea895609c9c3388e9853a82ad72d1c1193fdc9cc83b82afae4f2dc",
     "role": "admin",
     "name": "Руководитель"
+  },
+  {
+    "login": "admin_polina",
+    "password_hash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "role": "manager",
+    "name": "Полина"
+  },
+  {
+    "login": "barkovpv",
+    "password_hash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "role": "manager",
+    "name": "Павел Барков",
+    "active": false
   }
 ]
