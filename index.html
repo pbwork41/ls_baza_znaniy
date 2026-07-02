@@ -183,6 +183,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
       </div>
+      <div class="nav-section" id="manage-section" style="display:none">Управление</div>
+      <div class="nav-item" id="team-nav" style="display:none" onclick="showPage('team',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Команда
+      </div>
+      <div class="nav-item" id="add-nav" style="display:none" onclick="openAddModal()">
+        <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Добавить
+      </div>
     </div>
     <div class="main">
       <div class="page active" id="page-home">
@@ -420,6 +429,7 @@ async function launchApp() {
   document.getElementById('user-name').textContent = u.first_name + ' ' + u.last_name;
   document.getElementById('btn-logout').style.display = 'inline-flex';
   if (u.role === 'admin') {
+    document.getElementById('manage-section').style.display = 'block';
     document.getElementById('team-nav').style.display = 'flex';
     document.getElementById('add-nav').style.display = 'flex';
   }
@@ -580,8 +590,7 @@ function materialHTML(m) {
       <div class="m-meta">${meta.label||''} · ${m.updated||''}</div>
     </div>
     <div class="m-actions">
-      <button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button>
-      <button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>
+      ${(currentUser&&currentUser.role==='admin')?`<button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button><button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>`:''}
     </div>
   </div>`;
 }
@@ -598,7 +607,7 @@ async function openMaterial(id) {
   // Показываем кнопку редактирования только для текстовых файлов
   _editingMaterial = m;
   _editRawContent = '';
-  document.getElementById('btn-edit').style.display = m.file ? 'inline-flex' : 'none';
+  document.getElementById('btn-edit').style.display = (m.file && currentUser && currentUser.role==='admin') ? 'inline-flex' : 'none';
   const fab = document.getElementById('fab-edit');
   if (fab) { fab.style.display = m.file ? 'flex' : 'none'; }
   document.getElementById('btn-save').style.display = 'none';
