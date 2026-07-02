@@ -95,17 +95,41 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #toast.show{opacity:1}
 #fab-edit{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(107,70,193,.4);z-index:50;transition:transform .15s}
 #fab-edit:hover{transform:scale(1.1)}
-@media(min-width:601px){#mobile-back{display:none!important}}
-@media(max-width:600px){
-  .sidebar{display:none}
-  .cards-grid{grid-template-columns:1fr 1fr}
-}
-#mobile-back{display:none;align-items:center;gap:8px;padding:8px 16px 8px 12px;background:var(--surface);border-bottom:1px solid var(--border);font-size:14px;color:var(--accent);cursor:pointer;font-weight:500}
+@media(max-width:600px){.sidebar{display:none}.cards-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
 <div id="loading-screen">Загрузка...</div>
+
+<div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:200;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;width:100%;max-width:360px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:22px;font-weight:700">Lady Stretch</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:3px">База знаний</div>
+    </div>
+    <div id="auth-tabs" style="display:flex;background:var(--surface2);border-radius:8px;padding:3px;gap:3px;margin-bottom:20px">
+      <button onclick="authTab('login')" id="atab-login" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;font-family:var(--font)">Вход</button>
+      <button onclick="authTab('reg')" id="atab-reg" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;cursor:pointer;background:transparent;color:var(--muted);font-family:var(--font)">Регистрация</button>
+    </div>
+    <div id="auth-login">
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Имя</label><input id="l-fname" type="text" placeholder="Имя" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Фамилия</label><input id="l-lname" type="text" placeholder="Фамилия" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div style="margin-bottom:20px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Пароль</label><input id="l-pass" type="password" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div id="l-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none"></div>
+      <button onclick="doLogin()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Войти</button>
+    </div>
+    <div id="auth-reg" style="display:none">
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Имя</label><input id="r-fname" type="text" placeholder="Имя" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Фамилия</label><input id="r-lname" type="text" placeholder="Фамилия" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Пароль</label><input id="r-pass" type="password" placeholder="Придумайте пароль (мин. 4 символа)" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div style="margin-bottom:20px"><label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Повторите пароль</label><input id="r-pass2" type="password" placeholder="Повторите пароль" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)"></div>
+      <div id="r-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none"></div>
+      <div id="r-ok" style="color:var(--success);font-size:13px;margin-bottom:12px;background:var(--success-bg);padding:10px 12px;border-radius:var(--radius);display:none"></div>
+      <button onclick="doRegister()" id="r-btn" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Зарегистрироваться</button>
+    </div>
+  </div>
+</div>
 
 <div id="app">
   <div class="topbar">
@@ -115,10 +139,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <input id="search" type="text" placeholder="Поиск по базе знаний..." oninput="doSearch(this.value)" />
     </div>
     <div class="topbar-right">
+      <span id="user-name" style="font-size:13px;color:var(--muted)"></span>
+      <button class="btn" id="btn-logout" onclick="logout()" style="display:none">Выйти</button>
       <button class="btn btn-primary" onclick="openAddModal()">+ Добавить</button>
     </div>
   </div>
-  <div id="mobile-back" onclick="showPage('home',null)">← Главная</div>
   <div class="body-wrap">
     <div class="sidebar">
       <div class="nav-section">Разделы</div>
@@ -214,6 +239,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-sub">Гайды и материалы по управленческой панели</div>
         <div class="material-list" id="list-kpi"></div>
       </div>
+      <div class="page" id="page-team">
+        <div class="page-title">Команда</div>
+        <div class="page-sub">Управление доступом сотрудников</div>
+        <div id="team-list" style="display:flex;flex-direction:column;gap:8px;margin-top:4px"></div>
+      </div>
       <div class="page" id="page-search">
         <div class="page-title">Результаты поиска</div>
         <div class="page-sub" id="search-sub"></div>
@@ -296,6 +326,135 @@ const CAT = {
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
+// ─── AUTH ───
+let currentUser = null;
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function authTab(t) {
+  document.getElementById('auth-login').style.display = t==='login' ? 'block' : 'none';
+  document.getElementById('auth-reg').style.display = t==='reg' ? 'block' : 'none';
+  document.getElementById('atab-login').style.background = t==='login' ? 'var(--accent)' : 'transparent';
+  document.getElementById('atab-login').style.color = t==='login' ? '#fff' : 'var(--muted)';
+  document.getElementById('atab-reg').style.background = t==='reg' ? 'var(--accent)' : 'transparent';
+  document.getElementById('atab-reg').style.color = t==='reg' ? '#fff' : 'var(--muted)';
+}
+
+async function sbFetch(path, opts={}) {
+  const res = await fetch(CFG.supabase_url + '/rest/v1/' + path, {
+    ...opts,
+    headers: {
+      'apikey': CFG.supabase_key,
+      'Authorization': 'Bearer ' + CFG.supabase_key,
+      'Content-Type': 'application/json',
+      ...(opts.headers||{})
+    }
+  });
+  if (res.status === 204) return [];
+  return res.json();
+}
+
+async function doLogin() {
+  const fn = document.getElementById('l-fname').value.trim();
+  const ln = document.getElementById('l-lname').value.trim();
+  const pw = document.getElementById('l-pass').value;
+  const err = document.getElementById('l-err');
+  err.style.display = 'none';
+  if (!fn || !ln || !pw) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
+  const hash = await sha256(pw);
+  const data = await sbFetch('users?first_name=eq.' + encodeURIComponent(fn) + '&last_name=eq.' + encodeURIComponent(ln) + '&password_hash=eq.' + hash);
+  if (!Array.isArray(data) || data.length === 0) { err.textContent='Неверное имя, фамилия или пароль'; err.style.display='block'; return; }
+  const user = data[0];
+  if (!user.active) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
+  currentUser = user;
+  sessionStorage.setItem('ls_user', JSON.stringify(user));
+  await launchApp();
+}
+
+async function doRegister() {
+  const fn = document.getElementById('r-fname').value.trim();
+  const ln = document.getElementById('r-lname').value.trim();
+  const pw = document.getElementById('r-pass').value;
+  const pw2 = document.getElementById('r-pass2').value;
+  const err = document.getElementById('r-err');
+  const ok = document.getElementById('r-ok');
+  err.style.display='none'; ok.style.display='none';
+  if (!fn || !ln || !pw) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
+  if (pw !== pw2) { err.textContent='Пароли не совпадают'; err.style.display='block'; return; }
+  if (pw.length < 4) { err.textContent='Пароль минимум 4 символа'; err.style.display='block'; return; }
+  const hash = await sha256(pw);
+  const exist = await sbFetch('users?first_name=eq.' + encodeURIComponent(fn) + '&last_name=eq.' + encodeURIComponent(ln));
+  if (Array.isArray(exist) && exist.length > 0) { err.textContent='Сотрудник с таким именем уже зарегистрирован'; err.style.display='block'; return; }
+  const res = await sbFetch('users', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ first_name: fn, last_name: ln, password_hash: hash, role: 'manager', active: false })
+  });
+  ok.textContent = fn + ', вы зарегистрированы! Ожидайте активации руководителем.';
+  ok.style.display = 'block';
+  document.getElementById('r-btn').style.display = 'none';
+  ['r-fname','r-lname','r-pass','r-pass2'].forEach(id => document.getElementById(id).value='');
+}
+
+function logout() {
+  sessionStorage.removeItem('ls_user');
+  currentUser = null;
+  location.reload();
+}
+
+async function launchApp() {
+  // 1. Прячем auth, показываем загрузку
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display = 'flex';
+  document.getElementById('loading-screen').textContent = 'Загрузка материалов...';
+  // 2. Ждём данные
+  await loadIndex();
+  // 3. Только после загрузки — показываем приложение
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  // 4. Настраиваем UI под роль
+  const u = currentUser;
+  document.getElementById('user-name').textContent = u.first_name + ' ' + u.last_name;
+  document.getElementById('btn-logout').style.display = 'inline-flex';
+  if (u.role === 'admin') {
+    document.getElementById('team-nav').style.display = 'flex';
+    document.getElementById('add-nav').style.display = 'flex';
+  }
+  // 5. Рендерим
+  renderAll();
+}
+
+// ─── КОМАНДА ───
+async function renderTeam() {
+  const data = await sbFetch('users?order=created_at.asc');
+  if (!Array.isArray(data)) return;
+  const roles = { admin: 'Руководитель', manager: 'Менеджер' };
+  document.getElementById('team-list').innerHTML = data.map(u => `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--accent-bg);color:var(--accent-text);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${u.first_name[0]}${u.last_name[0]}</div>
+      <div style="flex:1;min-width:100px">
+        <div style="font-size:14px;font-weight:500">${u.first_name} ${u.last_name}</div>
+        <div style="font-size:12px;color:var(--muted)">${roles[u.role]||u.role}</div>
+      </div>
+      <select onchange="updateUser('${u.id}',{role:this.value})" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font)">
+        <option value="manager" ${u.role==='manager'?'selected':''}>Менеджер</option>
+        <option value="admin" ${u.role==='admin'?'selected':''}>Руководитель</option>
+      </select>
+      <span style="padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;${u.active?'background:var(--success-bg);color:var(--success)':'background:var(--danger-bg);color:var(--danger)'}">${u.active?'Активен':'Ожидает'}</span>
+      <button onclick="updateUser('${u.id}',{active:${!u.active}})" style="padding:5px 12px;font-size:12px;border:1px solid ${u.active?'var(--danger)':'var(--success)'};color:${u.active?'var(--danger)':'var(--success)'};background:#fff;border-radius:6px;cursor:pointer;font-family:var(--font)">${u.active?'Отключить':'Активировать'}</button>
+    </div>`).join('');
+}
+
+async function updateUser(id, updates) {
+  await sbFetch('users?id=eq.' + id, { method: 'PATCH', body: JSON.stringify(updates) });
+  toast(Object.keys(updates)[0]==='active' ? (updates.active?'Активирован':'Отключён') : 'Роль обновлена');
+  renderTeam();
+}
+
+// ─── INIT ───
 async function init() {
   try {
     const r = await fetch('config.json');
@@ -305,10 +464,24 @@ async function init() {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
-  await loadIndex();
+  // Проверяем сохранённую сессию
+  const saved = sessionStorage.getItem('ls_user');
+  if (saved) {
+    try {
+      const u = JSON.parse(saved);
+      // Перепроверяем что аккаунт ещё активен
+      const data = await sbFetch('users?id=eq.' + u.id + '&active=eq.true');
+      if (Array.isArray(data) && data.length > 0) {
+        currentUser = data[0];
+        document.getElementById('loading-screen').style.display = 'none';
+        await launchApp();
+        return;
+      }
+    } catch(e) {}
+    sessionStorage.removeItem('ls_user');
+  }
   document.getElementById('loading-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  renderAll();
+  document.getElementById('auth-screen').style.display = 'flex';
 }
 
 async function ghGet(path) {
@@ -654,11 +827,9 @@ function showPage(name, navEl) {
   state.prevPage = state.currentPage;
   state.currentPage = name;
   if (name !== 'search') document.getElementById('search').value = '';
-  const mb = document.getElementById('mobile-back');
-  if (mb) mb.style.display = name !== 'home' ? 'flex' : 'none';
-  // Скрываем FAB если уходим со страницы контента
   const fab = document.getElementById('fab-edit');
   if (fab && name !== 'content') fab.style.display = 'none';
+  if (name === 'team') renderTeam();
 }
 
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
