@@ -334,6 +334,7 @@ const CAT = {
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
+window.currentUser = null;
 let currentUser = null;
 
 async function saveStaff() {
@@ -422,6 +423,7 @@ async function doLogin() {
   }
   if (!user) { err.style.display='block'; return; }
   currentUser = user;
+  window.currentUser = user;
   sessionStorage.setItem('ls_user', JSON.stringify(user));
   await launchApp();
 }
@@ -580,7 +582,7 @@ function materialHTML(m) {
       <div class="m-meta">${meta.label||''} · ${m.updated||''}</div>
     </div>
     <div class="m-actions">
-      ${(currentUser&&currentUser.role==='admin')?`<button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button><button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>`:''}
+      ${(window.currentUser&&window.currentUser.role==='admin')?`<button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button><button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>`:''}
     </div>
   </div>`;
 }
@@ -597,7 +599,7 @@ async function openMaterial(id) {
   // Показываем кнопку редактирования только для текстовых файлов
   _editingMaterial = m;
   _editRawContent = '';
-  document.getElementById('btn-edit').style.display = (m.file && currentUser && currentUser.role==='admin') ? 'inline-flex' : 'none';
+  document.getElementById('btn-edit').style.display = (m.file && window.currentUser && window.currentUser.role==='admin') ? 'inline-flex' : 'none';
   const fab = document.getElementById('fab-edit');
   if (fab) { fab.style.display = m.file ? 'flex' : 'none'; }
   document.getElementById('btn-save').style.display = 'none';
