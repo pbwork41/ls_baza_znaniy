@@ -440,7 +440,9 @@ async function launchApp() {
   document.getElementById('app').style.display = 'flex';
   document.getElementById('user-label').textContent = currentUser.name || currentUser.login;
   document.getElementById('btn-logout').style.display = 'inline-flex';
-
+  if (currentUser.role === 'admin') {
+    document.getElementById('staff-nav').style.display = 'flex';
+  }
   renderAll();
 }
 
