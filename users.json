@@ -6,10 +6,9 @@
     "name": "Руководитель"
   },
   {
-    "login": "barkovpv",
-    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "login": "admin_polina",
+    "password_hash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     "role": "manager",
-    "name": "Павел Барков",
-    "active": true
+    "name": "Полина"
   }
 ]
