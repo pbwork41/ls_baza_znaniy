@@ -517,10 +517,19 @@ async function init() {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
-  // Загружаем users.json отдельно (чтобы config.json не раздувался)
+  // Загружаем users.json и мёрджим с config.json users
   try {
     const ur = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/users.json?t=' + Date.now());
-    if (ur.ok) { CFG.users = await ur.json(); }
+    if (ur.ok) {
+      const fileUsers = await ur.json();
+      const cfgUsers = CFG.users || [];
+      // Мёрджим: берём fileUsers, добавляем из cfgUsers тех кого нет в fileUsers
+      const merged = [...fileUsers];
+      cfgUsers.forEach(cu => {
+        if (!merged.find(u => u.login === cu.login)) merged.push(cu);
+      });
+      CFG.users = merged;
+    }
   } catch(e) {}
   // Проверяем сессию
   const saved = sessionStorage.getItem('ls_user');
