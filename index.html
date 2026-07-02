@@ -104,49 +104,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 <div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:200;align-items:center;justify-content:center;padding:20px">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;width:100%;max-width:340px">
-    <div style="text-align:center;margin-bottom:20px">
+    <div style="text-align:center;margin-bottom:28px">
       <div style="font-size:22px;font-weight:700">Lady Stretch</div>
       <div style="font-size:13px;color:var(--muted);margin-top:3px">База знаний</div>
     </div>
-    <div style="display:flex;background:var(--surface2);border-radius:8px;padding:3px;gap:3px;margin-bottom:20px">
-      <button onclick="authTab('login')" id="atab-login" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;font-family:var(--font)">Вход</button>
-      <button onclick="authTab('reg')" id="atab-reg" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;cursor:pointer;background:transparent;color:var(--muted);font-family:var(--font)">Регистрация</button>
+    <div style="margin-bottom:14px">
+      <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Логин</label>
+      <input id="a-login" type="text" placeholder="Логин" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
     </div>
-
-    <div id="auth-login">
-      <div style="margin-bottom:14px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Логин</label>
-        <input id="a-login" type="text" placeholder="Логин" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div style="margin-bottom:20px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Пароль</label>
-        <input id="a-pass" type="password" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div id="a-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none">Неверный логин или пароль</div>
-      <button onclick="doLogin()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Войти</button>
+    <div style="margin-bottom:20px">
+      <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Пароль</label>
+      <input id="a-pass" type="password" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
     </div>
-
-    <div id="auth-reg" style="display:none">
-      <div style="margin-bottom:12px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Имя и фамилия</label>
-        <input id="r-name" type="text" placeholder="Имя Фамилия" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div style="margin-bottom:12px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Придумайте логин</label>
-        <input id="r-login" type="text" placeholder="Латинскими буквами, без пробелов" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div style="margin-bottom:12px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Пароль</label>
-        <input id="r-pass" type="password" placeholder="Минимум 4 символа" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div style="margin-bottom:20px">
-        <label style="font-size:12px;font-weight:500;color:#444;display:block;margin-bottom:5px">Повторите пароль</label>
-        <input id="r-pass2" type="password" placeholder="Повторите пароль" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;outline:none;font-family:var(--font)">
-      </div>
-      <div id="r-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none"></div>
-      <div id="r-ok" style="color:var(--success);font-size:13px;margin-bottom:12px;padding:10px 12px;background:var(--success-bg);border-radius:var(--radius);display:none"></div>
-      <button onclick="doRegister()" id="r-btn" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Зарегистрироваться</button>
-    </div>
+    <div id="a-err" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none">Неверный логин или пароль</div>
+    <button onclick="doLogin()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)">Войти</button>
   </div>
 </div>
 
@@ -201,11 +172,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="nav-item" onclick="showPage('kpi',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
-      </div>
-      <div class="nav-section" id="admin-section" style="display:none">Управление</div>
-      <div class="nav-item" id="team-nav" style="display:none" onclick="showPage('team',this)">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Сотрудники
       </div>
       <div class="nav-item" id="add-nav" style="display:none" onclick="openAddModal()">
         <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -266,24 +232,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Работа с дашбордом</div>
         <div class="page-sub">Гайды и материалы по управленческой панели</div>
         <div class="material-list" id="list-kpi"></div>
-      </div>
-      <div class="page" id="page-team">
-        <div class="page-title">Сотрудники</div>
-        <div class="page-sub">Управление доступом</div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
-          <div style="font-size:13px;font-weight:500;margin-bottom:12px">Добавить сотрудника</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-            <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px">Логин</div><input id="new-login" type="text" placeholder="Например: Anna" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;font-family:var(--font)"></div>
-            <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px">Пароль</div><input id="new-pass" type="text" placeholder="Пароль" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;font-family:var(--font)"></div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-            <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px">Имя (отображается)</div><input id="new-name" type="text" placeholder="Имя Фамилия" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;font-family:var(--font)"></div>
-            <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px">Роль</div><select id="new-role" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font)"><option value="manager">Менеджер</option><option value="admin">Руководитель</option></select></div>
-          </div>
-          <button onclick="addEmployee()" style="padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font)">+ Добавить</button>
-          <div id="team-add-msg" style="font-size:13px;margin-top:8px;display:none"></div>
-        </div>
-        <div id="team-list" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
       <div class="page" id="page-search">
         <div class="page-title">Результаты поиска</div>
@@ -369,51 +317,16 @@ const CAT = {
 
 let currentUser = null;
 
-// Фиксированный аккаунт руководителя — не хранится в файлах
 const ADMIN_USER = {
   login: 'Admin',
   password_hash: '93f2f56f3eea895609c9c3388e9853a82ad72d1c1193fdc9cc83b82afae4f2dc',
   role: 'admin',
-  name: 'Руководитель',
-  active: true
+  name: 'Руководитель'
 };
 
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-function authTab(t) {
-  document.getElementById('auth-login').style.display = t==='login' ? 'block' : 'none';
-  document.getElementById('auth-reg').style.display = t==='reg' ? 'block' : 'none';
-  document.getElementById('atab-login').style.background = t==='login' ? 'var(--accent)' : 'transparent';
-  document.getElementById('atab-login').style.color = t==='login' ? '#fff' : 'var(--muted)';
-  document.getElementById('atab-reg').style.background = t==='reg' ? 'var(--accent)' : 'transparent';
-  document.getElementById('atab-reg').style.color = t==='reg' ? '#fff' : 'var(--muted)';
-}
-
-async function doRegister() {
-  const name = document.getElementById('r-name').value.trim();
-  const login = document.getElementById('r-login').value.trim();
-  const pass = document.getElementById('r-pass').value;
-  const pass2 = document.getElementById('r-pass2').value;
-  const err = document.getElementById('r-err');
-  const ok = document.getElementById('r-ok');
-  err.style.display='none'; ok.style.display='none';
-  if (!name || !login || !pass) { err.textContent='Заполните все поля'; err.style.display='block'; return; }
-  if (pass !== pass2) { err.textContent='Пароли не совпадают'; err.style.display='block'; return; }
-  if (pass.length < 4) { err.textContent='Пароль минимум 4 символа'; err.style.display='block'; return; }
-  const users = CFG.users || [];
-  if (users.find(u => u.login.toLowerCase() === login.toLowerCase())) {
-    err.textContent='Этот логин уже занят'; err.style.display='block'; return;
-  }
-  const hash = await sha256(pass);
-  users.push({ login, password_hash: hash, role: 'manager', name, active: false });
-  CFG.users = users;
-  await saveUsers();
-  ok.textContent = name + ', вы зарегистрированы! Ожидайте активации руководителем.';
-  ok.style.display='block';
-  document.getElementById('r-btn').style.display='none';
 }
 
 async function doLogin() {
@@ -423,19 +336,17 @@ async function doLogin() {
   err.style.display = 'none';
   if (!login || !pass) { err.style.display='block'; return; }
   const hash = await sha256(pass);
-  // Сначала проверяем Admin (хардкод)
   let user = null;
   if (ADMIN_USER.login.toLowerCase() === login.toLowerCase() && ADMIN_USER.password_hash === hash) {
     user = ADMIN_USER;
   } else {
     const users = CFG.users || [];
     user = users.find(u => u.login && u.login.toLowerCase() === login.toLowerCase() && u.password_hash === hash);
-    if (user && user.active === false) { err.textContent='Аккаунт ожидает активации руководителем'; err.style.display='block'; return; }
   }
   if (!user) { err.style.display='block'; return; }
   currentUser = user;
   sessionStorage.setItem('ls_user', JSON.stringify(user));
-  launchApp();
+  await launchApp();
 }
 
 function logout() {
@@ -453,75 +364,9 @@ async function launchApp() {
   document.getElementById('user-label').textContent = currentUser.name || currentUser.login;
   document.getElementById('btn-logout').style.display = 'inline-flex';
   if (currentUser.role === 'admin') {
-    document.getElementById('admin-section').style.display = 'block';
-    document.getElementById('team-nav').style.display = 'flex';
     document.getElementById('add-nav').style.display = 'flex';
   }
-  requestAnimationFrame(() => { requestAnimationFrame(() => { renderAll(); }); });
-}
-
-async function addEmployee() {
-  const login = document.getElementById('new-login').value.trim();
-  const pass = document.getElementById('new-pass').value.trim();
-  const name = document.getElementById('new-name').value.trim();
-  const role = document.getElementById('new-role').value;
-  const msg = document.getElementById('team-add-msg');
-  if (!login || !pass) { msg.textContent='Введите логин и пароль'; msg.style.color='var(--danger)'; msg.style.display='block'; return; }
-  const hash = await sha256(pass);
-  const users = CFG.users || [];
-  if (users.find(u => u.login.toLowerCase() === login.toLowerCase())) {
-    msg.textContent='Логин уже занят'; msg.style.color='var(--danger)'; msg.style.display='block'; return;
-  }
-  users.push({ login, password_hash: hash, role, name: name||login });
-  CFG.users = users;
-  await saveUsers();
-  msg.textContent='Сотрудник добавлен!'; msg.style.color='var(--success)'; msg.style.display='block';
-  ['new-login','new-pass','new-name'].forEach(id=>document.getElementById(id).value='');
-  renderTeam();
-}
-
-async function saveUsers() {
-  // Сохраняем только не-Admin пользователей (Admin всегда в коде)
-  const toSave = (CFG.users || []).filter(u => u.login !== 'Admin');
-  const res = await fetch('https://api.github.com/repos/' + CFG.repo + '/contents/users.json', {
-    headers: { 'Authorization': 'token ' + CFG.gh_token }
-  });
-  const d = await res.json();
-  const sha = d.sha || null;
-  const fileContent = btoa(unescape(encodeURIComponent(JSON.stringify(toSave, null, 2))));
-  const body = { message: 'update: users', content: fileContent };
-  if (sha) body.sha = sha;
-  await fetch('https://api.github.com/repos/' + CFG.repo + '/contents/users.json', {
-    method: 'PUT',
-    headers: { 'Authorization': 'token ' + CFG.gh_token, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-}
-
-function renderTeam() {
-  const users = CFG.users || [];
-  const roles = { admin: 'Руководитель', manager: 'Менеджер' };
-  document.getElementById('team-list').innerHTML = [ADMIN_USER, ...(CFG.users||[]).filter(u=>u.login!=='Admin')].map((u,i) => `
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--accent-bg);color:var(--accent-text);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${(u.name||u.login)[0].toUpperCase()}</div>
-      <div style="flex:1"><div style="font-size:14px;font-weight:500">${u.name||u.login}</div><div style="font-size:12px;color:var(--muted)">@${u.login} · ${roles[u.role]||u.role} · <span style="color:${u.active===false?'var(--danger)':'var(--success)'};font-weight:500">${u.active===false?'ожидает':'активен'}</span></div></div>
-      ${u.login !== 'Admin' ? `<button onclick="toggleActive(${i},${!u.active})" style="padding:5px 10px;font-size:12px;border:1px solid ${u.active===false?'var(--success)':'var(--danger)'};color:${u.active===false?'var(--success)':'var(--danger)'};background:#fff;border-radius:6px;cursor:pointer;font-family:var(--font)">${u.active===false?'Активировать':'Деактивировать'}</button><button onclick="removeEmployee(${i})" style="padding:5px 10px;font-size:12px;border:1px solid var(--danger);color:var(--danger);background:#fff;border-radius:6px;cursor:pointer;font-family:var(--font)">Удалить</button>` : '<span style="font-size:12px;color:var(--muted)">системный</span>'}
-    </div>`).join('');
-}
-
-async function toggleActive(idx, val) {
-  CFG.users[idx].active = val;
-  await saveUsers();
-  renderTeam();
-  toast(val ? 'Активирован' : 'Деактивирован');
-}
-
-async function removeEmployee(idx) {
-  if (!confirm('Удалить сотрудника?')) return;
-  CFG.users.splice(idx, 1);
-  await saveUsers();
-  renderTeam();
-  toast('Удалено');
+  renderAll();
 }
 
 async function init() {
@@ -533,30 +378,27 @@ async function init() {
     document.getElementById('loading-screen').textContent = 'Ошибка загрузки конфигурации';
     return;
   }
-  // Загружаем users.json и мёрджим с config.json users
   try {
     const ur = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/users.json?t=' + Date.now());
-    if (ur.ok) {
-      const fileUsers = await ur.json();
-      const cfgUsers = CFG.users || [];
-      // Мёрджим: берём fileUsers, добавляем из cfgUsers тех кого нет в fileUsers
-      // Берём только не-Admin из файла
-      const fileFiltered = fileUsers.filter(u => u.login !== 'Admin');
-      CFG.users = [ADMIN_USER, ...fileFiltered];
-    }
+    if (ur.ok) CFG.users = await ur.json();
   } catch(e) {}
-  // Проверяем сессию
   const saved = sessionStorage.getItem('ls_user');
   if (saved) {
     try {
       const u = JSON.parse(saved);
-      const users = CFG.users || [];
-      const found = u && u.login ? users.find(x => x.login === u.login && x.password_hash === u.password_hash) : null;
-      if (found && found.active !== false) {
-        currentUser = found;
-        document.getElementById('loading-screen').style.display = 'none';
-        launchApp();
-        return;
+      if (u && u.login) {
+        let found = null;
+        if (u.login === 'Admin' && u.password_hash === ADMIN_USER.password_hash) {
+          found = ADMIN_USER;
+        } else {
+          found = (CFG.users||[]).find(x => x.login === u.login && x.password_hash === u.password_hash);
+        }
+        if (found) {
+          currentUser = found;
+          document.getElementById('loading-screen').style.display = 'none';
+          await launchApp();
+          return;
+        }
       }
     } catch(e) {}
     sessionStorage.removeItem('ls_user');
@@ -661,8 +503,7 @@ function materialHTML(m) {
       <div class="m-meta">${meta.label||''} · ${m.updated||''}</div>
     </div>
     <div class="m-actions">
-      <button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button>
-      <button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>
+      ${(currentUser&&currentUser.role==='admin')?`<button class="icon-btn" data-id="${m.id}" data-action="rename" title="Переименовать">✏️</button><button class="icon-btn" data-id="${m.id}" data-action="delete" title="Удалить">🗑</button>`:''}
     </div>
   </div>`;
 }
@@ -911,7 +752,6 @@ function showPage(name, navEl) {
   // Скрываем FAB если уходим со страницы контента
   const fab = document.getElementById('fab-edit');
   if (fab && name !== 'content') fab.style.display = 'none';
-  if (name === 'team') renderTeam();
 }
 
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
