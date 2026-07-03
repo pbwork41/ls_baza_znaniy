@@ -330,6 +330,20 @@
       ],
       "updated": "2026-07-02",
       "isNew": true
+    },
+    {
+      "id": "s004",
+      "title": "Скрипт — работа с запросом на возврат абонемента",
+      "category": "scripts",
+      "file": "scripts/refund-script.md",
+      "tags": [
+        "возврат",
+        "скрипт",
+        "абонемент",
+        "работа с клиентом"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
     }
   ],
   "videos": [],
