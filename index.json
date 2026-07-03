@@ -359,6 +359,20 @@
       ],
       "updated": "2026-07-03",
       "isNew": true
+    },
+    {
+      "id": "s005",
+      "title": "Скрипт — Безлимитная неделя (после пробного)",
+      "category": "scripts",
+      "file": "scripts/bezlimit-week-script.md",
+      "tags": [
+        "безлимитная неделя",
+        "скрипт",
+        "пробное",
+        "звонок"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
     }
   ],
   "videos": [],
