@@ -174,10 +174,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         Направления <span class="nav-count" id="cnt-directions">0</span>
       </div>
-      <div class="nav-item" onclick="showPage('directions',this)">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        Направления <span class="nav-count" id="cnt-directions">0</span>
-      </div>
       <div class="nav-item" onclick="showPage('kpi',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
@@ -237,11 +233,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Работа в AmoCRM</div>
         <div class="page-sub">Инструкции по CRM</div>
         <div class="material-list" id="list-amocrm"></div>
-      </div>
-      <div class="page" id="page-directions">
-        <div class="page-title">Направления</div>
-        <div class="page-sub">Информация о направлениях студии</div>
-        <div class="material-list" id="list-directions"></div>
       </div>
       <div class="page" id="page-directions">
         <div class="page-title">Направления</div>
@@ -351,7 +342,6 @@ const CAT = {
   onec:       { label: 'Работа в 1С', icon: '🖥️', color: '#fef9ee' },
   banks:      { label: 'Работа с банками', icon: '🏦', color: '#f0fdf4' },
   amocrm:     { label: 'Работа в AmoCRM', icon: '📊', color: '#eff6ff' },
-  directions: { label: 'Направления',  icon: '🧘', color: '#f0fdf4' },
   directions: { label: 'Направления',  icon: '🧘', color: '#f0fdf4' },
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
