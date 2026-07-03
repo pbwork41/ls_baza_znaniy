@@ -316,6 +316,20 @@
       ],
       "updated": "2026-06-27",
       "isNew": true
+    },
+    {
+      "id": "dir001",
+      "title": "Йога — направление (Пивинская Екатерина)",
+      "category": "directions",
+      "file": "directions/yoga.md",
+      "tags": [
+        "йога",
+        "направление",
+        "Екатерина",
+        "абонемент"
+      ],
+      "updated": "2026-07-02",
+      "isNew": true
     }
   ],
   "videos": [],
