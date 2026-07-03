@@ -344,6 +344,21 @@
       ],
       "updated": "2026-07-03",
       "isNew": true
+    },
+    {
+      "id": "dir002",
+      "title": "Все направления — описания для администратора",
+      "category": "directions",
+      "file": "directions/all-directions.md",
+      "tags": [
+        "направления",
+        "описание",
+        "стретчинг",
+        "пилатес",
+        "барре"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
     }
   ],
   "videos": [],
