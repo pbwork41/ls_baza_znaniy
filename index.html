@@ -94,6 +94,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
 #toast.show{opacity:1}
 #fab-edit{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(107,70,193,.4);z-index:50;transition:transform .15s}
+.manager-only-hidden{display:none!important}
 #fab-edit:hover{transform:scale(1.1)}
 @media(max-width:600px){.sidebar{display:none}.cards-grid{grid-template-columns:1fr 1fr}}
 </style>
@@ -169,6 +170,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
         Работа в AmoCRM <span class="nav-count" id="cnt-amocrm">0</span>
       </div>
+      <div class="nav-item" onclick="showPage('directions',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Направления <span class="nav-count" id="cnt-directions">0</span>
+      </div>
       <div class="nav-item" onclick="showPage('kpi',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
@@ -228,6 +233,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Работа в AmoCRM</div>
         <div class="page-sub">Инструкции по CRM</div>
         <div class="material-list" id="list-amocrm"></div>
+      </div>
+      <div class="page" id="page-directions">
+        <div class="page-title">Направления</div>
+        <div class="page-sub">Информация о направлениях студии</div>
+        <div class="material-list" id="list-directions"></div>
       </div>
       <div class="page" id="page-kpi">
         <div class="page-title">Работа с дашбордом</div>
@@ -297,6 +307,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
           <option value="onec">Работа в 1С</option>
           <option value="banks">Работа с банками</option>
           <option value="amocrm">Работа в AmoCRM</option>
+          <option value="directions">Направления</option>
           <option value="kpi">KPI</option>
         </select>
       </div>
@@ -331,6 +342,7 @@ const CAT = {
   onec:       { label: 'Работа в 1С', icon: '🖥️', color: '#fef9ee' },
   banks:      { label: 'Работа с банками', icon: '🏦', color: '#f0fdf4' },
   amocrm:     { label: 'Работа в AmoCRM', icon: '📊', color: '#eff6ff' },
+  directions: { label: 'Направления',  icon: '🧘', color: '#f0fdf4' },
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
@@ -538,7 +550,7 @@ document.addEventListener('click', function(e) {
 
 function renderAll() {
   renderHome();
-  ['start','scripts','videos','documents','onec','banks','amocrm','kpi'].forEach(cat => {
+  ['start','scripts','videos','documents','onec','banks','amocrm','kpi','directions'].forEach(cat => {
     renderList(cat);
     const el = document.getElementById('cnt-' + cat);
     if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
