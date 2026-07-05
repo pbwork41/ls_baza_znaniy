@@ -373,6 +373,34 @@
       ],
       "updated": "2026-07-03",
       "isNew": true
+    },
+    {
+      "id": "m001",
+      "title": "Массаж — общая информация",
+      "category": "massage",
+      "file": "massage/massage-info.md",
+      "tags": [
+        "массаж",
+        "запись",
+        "предоплата",
+        "dikidi"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
+    },
+    {
+      "id": "m002",
+      "title": "Виды массажа — описания",
+      "category": "massage",
+      "file": "massage/massage-types.md",
+      "tags": [
+        "массаж",
+        "виды",
+        "антицеллюлитный",
+        "лимфодренажный"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
     }
   ],
   "videos": [],
