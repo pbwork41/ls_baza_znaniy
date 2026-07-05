@@ -174,6 +174,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         Направления <span class="nav-count" id="cnt-directions">0</span>
       </div>
+      <div class="nav-item" onclick="showPage('massage',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Массаж <span class="nav-count" id="cnt-massage">0</span>
+      </div>
       <div class="nav-item" onclick="showPage('kpi',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
@@ -238,6 +242,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Направления</div>
         <div class="page-sub">Информация о направлениях студии</div>
         <div class="material-list" id="list-directions"></div>
+      </div>
+      <div class="page" id="page-massage">
+        <div class="page-title">Массаж</div>
+        <div class="page-sub">Материалы по массажу</div>
+        <div class="material-list" id="list-massage"></div>
       </div>
       <div class="page" id="page-kpi">
         <div class="page-title">Работа с дашбордом</div>
@@ -343,6 +352,7 @@ const CAT = {
   banks:      { label: 'Работа с банками', icon: '🏦', color: '#f0fdf4' },
   amocrm:     { label: 'Работа в AmoCRM', icon: '📊', color: '#eff6ff' },
   directions: { label: 'Направления',  icon: '🧘', color: '#f0fdf4' },
+  massage:    { label: 'Массаж',        icon: '💆', color: '#fff1f2' },
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
@@ -550,7 +560,7 @@ document.addEventListener('click', function(e) {
 
 function renderAll() {
   renderHome();
-  ['start','scripts','videos','documents','onec','banks','amocrm','kpi','directions'].forEach(cat => {
+  ['start','scripts','videos','documents','onec','banks','amocrm','kpi','directions','massage'].forEach(cat => {
     renderList(cat);
     const el = document.getElementById('cnt-' + cat);
     if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
