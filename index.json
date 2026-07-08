@@ -401,6 +401,20 @@
       ],
       "updated": "2026-07-03",
       "isNew": true
+    },
+    {
+      "id": "s006",
+      "title": "Скрипт — обзвон после пробного занятия (были давно)",
+      "category": "scripts",
+      "url": "https://pbwork41.github.io/ls_baza_znaniy/scripts/call-after-trial.html",
+      "tags": [
+        "скрипт",
+        "обзвон",
+        "пробное",
+        "возражения"
+      ],
+      "updated": "2026-07-03",
+      "isNew": true
     }
   ],
   "videos": [],
