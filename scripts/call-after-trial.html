@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скрипт обзвона после пробного (были давно)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#7c3aed;--accent-bg:#f5f3ff;--accent-text:#5b21b6;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#86efac;
+  --border:#e5e7eb;--bg:#f9fafb;--surface:#fff;
+  --text:#111827;--muted:#6b7280;
+  --r:8px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:16px;max-width:640px;margin:0 auto}
+.screen{display:none}
+.screen.active{display:block}
+.hero{background:var(--accent);color:#fff;border-radius:12px;padding:16px 20px;margin-bottom:16px;font-size:14px;font-weight:600}
+.block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
+.label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.speech{font-size:14px;line-height:1.7;color:var(--text)}
+.speech em{color:var(--muted);font-style:italic}
+.btn-group{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.btn-reason{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px;font-size:13px;color:var(--text);cursor:pointer;text-align:left;font-family:var(--font)}
+.btn-reason:hover{background:var(--bg);border-color:#d1d5db}
+.invite{background:var(--green-bg);border:1px solid var(--green-border);border-radius:12px;padding:16px;margin-top:10px}
+.invite .label{color:var(--green)}
+.nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn-back{background:transparent;border:1px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--font)}
+.btn-back:hover{background:var(--bg)}
+.btn-yes{background:var(--green);border:none;border-radius:var(--r);padding:8px 16px;font-size:13px;color:#fff;cursor:pointer;font-weight:500;font-family:var(--font)}
+.btn-no{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--font)}
+.success{background:var(--green-bg);border:1px solid var(--green-border);border-radius:12px;padding:16px}
+.success .label{color:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- СТАРТ -->
+<div id="s-start" class="screen active">
+  <div class="hero">Обзвон клиентов после пробного занятия (были давно)</div>
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Алло, здравствуйте! Меня зовут [Имя]. Не переживайте, я не займу много вашего времени — звоню только для того, чтобы попросить небольшую обратную связь. Вы были у нас на пробной тренировке в студии Lady Stretch некоторое время назад. Удобно сейчас буквально минутку?</p>
+  </div>
+  <div class="label" style="margin-top:4px">Ответ клиента</div>
+  <div class="btn-group">
+    <button class="btn-reason" onclick="go('s-yes')">✅ Да, удобно</button>
+    <button class="btn-reason" onclick="go('s-no')">❌ Нет, неудобно</button>
+  </div>
+</div>
+
+<!-- НЕУДОБНО -->
+<div id="s-no" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Хорошо, тогда я перезвоню вам позже. В какое время вам будет удобнее?</p>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-start')">← Назад</button></div>
+</div>
+
+<!-- УДОБНО — ПРИЧИНА -->
+<div id="s-yes" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо 💜 Ваш ответ займёт буквально 30 секунд и очень поможет нам стать лучше. Подскажите, пожалуйста, чего вам тогда не хватило, чтобы начать заниматься вместе с нами?</p>
+  </div>
+  <div class="label" style="margin-top:4px">Причина клиента</div>
+  <div class="btn-group">
+    <button class="btn-reason" onclick="go('s-trainer')">😕 Не понравилась тренировка или тренер</button>
+    <button class="btn-reason" onclick="go('s-time')">⏰ Не было времени</button>
+    <button class="btn-reason" onclick="go('s-price')">💸 Было дорого</button>
+    <button class="btn-reason" onclick="go('s-credit')">❌ Не захотела оформлять рассрочку</button>
+    <button class="btn-reason" onclick="go('s-later')">😅 Всё понравилось, но не дошли руки</button>
+    <button class="btn-reason" onclick="go('s-notready')">🤷 Сейчас неактуально / не готова</button>
+    <button class="btn-reason" onclick="go('s-think')">🤔 «Я подумаю»</button>
+    <button class="btn-reason" onclick="go('s-moved')">🚗 Переехала / далеко ездить</button>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-start')">← Назад</button></div>
+</div>
+
+<!-- ВЕТКИ -->
+<div id="s-trainer" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо за обратную связь. Для нас это действительно очень важно — именно благодаря таким отзывам мы становимся лучше. Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно. ✨ У нас 12 разных направлений и несколько тренеров, поэтому многие девушки находят «свою» тренировку не с первого раза.</p>
+  </div>
+  <div class="invite" id="inv-trainer"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-time" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо за обратную связь. Понимаю. Возможно, сейчас обстоятельства изменились, поэтому мы и решили снова пригласить вас. Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно. ✨</p>
+  </div>
+  <div class="invite" id="inv-time"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-price" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо за обратную связь. Понимаю. Сейчас у нас появилась возможность оформить абонемент в рассрочку без переплат, поэтому начать заниматься стало гораздо комфортнее. Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно. ✨</p>
+  </div>
+  <div class="invite" id="inv-price"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-credit" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо за обратную связь. Понимаю. Не всем комфортно оформлять рассрочку, и это абсолютно нормально. Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно. После тренировки вы сможете спокойно принять решение, а если захотите заниматься дальше — менеджер поможет подобрать наиболее удобный вариант оплаты.</p>
+  </div>
+  <div class="invite" id="inv-credit"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-later" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Спасибо за обратную связь. Тогда тем более давайте это исправим. 😊 Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно.</p>
+  </div>
+  <div class="invite" id="inv-later"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-notready" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Понимаю, спасибо за честный ответ. Именно поэтому мы и решили пригласить вас ещё раз совершенно бесплатно — без каких-либо обязательств. Просто попробуйте ещё одну тренировку, а решение сможете принять уже после неё.</p>
+  </div>
+  <div class="invite" id="inv-notready"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-think" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Конечно. Подскажите, пожалуйста, вас больше смущает стоимость, время или пока просто не уверены, что готовы начать заниматься?</p>
+  </div>
+  <div class="label" style="margin-top:4px">Уточняем причину</div>
+  <div class="btn-group">
+    <button class="btn-reason" onclick="go('s-price')">💸 Дорого</button>
+    <button class="btn-reason" onclick="go('s-time')">⏰ Нет времени</button>
+    <button class="btn-reason" onclick="go('s-trainer')">😕 Не понравилась тренировка</button>
+    <button class="btn-reason" onclick="go('s-credit')">❌ Не хочет рассрочку</button>
+    <button class="btn-reason" onclick="go('s-think-no')">🤷 Причину не назвала</button>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<div id="s-think-no" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Мы бы очень хотели, чтобы вы дали нам второй шанс, и приглашаем вас ещё на одну пробную тренировку совершенно бесплатно.</p>
+  </div>
+  <div class="invite" id="inv-thinkno"></div>
+  <div class="nav"><button class="btn-back" onclick="go('s-think')">← Назад</button></div>
+</div>
+
+<div id="s-moved" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Понимаю, спасибо, что поделились. 💜 Очень жаль, что сейчас посещать нашу студию для вас неудобно. Будем очень рады видеть вас снова, если обстоятельства изменятся. Хорошего вам дня!</p>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-yes')">← Назад</button></div>
+</div>
+
+<!-- ФИНАЛ -->
+<div id="s-agreed" class="screen">
+  <div class="success">
+    <div class="label">Менеджер</div>
+    <p class="speech">Отлично! 💜 Тогда давайте запишем вас прямо сейчас — когда вам было бы удобно? Утром или вечером, будние или выходные?<br><br><em>Записываем, подтверждаем дату и время.</em><br><br>Будем рады видеть вас в Lady Stretch! ✨</p>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-start')">← В начало</button></div>
+</div>
+
+<div id="s-declined" class="screen">
+  <div class="block">
+    <div class="label">Менеджер</div>
+    <p class="speech">Понимаю. Спасибо, что уделили время и поделились обратной связью. Будем очень рады видеть вас в Lady Stretch, если однажды захотите вернуться. Хорошего вам дня! 💜</p>
+  </div>
+  <div class="nav"><button class="btn-back" onclick="go('s-start')">← В начало</button></div>
+</div>
+
+<script>
+const INVITE = `<div class="label">Приглашение</div>
+<p class="speech">Кстати, сейчас у нас проходит марафон активности, и совсем скоро среди участников состоится розыгрыш iPhone 17. 📱<br><br>Также вы можете пригласить с собой подругу — для неё первое пробное занятие тоже будет совершенно бесплатным. 💜<br><br>На тренировке тренер проведёт небольшую диагностику, поможет подобрать наиболее подходящее направление и ответит на все ваши вопросы.<br><br>А если после тренировки вы решите заниматься вместе с нами — для вас будут действовать самые выгодные условия на покупку абонемента.<br><br>Подскажите, пожалуйста, хотели бы воспользоваться этим приглашением и записаться на бесплатную пробную тренировку?</p>
+<div class="nav" style="margin-top:10px">
+  <button class="btn-yes" onclick="go('s-agreed')">✅ Согласилась</button>
+  <button class="btn-no" onclick="go('s-declined')">❌ Отказалась</button>
+</div>`;
+
+['trainer','time','price','credit','later','notready','thinkno'].forEach(k=>{
+  const el=document.getElementById('inv-'+k);
+  if(el) el.innerHTML=INVITE;
+});
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+}
+</script>
+</body>
+</html>
