@@ -509,10 +509,12 @@ async function init() {
 }
 
 async function ghGet(path) {
-  const res = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`, {
-    headers: { 'Authorization': `token ${CFG.gh_token}` }
-  });
-  return res.json();
+  // Читаем через raw — быстрее и не требует токена (репо публичный)
+  const res = await fetch('https://raw.githubusercontent.com/' + CFG.repo + '/main/' + path + '?t=' + Date.now());
+  const text = await res.text();
+  // Возвращаем в формате совместимом с API
+  const b64 = btoa(unescape(encodeURIComponent(text)));
+  return { content: b64, sha: '' };
 }
 
 async function ghPut(path, content, message, sha = null) {
