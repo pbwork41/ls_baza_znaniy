@@ -629,26 +629,7 @@ async function openMaterial(id) {
   document.getElementById('content-edit').style.display = 'none';
   document.getElementById('content-view').style.display = 'block';
 
-  // HTML файлы — рендерим через srcdoc iframe
-  if (m.file && m.file.endsWith('.html')) {
-    document.getElementById('btn-edit').style.display = 'none';
-    if (fab) fab.style.display = 'none';
-    const rawUrl = 'https://raw.githubusercontent.com/' + CFG.repo + '/main/' + m.file + '?t=' + Date.now();
-    const res = await fetch(rawUrl);
-    const html = await res.text();
-    const iframe = document.createElement('iframe');
-    iframe.style.cssText = 'width:100%;min-height:600px;border:none;border-radius:8px;display:block';
-    iframe.srcdoc = html;
-    iframe.onload = function() {
-      try {
-        const h = iframe.contentWindow.document.body.scrollHeight;
-        if (h > 100) iframe.style.height = (h + 32).toString() + 'px';
-      } catch(e) {}
-    };
-    view.innerHTML = '';
-    view.appendChild(iframe);
-    return;
-  }
+
 
   if (m.download_url) {
     view.innerHTML = `<div style="padding:16px 0;display:flex;align-items:center;gap:12px">
