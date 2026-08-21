@@ -415,6 +415,21 @@
       "updated": "2026-07-03",
       "isNew": true,
       "file": "scripts/call-after-trial.html"
+    },
+    {
+      "id": "sm001",
+      "title": "Регламент и воронка сервис-менеджера",
+      "category": "service",
+      "file": "service-manager/service-manager-regulations.md",
+      "tags": [
+        "сервис-менеджер",
+        "регламент",
+        "NPS",
+        "воронка",
+        "AmoCRM"
+      ],
+      "updated": "2026-07-09",
+      "isNew": true
     }
   ],
   "videos": [],
