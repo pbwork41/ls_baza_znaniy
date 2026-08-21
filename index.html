@@ -182,6 +182,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
         Дашборд <span class="nav-count" id="cnt-kpi">0</span>
       </div>
+      <div class="nav-item" onclick="showPage('service',this)">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Сервис-менеджер <span class="nav-count" id="cnt-service">0</span>
+      </div>
       <div class="nav-item" id="staff-nav" style="display:none" onclick="showPage('staff',this)">
         <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Сотрудники
@@ -252,6 +256,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="page-title">Работа с дашбордом</div>
         <div class="page-sub">Гайды и материалы по управленческой панели</div>
         <div class="material-list" id="list-kpi"></div>
+      </div>
+      <div class="page" id="page-service">
+        <div class="page-title">Сервис-менеджер</div>
+        <div class="page-sub">Регламенты и воронка работы с клиентской базой</div>
+        <div class="material-list" id="list-service"></div>
       </div>
       <div class="page" id="page-staff">
         <div class="page-title">Сотрудники</div>
@@ -353,6 +362,7 @@ const CAT = {
   amocrm:     { label: 'Работа в AmoCRM', icon: '📊', color: '#eff6ff' },
   directions: { label: 'Направления',  icon: '🧘', color: '#f0fdf4' },
   massage:    { label: 'Массаж',        icon: '💆', color: '#fff1f2' },
+  service:    { label: 'Сервис-менеджер', icon: '🎯', color: '#eff6ff' },
   kpi:        { label: 'Дашборд',     icon: '📊', color: '#fef2f2' },
 };
 
@@ -562,7 +572,7 @@ document.addEventListener('click', function(e) {
 
 function renderAll() {
   renderHome();
-  ['start','scripts','videos','documents','onec','banks','amocrm','kpi','directions','massage'].forEach(cat => {
+  ['start','scripts','videos','documents','onec','banks','amocrm','kpi','directions','massage','service'].forEach(cat => {
     renderList(cat);
     const el = document.getElementById('cnt-' + cat);
     if (el) el.textContent = state.allMaterials.filter(m => m.category === cat).length;
