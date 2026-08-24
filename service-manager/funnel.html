@@ -5,192 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LADY STRETCH — Воронка сервис-менеджера</title>
 <style>
-  :root{
-    --bg:#faf7f5;
-    --ink:#2b2330;
-    --sub:#6b5b66;
-    --card:#ffffff;
-    --line:#e3d9de;
-    --a:#c7538a;   /* Блок 1 — действующие клиенты */
-    --a-bg:#fdeef4;
-    --b:#3f8f7a;   /* Блок 2 — пробное без покупки */
-    --b-bg:#eaf6f2;
-    --c:#c8863a;   /* Блок 3 — не продлили */
-    --c-bg:#fdf3e6;
-    --d:#6f6cc4;   /* Блок 4 — реактивация (win-back) */
-    --d-bg:#eeedfb;
-    --x:#9a3b3b;   /* Закрыто / Не реализовано */
-    --x-bg:#fbeaea;
-    --shadow: 0 2px 10px rgba(43,35,48,0.07);
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    padding: 32px 20px 60px;
-  }
-  .wrap{max-width:1280px; margin:0 auto;}
-  header{ text-align:center; margin-bottom:28px; }
-  header h1{ font-size: 26px; margin:0 0 6px; letter-spacing:0.2px;}
-  header p{ margin:0; color:var(--sub); font-size:14px; }
-
-  .hub{
-    max-width: 420px;
-    margin: 0 auto 30px;
-    background: linear-gradient(135deg,#2b2330,#493c50);
-    color:#fff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    text-align:center;
-    box-shadow: var(--shadow);
-  }
-  .hub .role{ font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.75; margin-bottom:4px;}
-  .hub .name{ font-size:19px; font-weight:700; }
-  .hub .sub{ font-size:12.5px; opacity:0.85; margin-top:6px; line-height:1.4;}
-
-  .stem{
-    width:2px; height:22px; background:var(--line); margin:0 auto;
-  }
-
-  .columns{
-    display:grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    align-items:start;
-  }
-  @media (max-width: 1200px){
-    .columns{ grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 760px){
-    .columns{ grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 480px){
-    .columns{ grid-template-columns: 1fr; }
-  }
-
-  .entry{
-    max-width: 780px; margin: 0 auto 22px; background:var(--card); border-radius:12px;
-    padding: 12px 18px; box-shadow: var(--shadow); font-size:12.5px; color:var(--sub); text-align:center;
-  }
-  .entry b{ color:var(--ink); }
-
-  .col-head{
-    border-radius: 12px;
-    padding: 12px 14px;
-    font-weight:700;
-    font-size: 14.5px;
-    margin-bottom: 14px;
-    text-align:center;
-    box-shadow: var(--shadow);
-  }
-  .col-a .col-head{ background:var(--a-bg); color:var(--a); border:1px solid var(--a);}
-  .col-b .col-head{ background:var(--b-bg); color:var(--b); border:1px solid var(--b);}
-  .col-c .col-head{ background:var(--c-bg); color:var(--c); border:1px solid var(--c);}
-  .col-d .col-head{ background:var(--d-bg); color:var(--d); border:1px solid var(--d);}
-  .col-x .col-head{ background:var(--x-bg); color:var(--x); border:1px solid var(--x);}
-
-  .track{ position:relative; padding-left: 16px; }
-  .track::before{
-    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px; background:var(--line);
-  }
-
-  .stage{
-    position:relative;
-    background:var(--card);
-    border-radius:10px;
-    box-shadow: var(--shadow);
-    padding: 10px 12px 10px 14px;
-    margin-bottom: 12px;
-    font-size: 12.8px;
-    line-height:1.45;
-  }
-  .stage::before{
-    content:""; position:absolute; left:-16px; top:14px; width:9px; height:9px; border-radius:50%;
-    background: var(--dot, #999); border:2px solid var(--card); box-shadow: 0 0 0 1px var(--line);
-  }
-  .col-a .stage::before{ --dot: var(--a); }
-  .col-b .stage::before{ --dot: var(--b); }
-  .col-c .stage::before{ --dot: var(--c); }
-  .col-d .stage::before{ --dot: var(--d); }
-  .col-x .stage::before{ --dot: var(--x); }
-
-  .stage .n{ font-weight:700; margin-right:4px; }
-  .stage .say{ display:block; margin-top:5px; color:var(--sub); font-style:italic; }
-  .stage .when{
-    display:inline-block; margin-top:6px; font-size:10.8px; font-weight:600;
-    padding:2px 7px; border-radius:20px; color:#fff;
-  }
-  .col-a .when{ background:var(--a); }
-  .col-b .when{ background:var(--b); }
-  .col-c .when{ background:var(--c); }
-  .col-d .when{ background:var(--d); }
-  .col-x .when{ background:var(--x); }
-
-  .stage.warn{ border:1px dashed var(--x); background:#fff8f7; }
-  .stage.warn .n{ color:var(--x); }
-
-  .go{
-    display:block; margin-top:7px; font-size:11.5px; font-weight:700;
-  }
-  .go.ok{ color:#2f7a5f; }
-  .go.no{ color:#b6483f; }
-
-  /* --- кнопки скрипта / сообщения --- */
-  .actions{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-  .btn{
-    font-family:inherit; font-size:11px; font-weight:600; cursor:pointer;
-    border-radius:20px; padding:4px 10px; border:1px solid var(--line);
-    background:#faf9f8; color:var(--ink); transition: background .15s, color .15s, border-color .15s;
-  }
-  .btn:hover{ background:#f1eeed; }
-  .col-a .btn.active{ background:var(--a); border-color:var(--a); color:#fff; }
-  .col-b .btn.active{ background:var(--b); border-color:var(--b); color:#fff; }
-  .col-c .btn.active{ background:var(--c); border-color:var(--c); color:#fff; }
-  .col-d .btn.active{ background:var(--d); border-color:var(--d); color:#fff; }
-  .col-x .btn.active{ background:var(--x); border-color:var(--x); color:#fff; }
-
-  .panel{
-    display:none; margin-top:9px; padding:10px 11px; border-radius:8px;
-    background:#f7f4f2; border:1px solid var(--line); font-size:12.3px; color:var(--ink); line-height:1.55;
-  }
-  .panel.open{ display:block; }
-  .panel .txt p{ margin:0 0 7px; }
-  .panel .txt p:last-child{ margin-bottom:0; }
-  .panel .note{ color:var(--sub); font-size:11.8px; }
-  .panel .copy{
-    margin-top:8px; font-size:10.8px; font-weight:600; cursor:pointer;
-    border:1px solid var(--line); background:#fff; border-radius:16px; padding:3px 9px; color:var(--sub);
-  }
-  .panel .copy:hover{ color:var(--ink); border-color:#c9bdc4; }
-
-  .legend{
-    max-width: 1280px; margin: 34px auto 0; background:var(--card); border-radius:12px;
-    padding: 16px 20px; box-shadow: var(--shadow); font-size:12.5px; color:var(--sub);
-  }
-  .legend b{ color:var(--ink); }
-  .legend .row{ display:flex; flex-wrap:wrap; gap:18px; margin-top:8px; }
-  .legend .item{ display:flex; align-items:center; gap:6px; }
-  .legend .sw{ width:10px; height:10px; border-radius:3px; }
+:root{
+  --bg:#faf7f5;--ink:#2b2330;--sub:#6b5b66;--card:#fff;--line:#e3d9de;
+  --a:#c7538a;--a-bg:#fdeef4;
+  --b:#3f8f7a;--b-bg:#eaf6f2;
+  --c:#c8863a;--c-bg:#fdf3e6;
+  --d:#6f6cc4;--d-bg:#eeedfb;
+  --x:#9a3b3b;--x-bg:#fbeaea;
+  --shadow:0 2px 10px rgba(43,35,48,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:24px 16px 60px}
+.wrap{max-width:1320px;margin:0 auto}
+header{text-align:center;margin-bottom:24px}
+header h1{font-size:24px;font-weight:700;margin-bottom:6px}
+header p{color:var(--sub);font-size:13px}
+.hub{max-width:440px;margin:0 auto 20px;background:linear-gradient(135deg,#2b2330,#493c50);color:#fff;border-radius:16px;padding:18px 24px;text-align:center;box-shadow:var(--shadow)}
+.hub-role{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.75;margin-bottom:4px}
+.hub-name{font-size:18px;font-weight:700}
+.hub-sub{font-size:12px;opacity:.8;margin-top:6px;line-height:1.5}
+.stem{width:2px;height:20px;background:var(--line);margin:0 auto}
+.entry{max-width:760px;margin:0 auto 20px;background:var(--card);border-radius:12px;padding:12px 18px;box-shadow:var(--shadow);font-size:12.5px;color:var(--sub);text-align:center}
+.entry b{color:var(--ink)}
+.columns{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:start}
+@media(max-width:1100px){.columns{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.columns{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.columns{grid-template-columns:1fr}}
+.col-head{border-radius:12px;padding:11px 14px;font-weight:700;font-size:13.5px;margin-bottom:12px;text-align:center;box-shadow:var(--shadow)}
+.col-a .col-head{background:var(--a-bg);color:var(--a);border:1px solid var(--a)}
+.col-b .col-head{background:var(--b-bg);color:var(--b);border:1px solid var(--b)}
+.col-c .col-head{background:var(--c-bg);color:var(--c);border:1px solid var(--c)}
+.col-d .col-head{background:var(--d-bg);color:var(--d);border:1px solid var(--d)}
+.col-x .col-head{background:var(--x-bg);color:var(--x);border:1px solid var(--x)}
+.track{position:relative;padding-left:16px}
+.track::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.stage{position:relative;background:var(--card);border-radius:10px;box-shadow:var(--shadow);padding:10px 12px 10px 14px;margin-bottom:10px;font-size:12.5px;line-height:1.45}
+.stage::before{content:"";position:absolute;left:-16px;top:14px;width:9px;height:9px;border-radius:50%;background:var(--dot,#999);border:2px solid var(--card);box-shadow:0 0 0 1px var(--line)}
+.col-a .stage::before{--dot:var(--a)}
+.col-b .stage::before{--dot:var(--b)}
+.col-c .stage::before{--dot:var(--c)}
+.col-d .stage::before{--dot:var(--d)}
+.col-x .stage::before{--dot:var(--x)}
+.stage .n{font-weight:700;margin-right:4px}
+.stage .say{display:block;margin-top:4px;color:var(--sub);font-style:italic;font-size:11.8px}
+.stage .when{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:20px;color:#fff}
+.col-a .when{background:var(--a)}
+.col-b .when{background:var(--b)}
+.col-c .when{background:var(--c)}
+.col-d .when{background:var(--d)}
+.col-x .when{background:var(--x)}
+.stage.warn{border:1px dashed var(--x);background:#fff8f7}
+.stage.warn .n{color:var(--x)}
+.go{display:block;margin-top:6px;font-size:11.5px;font-weight:700}
+.go.ok{color:#2f7a5f}
+.go.no{color:#b6483f}
+.actions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.btn{font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;border-radius:20px;padding:4px 10px;border:1px solid var(--line);background:#faf9f8;color:var(--ink);transition:background .12s}
+.btn:hover{background:#f1eeed}
+.col-a .btn.active{background:var(--a);border-color:var(--a);color:#fff}
+.col-b .btn.active{background:var(--b);border-color:var(--b);color:#fff}
+.col-c .btn.active{background:var(--c);border-color:var(--c);color:#fff}
+.col-d .btn.active{background:var(--d);border-color:var(--d);color:#fff}
+.col-x .btn.active{background:var(--x);border-color:var(--x);color:#fff}
+.panel{display:none;margin-top:8px;padding:10px 11px;border-radius:8px;background:#f7f4f2;border:1px solid var(--line);font-size:12px;color:var(--ink);line-height:1.6}
+.panel.open{display:block}
+.panel p{margin:0 0 6px}
+.panel p:last-child{margin-bottom:0}
+.panel .note{color:var(--sub);font-size:11.5px;font-style:italic}
+.panel b{color:var(--ink)}
+.copy-btn{margin-top:8px;font-size:10.5px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:16px;padding:3px 9px;color:var(--sub)}
+.copy-btn:hover{color:var(--ink);border-color:#c9bdc4}
+.legend{max-width:1320px;margin:28px auto 0;background:var(--card);border-radius:12px;padding:14px 18px;box-shadow:var(--shadow);font-size:12.5px;color:var(--sub)}
+.legend b{color:var(--ink)}
+.legend-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
+.legend-item{display:flex;align-items:center;gap:6px}
+.legend-sw{width:10px;height:10px;border-radius:3px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>LADY STRETCH — воронка работы сервис-менеджера</h1>
-    <p>Единая воронка в AmoCRM · 4 блока этапов · нажмите на кнопку под этапом, чтобы открыть текст</p>
+    <h1>LADY STRETCH — воронка сервис-менеджера</h1>
+    <p>Единая воронка в AmoCRM · 4 блока · нажмите кнопку под этапом чтобы открыть скрипт</p>
   </header>
 
   <div class="hub">
-    <div class="role">Сервис-менеджер студии</div>
-    <div class="name">Забота о клиенте на каждом этапе</div>
-    <div class="sub">Действующие → Пробное без покупки → Не продлили → Реактивация / Закрытие</div>
+    <div class="hub-role">Сервис-менеджер студии</div>
+    <div class="hub-name">Забота о клиенте на каждом этапе</div>
+    <div class="hub-sub">Действующие → Пробное без покупки → Не продлили → Реактивация / Закрытие</div>
   </div>
   <div class="stem"></div>
 
   <div class="entry">
-    <b>Точки входа от менеджера отдела продаж</b> (заявка, запись и первое пробное занятие — вне этого документа):
+    <b>Точки входа от менеджера отдела продаж</b> (заявка, запись и первое пробное — вне этого документа):<br>
     А — купил(а) абонемент → этап 1 &nbsp;·&nbsp; Б — была на пробном, не купила → этап 7
   </div>
 
@@ -200,89 +107,71 @@
     <div class="col-a">
       <div class="col-head">1 · Действующие клиенты</div>
       <div class="track">
-
         <div class="stage">
           <span class="n">1а.</span>Приветственное сообщение
           <span class="when">день 1 — WhatsApp</span>
           <div class="actions">
-            <button class="btn msg" data-target="p-1a">💬 Готовое сообщение</button>
+            <button class="btn" data-t="p1a">💬 Сообщение</button>
           </div>
-          <div class="panel" id="p-1a">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это служба заботы Lady Stretch, меня зовут [Имя]. Поздравляем вас с покупкой абонемента! Я ваш сервис-менеджер — по любым вопросам о студии, расписании или тренировках всегда можете писать или звонить мне напрямую. Мой рабочий день с 11:00 до 20:00, с 14:00 до 16:00 я в студии на обеде, поэтому могу ответить не сразу. Выходные — суббота и воскресенье.»</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p1a">
+            <p>«Здравствуйте, [Имя]! Это служба заботы Lady Stretch, меня зовут [Имя]. Поздравляем вас с покупкой абонемента! Я ваш сервис-менеджер — по любым вопросам о студии, расписании или тренировках всегда можете писать или звонить мне напрямую. Мой рабочий день с 11:00 до 20:00, с 14:00 до 16:00 я в студии на обеде, поэтому могу ответить не сразу. Выходные — суббота и воскресенье.»</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">1б.</span>Звонок-онбординг
           <span class="when">день 3–5</span>
           <div class="actions">
-            <button class="btn call" data-target="p-1b">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p1b">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-1b">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя], сервис-менеджер студии Lady Stretch. Поздравляю с началом занятий! Хотела узнать — удобно ли расписание, комфортно ли было на первой тренировке в абонементе, остались ли вопросы по студии?»</p>
-              <p class="note">Цель — снять тревожность новичка, показать заботу, мягко предложить записаться на несколько тренировок вперёд.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p1b">
+            <p>«Здравствуйте, [Имя]! Это [Имя], сервис-менеджер студии Lady Stretch. Поздравляю с началом занятий! Хотела узнать — удобно ли расписание, комфортно ли было на первой тренировке в абонементе, остались ли вопросы по студии?»</p>
+            <p class="note">Цель — снять тревожность новичка, показать заботу, мягко предложить записаться на несколько тренировок вперёд.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">2.</span>Плановый контакт
           <span class="when">раз в месяц — звонок</span>
           <div class="actions">
-            <button class="btn call" data-target="p-2">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p2">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-2">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, звоню просто узнать, как у вас дела с тренировками — всё ли устраивает, удобно ли расписание и тренер, есть ли что улучшить?»</p>
-              <p class="note">Жалоба — зафиксировать, при необходимости эскалировать руководителю, перезвонить с решением. Всё хорошо — поблагодарить, рассказать о новинках. Раз в квартал в этот же звонок добавляется блок сбора NPS.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p2">
+            <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, звоню просто узнать, как у вас дела с тренировками — всё ли устраивает, удобно ли расписание и тренер, есть ли что улучшить?»</p>
+            <p class="note">Жалоба — зафиксировать, эскалировать руководителю, перезвонить с решением. Всё хорошо — поблагодарить, рассказать о новинках. Раз в квартал добавляется блок сбора NPS.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">3.</span>Сбор NPS
           <span class="when">раз в квартал</span>
           <div class="actions">
-            <button class="btn call" data-target="p-3">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p3">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-3">
-            <div class="txt">
-              <p>«[Имя], можно задать один короткий вопрос? По шкале от 0 до 10, где 0 — точно не порекомендуете, а 10 — точно порекомендуете, насколько вероятно, что вы порекомендуете студию Lady Stretch подруге или знакомой?»</p>
-              <p><b>9–10 (промоутеры):</b> «Очень приятно это слышать, спасибо! А что вам нравится больше всего?» — предложить программу «приведи подругу» и/или попросить отзыв.</p>
-              <p><b>7–8 (нейтралы):</b> «Спасибо! А что могло бы сделать наш сервис на все 10 из 10?» — зафиксировать пожелание, передать администратору.</p>
-              <p><b>0–6 (детракторы):</b> «Спасибо за честность, это для нас правда важно. Расскажите, пожалуйста, что произошло, что вызвало такую оценку?» — эскалировать руководителю в тот же день, перезвонить с решением через 2–3 дня.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p3">
+            <p>«[Имя], можно задать один короткий вопрос? По шкале от 0 до 10, где 0 — точно не порекомендуете, а 10 — точно порекомендуете, насколько вероятно, что вы порекомендуете студию Lady Stretch подруге?»</p>
+            <p><b>9–10:</b> «Спасибо! А что вам нравится больше всего?» — предложить «приведи подругу» и/или попросить отзыв.</p>
+            <p><b>7–8:</b> «Спасибо! Что могло бы сделать наш сервис на все 10?» — зафиксировать, передать администратору.</p>
+            <p><b>0–6:</b> «Спасибо за честность. Расскажите, что произошло?» — эскалировать руководителю в тот же день, перезвонить с решением через 2–3 дня.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">4.</span>Абонемент истекает
           <span class="when">за 7 дней</span>
           <div class="actions">
-            <button class="btn call" data-target="c-4">📞 Скрипт звонка</button>
-            <button class="btn msg" data-target="m-4">💬 Готовое сообщение</button>
+            <button class="btn" data-t="p4c">📞 Скрипт</button>
+            <button class="btn" data-t="p4m">💬 Сообщение</button>
           </div>
-          <div class="panel" id="c-4">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch. Хотела напомнить, что ваш абонемент действует ещё [N] дней, до [дата]. Чтобы не терять привычный ритм тренировок, предлагаю продлить заранее — [условия продления/акция]. Оформить сейчас?»</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p4c">
+            <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch. Хотела напомнить, что ваш абонемент действует ещё [N] дней, до [дата]. Чтобы не терять привычный ритм тренировок, предлагаю продлить заранее — [условия/акция]. Оформить сейчас?»</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
-          <div class="panel" id="m-4">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! 🌸 Ваш абонемент в Lady Stretch действует ещё [N] дней (до [дата]). Чтобы не терять ритм тренировок — продлите заранее: [условия/акция]. Если удобно, могу оформить прямо сейчас, просто напишите 🙂»</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p4m">
+            <p>«Здравствуйте, [Имя]! 🌸 Ваш абонемент в Lady Stretch действует ещё [N] дней (до [дата]). Чтобы не терять ритм тренировок — продлите заранее: [условия/акция]. Если удобно, могу оформить прямо сейчас, просто напишите 🙂»</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">5.</span>Продлил(а)
           <span class="go ok">✓ → возврат на этап 2 (цикл)</span>
@@ -298,58 +187,48 @@
     <div class="col-b">
       <div class="col-head">2 · Пробное без покупки</div>
       <div class="track">
-
         <div class="stage">
           <span class="n">7.</span>Звонок «как впечатления»
           <span class="when">24–48 часов после пробного</span>
           <div class="actions">
-            <button class="btn call" data-target="p-7">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p7">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-7">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, вы вчера/позавчера были у нас на пробном занятии с [тренер]. Хотела узнать — какие впечатления, понравилось?»</p>
-              <p class="note">«Понравилось, но думаю / дорого» — рассказать про акции, рассрочку, короткий абонемент, договориться о дате звонка. «Не понравился тренер / нагрузка» — предложить второе пробное (этап 9). «Не сейчас» — уточнить когда вернуться к разговору, не давить.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p7">
+            <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, вы вчера/позавчера были у нас на пробном занятии с [тренер]. Хотела узнать — какие впечатления, понравилось?»</p>
+            <p class="note">«Понравилось, но думаю / дорого» → рассказать про акции, рассрочку, договориться о дате звонка. «Не понравился тренер / нагрузка» → этап 9. «Не сейчас» → уточнить когда, не давить.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">8.</span>Причина отказа выяснена
           <span class="say">Не тренер / не формат / дорого / думает</span>
         </div>
-
         <div class="stage">
-          <span class="n">9.</span>Предложено 2-е бесплатное пробное
+          <span class="n">9.</span>2-е бесплатное пробное
           <div class="actions">
-            <button class="btn call" data-target="c-9">📞 Скрипт звонка</button>
-            <button class="btn msg" data-target="m-9">💬 Готовое сообщение</button>
+            <button class="btn" data-t="p9c">📞 Скрипт</button>
+            <button class="btn" data-t="p9m">💬 Сообщение</button>
           </div>
-          <div class="panel" id="c-9">
-            <div class="txt">
-              <p>«[Имя], я вас услышала. У нас в студии несколько тренеров с разным стилем ведения — кому-то важнее мягкий подход, кому-то, наоборот, более активный темп. Хочу предложить вам второе пробное занятие — уже бесплатно, но с другим тренером [Имя] / в другом формате [формат], чтобы вы могли сравнить и понять, что подходит именно вам. Когда вам будет удобно?»</p>
-              <p class="note">Второе пробное всегда бесплатно и с другим тренером/форматом — не повторяем тот же опыт.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p9c">
+            <p>«[Имя], я вас услышала. У нас в студии несколько тренеров с разным стилем ведения. Хочу предложить вам второе пробное занятие — уже бесплатно, но с другим тренером [Имя] / в другом формате [формат], чтобы вы могли сравнить и понять, что подходит именно вам. Когда вам будет удобно?»</p>
+            <p class="note">Второе пробное всегда бесплатно и с другим тренером/форматом.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
-          <div class="panel" id="m-9">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Напоминаю про приглашение на бесплатное повторное пробное занятие в Lady Stretch — с другим тренером, чтобы просто попробовать ещё раз 🙂 Когда вам удобно? Отправляю несколько вариантов времени: [время1] / [время2].»</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p9m">
+            <p>«Здравствуйте, [Имя]! Напоминаю про приглашение на бесплатное повторное пробное занятие в Lady Stretch — с другим тренером 🙂 Когда вам удобно? [время1] / [время2]»</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">10.</span>Записан(а) на 2-е пробное
           <span class="go ok">✓ → после занятия, возврат на этап 7</span>
         </div>
         <div class="stage">
-          <span class="n">11а.</span>Финальный отказ — мягкий
-          <span class="go ok">→ Блок 4, этап 17</span>
+          <span class="n">11а.</span>Мягкий отказ
+          <span class="go ok">→ Блок 4, этап 17 (через 3 мес.)</span>
         </div>
         <div class="stage">
-          <span class="n">11б.</span>Финальный отказ — жёсткий / негатив
+          <span class="n">11б.</span>Жёсткий отказ / негатив
           <span class="go no">✗ → Закрыто / Не реализовано</span>
         </div>
       </div>
@@ -359,51 +238,43 @@
     <div class="col-c">
       <div class="col-head">3 · Не продлили абонемент</div>
       <div class="track">
-
         <div class="stage">
           <span class="n">12.</span>Звонок «узнать причину»
           <span class="when">в течение 3 дней</span>
           <div class="actions">
-            <button class="btn call" data-target="p-12">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p12">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-12">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch. Заметила, что ваш абонемент подошёл к концу, и вы пока не продлевали — хотела узнать, всё ли в порядке, как вам занятия в целом?»</p>
-              <p class="note">Выявить причину: график, тренер, цена, мотивация/результат, пауза (болезнь/отпуск/переезд), конкуренты.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p12">
+            <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch. Заметила, что ваш абонемент подошёл к концу, и вы пока не продлевали — хотела узнать, всё ли в порядке, как вам занятия в целом?»</p>
+            <p class="note">Выявить причину: график, тренер, цена, мотивация, пауза (болезнь/отпуск/переезд).</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">13.</span>Причина зафиксирована
           <span class="say">График / тренер / цена / мотивация / пауза</span>
         </div>
-
         <div class="stage">
-          <span class="n">14.</span>Персональный оффер на возврат
+          <span class="n">14.</span>Персональный оффер
           <div class="actions">
-            <button class="btn call" data-target="p-14">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p14">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-14">
-            <div class="txt">
-              <p>«Я вас поняла. У нас есть [конкретный оффер под причину]. Может, вернёмся на пробной основе — [условие], и посмотрим, станет ли удобнее?»</p>
-              <p class="note">Расписание — другие слоты/группы. Тренер — смена тренера или пробное с другим. Цена — скидка/рассрочка/короткий абонемент. Мотивация — консультация с тренером по прогрессу. Пауза — заморозка, перенос дней. «Не сейчас» — не давить, назначить звонок через 1–2 месяца.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p14">
+            <p>«Я вас поняла. У нас есть [конкретный оффер под причину]. Может, вернёмся на пробной основе — [условие], и посмотрим, станет ли удобнее?»</p>
+            <p class="note"><b>Расписание</b> → другие слоты/группы. <b>Тренер</b> → смена или пробное с другим. <b>Цена</b> → скидка/рассрочка/короткий абонемент. <b>Мотивация</b> → консультация по прогрессу. <b>Пауза</b> → заморозка. <b>Не сейчас</b> → звонок через 1–2 мес.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
           <span class="n">15.</span>Вернулся(лась)
           <span class="go ok">✓ → возврат на этап 1</span>
         </div>
         <div class="stage">
-          <span class="n">16а.</span>Не вернулся(лась) — мягкий отказ
-          <span class="go ok">→ Блок 4, этап 17</span>
+          <span class="n">16а.</span>Мягкий отказ
+          <span class="go ok">→ Блок 4, этап 17 (через 2 мес.)</span>
         </div>
         <div class="stage">
-          <span class="n">16б.</span>Не вернулся(лась) — жёсткий / негатив
+          <span class="n">16б.</span>Жёсткий отказ / негатив
           <span class="go no">✗ → Закрыто / Не реализовано</span>
         </div>
       </div>
@@ -413,44 +284,37 @@
     <div class="col-d">
       <div class="col-head">4 · Реактивация (win-back)</div>
       <div class="track">
-
         <div class="stage">
           <span class="n">17.</span>Реактивационный звонок
           <span class="when">через 2–3 мес. после 11а/16а</span>
           <div class="actions">
-            <button class="btn call" data-target="p-17">📞 Скрипт звонка</button>
+            <button class="btn" data-t="p17">📞 Скрипт</button>
           </div>
-          <div class="panel" id="p-17">
-            <div class="txt">
-              <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, давно не общались. Хотела узнать, как вы, актуально ли для вас сейчас позаниматься растяжкой? У нас [новости/новый формат/новый тренер], могу предложить бесплатное пробное занятие, чтобы просто заглянуть и посмотреть, что изменилось.»</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="p17">
+            <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch, давно не общались. Хотела узнать, как вы, актуально ли для вас сейчас позаниматься растяжкой? У нас [новости/новый формат/новый тренер], могу предложить бесплатное пробное занятие, чтобы просто заглянуть и посмотреть, что изменилось.»</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
         </div>
-
         <div class="stage">
-          <span class="n">18.</span>Записан(а) на пробное повторно
-          <span class="go ok">✓ → после занятия, возврат на этап 7 (тег «повторный клиент»)</span>
+          <span class="n">18.</span>Записан(а) повторно
+          <span class="go ok">✓ → после занятия, возврат на этап 7<br>тег «повторный клиент»</span>
         </div>
         <div class="stage">
-          <span class="n">19.</span>Отказался(лась) окончательно
+          <span class="n">19.</span>Отказ окончательный
           <span class="go no">✗ → Закрыто / Не реализовано</span>
         </div>
-
         <div class="stage warn">
-          <span class="n">⚠</span>Экстренный сценарий
-          <span class="say">Запрос возврата абонемента или сильный негатив — может произойти на любом этапе (чаще в Блоке 1)</span>
+          <span class="n">⚠</span> Экстренный сценарий
+          <span class="say">Возврат абонемента или сильный негатив — может произойти на любом этапе</span>
           <div class="actions">
-            <button class="btn call" data-target="p-warn">📋 Инструкция</button>
+            <button class="btn" data-t="pwarn">📋 Инструкция</button>
           </div>
-          <div class="panel" id="p-warn">
-            <div class="txt">
-              <p>1. Не спорить и не давить, дать клиенту договорить, зафиксировать причину дословно.</p>
-              <p>2. В тот же день эскалировать руководителю студии — решение по возврату принимает он.</p>
-              <p>3. После решения вопроса — статус «Закрыто / Не реализовано», указать причину, включить флаг «не звонить повторно».</p>
-              <p>4. Не ставить карточку в очередь на реактивацию.</p>
-            </div>
-            <button class="copy" type="button">Скопировать</button>
+          <div class="panel" id="pwarn">
+            <p>1. Не спорить, дать клиенту договорить, зафиксировать причину дословно.</p>
+            <p>2. В тот же день эскалировать руководителю студии.</p>
+            <p>3. После решения — статус «Закрыто / Не реализовано», флаг «не звонить повторно».</p>
+            <p>4. Не ставить в очередь на реактивацию.</p>
+            <button class="copy-btn">Скопировать</button>
           </div>
           <span class="go no">✗ → сразу Закрыто / Не реализовано</span>
         </div>
@@ -462,19 +326,19 @@
       <div class="col-head">✕ Закрыто / Не реализовано</div>
       <div class="track">
         <div class="stage">
-          <span class="n">•</span>Ушла навсегда
-          <span class="say">Финальный отказ после реактивации (этап 19)</span>
+          <span class="n">•</span> Ушла навсегда
+          <span class="say">Финальный отказ после этапа 19</span>
         </div>
         <div class="stage">
-          <span class="n">•</span>Сильный негатив / жалоба
+          <span class="n">•</span> Сильный негатив / жалоба
           <span class="say">Просит прекратить звонки, конфликт не решён</span>
         </div>
         <div class="stage">
-          <span class="n">•</span>Возврат абонемента
-          <span class="say">Клиент запросил и получил возврат денег</span>
+          <span class="n">•</span> Возврат абонемента
+          <span class="say">Клиент получил возврат денег</span>
         </div>
         <div class="stage">
-          <span class="say">Флаг «не звонить повторно» — трогаем снова, только если клиент сам вышел на связь.</span>
+          <span class="say">Флаг «не звонить повторно» — трогаем снова только если клиент сам вышел на связь.</span>
         </div>
       </div>
     </div>
@@ -482,59 +346,43 @@
   </div>
 
   <div class="legend">
-    <b>Как читать карту:</b> каждая колонка — блок этапов сделки в единой воронке AmoCRM. Зелёные пометки «✓» — переход при позитивном исходе, красные «✗» — при негативном. Кнопки «📞 Скрипт звонка» и «💬 Готовое сообщение» открывают текст для конкретного этапа — там же кнопка «Скопировать». Таблица полей CRM и KPI — в документе «LADY STRETCH — Регламент работы сервис-менеджера».
-    <div class="row">
-      <div class="item"><span class="sw" style="background:var(--a)"></span>Действующие клиенты</div>
-      <div class="item"><span class="sw" style="background:var(--b)"></span>Пробное без покупки</div>
-      <div class="item"><span class="sw" style="background:var(--c)"></span>Не продлили</div>
-      <div class="item"><span class="sw" style="background:var(--d)"></span>Реактивация (win-back)</div>
-      <div class="item"><span class="sw" style="background:var(--x)"></span>Закрыто / Не реализовано</div>
+    <b>Как читать карту:</b> каждая колонка — блок этапов в единой воронке AmoCRM. ✓ — позитивный исход, ✗ — негативный. Кнопки 📞 и 💬 открывают готовый текст — там же кнопка «Скопировать».
+    <div class="legend-row">
+      <div class="legend-item"><span class="legend-sw" style="background:var(--a)"></span>Действующие клиенты</div>
+      <div class="legend-item"><span class="legend-sw" style="background:var(--b)"></span>Пробное без покупки</div>
+      <div class="legend-item"><span class="legend-sw" style="background:var(--c)"></span>Не продлили</div>
+      <div class="legend-item"><span class="legend-sw" style="background:var(--d)"></span>Реактивация (win-back)</div>
+      <div class="legend-item"><span class="legend-sw" style="background:var(--x)"></span>Закрыто</div>
     </div>
   </div>
 </div>
 
 <script>
-  document.querySelectorAll('.btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var id = btn.getAttribute('data-target');
-      var panel = document.getElementById(id);
-      if(!panel) return;
-      var isOpen = panel.classList.toggle('open');
-      btn.classList.toggle('active', isOpen);
-    });
+document.querySelectorAll('.btn[data-t]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var id = btn.getAttribute('data-t');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('open');
+    btn.classList.toggle('active', open);
   });
-
-  document.querySelectorAll('.copy').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var panel = btn.closest('.panel');
-      var textEl = panel.querySelector('.txt');
-      var text = textEl.innerText;
-      function showDone(){
-        var old = 'Скопировать';
-        btn.textContent = 'Скопировано ✓';
-        setTimeout(function(){ btn.textContent = old; }, 1500);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(showDone).catch(function(){
-          fallbackCopy(textEl, showDone);
-        });
-      } else {
-        fallbackCopy(textEl, showDone);
-      }
-    });
+});
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var panel = btn.closest('.panel');
+    var text = Array.from(panel.querySelectorAll('p')).map(function(p){return p.innerText;}).join('\n\n');
+    function done(){ btn.textContent='Скопировано ✓'; setTimeout(function(){ btn.textContent='Скопировать'; }, 1500); }
+    if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text, done); }); }
+    else { fallback(text, done); }
   });
-
-  function fallbackCopy(textEl, done){
-    var range = document.createRange();
-    range.selectNodeContents(textEl);
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    try{ document.execCommand('copy'); }catch(err){}
-    sel.removeAllRanges();
-    done();
-  }
+});
+function fallback(text, done){
+  var ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e){}
+  document.body.removeChild(ta); done();
+}
 </script>
 </body>
 </html>
