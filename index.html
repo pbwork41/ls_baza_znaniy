@@ -633,6 +633,16 @@ async function openMaterial(id) {
   // Показываем кнопку редактирования только для текстовых файлов
   _editingMaterial = m;
   _editRawContent = '';
+  // HTML файлы — открываем в полноэкранной модалке
+  if (m.file && m.file.endsWith('.html')) {
+    const url = 'https://raw.githubusercontent.com/' + CFG.repo + '/main/' + m.file + '?t=' + Date.now();
+    fetch(url).then(r=>r.blob()).then(blob=>{
+      const blobUrl = URL.createObjectURL(blob);
+      openHtmlModal(m.title, blobUrl);
+    });
+    showPage('home', null);
+    return;
+  }
   document.getElementById('btn-edit').style.display = (m.file && window.currentUser && window.currentUser.role==='admin') ? 'inline-flex' : 'none';
   const fab = document.getElementById('fab-edit');
   if (fab) { fab.style.display = m.file ? 'flex' : 'none'; }
@@ -898,6 +908,27 @@ function openPdfViewer(url, title) {
   document.getElementById('pdf-title').textContent = title || 'PDF';
   document.getElementById('pdf-frame').src = url;
   document.getElementById('modal-pdf').classList.add('open');
+}
+</script>
+<div id="html-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:#fff;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);flex-shrink:0">
+    <button onclick="closeHtmlModal()" style="padding:6px 14px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:13px;cursor:pointer;font-family:var(--font)">← Закрыть</button>
+    <span id="html-modal-title" style="font-size:14px;font-weight:600"></span>
+  </div>
+  <iframe id="html-modal-frame" style="flex:1;border:none;width:100%;height:100%"></iframe>
+</div>
+
+<script>
+function openHtmlModal(title, url) {
+  document.getElementById('html-modal-title').textContent = title;
+  document.getElementById('html-modal-frame').src = url;
+  document.getElementById('html-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeHtmlModal() {
+  document.getElementById('html-modal').style.display = 'none';
+  document.getElementById('html-modal-frame').src = '';
+  document.body.style.overflow = '';
 }
 </script>
 </body>
