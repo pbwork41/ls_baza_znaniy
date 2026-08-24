@@ -165,7 +165,7 @@ header p{color:var(--sub);font-size:13px}
               </div>
               <div>
                 <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Номер телефона</div>
-                <input id="nps-phone" type="tel" placeholder="+7 900 000 00 00" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+                <input id="nps-phone" type="tel" value="+7" placeholder="+7 900 000 00 00" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit" onfocus="if(this.value==='+7')this.setSelectionRange(2,2)" oninput="if(!this.value.startsWith('+7'))this.value='+7'+this.value.replace(/^\+?7?/,'')">
               </div>
               <div>
                 <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Студия</div>
