@@ -435,7 +435,6 @@
       "id": "sm002",
       "title": "Воронка сервис-менеджера — интерактивная карта",
       "category": "service",
-      "file": "service-manager/funnel.html",
       "tags": [
         "сервис-менеджер",
         "воронка",
@@ -443,7 +442,8 @@
         "скрипты"
       ],
       "updated": "2026-07-09",
-      "isNew": true
+      "isNew": true,
+      "url": "https://pbwork41.github.io/ls_baza_znaniy/service-manager/funnel.html"
     }
   ],
   "videos": [],
