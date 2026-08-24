@@ -430,6 +430,20 @@
       ],
       "updated": "2026-07-09",
       "isNew": true
+    },
+    {
+      "id": "sm002",
+      "title": "Воронка сервис-менеджера — интерактивная карта",
+      "category": "service",
+      "file": "service-manager/funnel.html",
+      "tags": [
+        "сервис-менеджер",
+        "воронка",
+        "AmoCRM",
+        "скрипты"
+      ],
+      "updated": "2026-07-09",
+      "isNew": true
     }
   ],
   "videos": [],
