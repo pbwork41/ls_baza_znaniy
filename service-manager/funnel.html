@@ -153,16 +153,54 @@ header p{color:var(--sub);font-size:13px}
 
         <div class="stage">
           <span class="n">3.</span>Сбор NPS
-          <span class="when">раз в квартал</span>
+          <span class="when">раз в месяц</span>
           <div class="actions">
-            <button class="btn" data-t="p3">📞 Скрипт</button>
+            <button class="btn" data-t="p3" style="background:var(--a);color:#fff;border-color:var(--a)">📋 Заполнить</button>
           </div>
           <div class="panel" id="p3">
-            <p>«[Имя], можно задать один короткий вопрос? По шкале от 0 до 10 — насколько вероятно, что вы порекомендуете Lady Stretch подруге? Где 0 — точно нет, 10 — точно да 😊»</p>
-            <p><b>9–10 🌟</b> «Это очень приятно слышать, спасибо! А что вам нравится больше всего?» — предложить «приведи подругу» и/или попросить отзыв.</p>
-            <p><b>7–8 😊</b> «Спасибо! А что могло бы сделать наш сервис на все 10?» — зафиксировать, передать администратору.</p>
-            <p><b>0–6 😔</b> «Спасибо за честность — для нас это действительно важно. Расскажите, что произошло?» — эскалировать руководителю в тот же день, перезвонить с решением через 2–3 дня.</p>
-            <button class="copy-btn">Скопировать</button>
+            <div style="display:grid;gap:8px">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Имя клиента</div>
+                <input id="nps-name" type="text" placeholder="Иванова Анна" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Номер телефона</div>
+                <input id="nps-phone" type="tel" placeholder="+7 900 000 00 00" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Студия</div>
+                <select id="nps-studio" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+                  <option value="">Выбрать...</option>
+                  <option value="Империал">Империал</option>
+                  <option value="Мечта">Мечта</option>
+                </select>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:5px">Насколько вероятно, что вы порекомендуете нашу студию друзьям или знакомым?</div>
+                <div style="display:flex;gap:4px;flex-wrap:wrap" id="nps-score-btns">
+                  ${[0,1,2,3,4,5,6,7,8,9,10].map(n=>`<button onclick="npsPickScore(${n},this)" style="width:30px;height:30px;border-radius:6px;border:1px solid #e3d9de;background:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">${n}</button>`).join('')}
+                </div>
+                <input id="nps-score" type="hidden">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Почему вы поставили именно такой балл?</div>
+                <textarea id="nps-why" rows="2" placeholder="..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Что мы можем улучшить, чтобы в следующий раз вы поставили балл выше?</div>
+                <textarea id="nps-improve" rows="2" placeholder="..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Есть ли особые пожелания или предложения? (Любые мысли приветствуются! 💜)</div>
+                <textarea id="nps-wishes" rows="2" placeholder="..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Какой продукт, услугу или тренировку хотели бы видеть в студии?</div>
+                <textarea id="nps-product" rows="2" placeholder="..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div id="nps-msg" style="display:none;padding:8px 10px;border-radius:6px;font-size:12px"></div>
+              <button onclick="submitNPS()" style="width:100%;padding:9px;background:var(--a);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">💜 Сохранить оценку</button>
+            </div>
           </div>
         </div>
 
@@ -411,6 +449,82 @@ function fallback(text, done){
   ta.value = text; document.body.appendChild(ta); ta.select();
   try { document.execCommand('copy'); } catch(e){}
   document.body.removeChild(ta); done();
+}
+
+function npsPickScore(n, el) {
+  document.getElementById('nps-score').value = n;
+  document.querySelectorAll('#nps-score-btns button').forEach(function(b) {
+    var s = parseInt(b.textContent);
+    var col = s >= 9 ? '#16a34a' : s >= 7 ? '#c8863a' : '#9a3b3b';
+    b.style.background = b === el ? col : '#fff';
+    b.style.color = b === el ? '#fff' : 'inherit';
+    b.style.borderColor = b === el ? col : '#e3d9de';
+  });
+}
+
+async function submitNPS() {
+  var name = document.getElementById('nps-name').value.trim();
+  var phone = document.getElementById('nps-phone').value.trim();
+  var studio = document.getElementById('nps-studio').value;
+  var score = document.getElementById('nps-score').value;
+  var why = document.getElementById('nps-why').value.trim();
+  var improve = document.getElementById('nps-improve').value.trim();
+  var wishes = document.getElementById('nps-wishes').value.trim();
+  var product = document.getElementById('nps-product').value.trim();
+  var msg = document.getElementById('nps-msg');
+
+  if (!name || !phone || !studio || score === '') {
+    msg.textContent = '⚠ Заполните имя, телефон, студию и выберите оценку';
+    msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b';
+    msg.style.display = 'block'; return;
+  }
+
+  var comment = [
+    why ? 'Почему такой балл: ' + why : '',
+    improve ? 'Что улучшить: ' + improve : '',
+    wishes ? 'Пожелания: ' + wishes : '',
+    product ? 'Хотели бы видеть: ' + product : ''
+  ].filter(Boolean).join(' | ');
+
+  try {
+    var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/nps_responses', {
+      method: 'POST',
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        client_name: name,
+        client_phone: phone,
+        studio: studio,
+        score: parseInt(score),
+        comment: comment,
+        survey_date: new Date().toISOString().slice(0, 10)
+      })
+    });
+    if (res.ok) {
+      msg.textContent = '✓ Оценка сохранена! Спасибо 💜';
+      msg.style.background = '#eaf6f2'; msg.style.color = '#3f8f7a';
+      msg.style.display = 'block';
+      ['nps-name','nps-phone','nps-studio','nps-score','nps-why','nps-improve','nps-wishes','nps-product'].forEach(function(id){
+        var el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.querySelectorAll('#nps-score-btns button').forEach(function(b){
+        b.style.background='#fff'; b.style.color='inherit'; b.style.borderColor='#e3d9de';
+      });
+    } else {
+      msg.textContent = '⚠ Ошибка сохранения. Попробуйте ещё раз.';
+      msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b';
+      msg.style.display = 'block';
+    }
+  } catch(e) {
+    msg.textContent = '⚠ Ошибка соединения: ' + e.message;
+    msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b';
+    msg.style.display = 'block';
+  }
 }
 </script>
 </body>
