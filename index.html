@@ -633,14 +633,9 @@ async function openMaterial(id) {
   // Показываем кнопку редактирования только для текстовых файлов
   _editingMaterial = m;
   _editRawContent = '';
-  // HTML файлы — открываем в полноэкранной модалке
-  if (m.file && m.file.endsWith('.html')) {
-    const url = 'https://raw.githubusercontent.com/' + CFG.repo + '/main/' + m.file + '?t=' + Date.now();
-    fetch(url).then(r=>r.blob()).then(blob=>{
-      const blobUrl = URL.createObjectURL(blob);
-      openHtmlModal(m.title, blobUrl);
-    });
-    showPage('home', null);
+  // Если есть url — открываем в новой вкладке
+  if (m.url) {
+    window.open(m.url, '_blank');
     return;
   }
   document.getElementById('btn-edit').style.display = (m.file && window.currentUser && window.currentUser.role==='admin') ? 'inline-flex' : 'none';
