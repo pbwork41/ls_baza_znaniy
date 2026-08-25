@@ -582,6 +582,46 @@ async function submitNPS() {
     msg.style.display = 'block';
   }
 }
+
+async function submitChurnReason() {
+  var name = document.getElementById('cr-name').value.trim();
+  var phone = document.getElementById('cr-phone').value.trim();
+  var studio = document.getElementById('cr-studio').value;
+  var reasons = Array.from(document.querySelectorAll('.cr-reason:checked')).map(function(c){return c.value;});
+  var comment = document.getElementById('cr-comment').value.trim();
+  var msg = document.getElementById('cr-msg');
+  if (!name || !phone || !studio || reasons.length === 0) {
+    msg.textContent = '⚠ Заполните имя, телефон, студию и выберите хотя бы одну причину';
+    msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b'; msg.style.display = 'block'; return;
+  }
+  try {
+    var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/churn_reasons', {
+      method: 'POST',
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({client_name:name, client_phone:phone, studio:studio, reasons:reasons, comment:comment, survey_date:new Date().toISOString().slice(0,10)})
+    });
+    if (res.ok) {
+      msg.textContent = '✓ Причина сохранена! 💜';
+      msg.style.background = '#eaf6f2'; msg.style.color = '#3f8f7a'; msg.style.display = 'block';
+      document.getElementById('cr-name').value='';
+      document.getElementById('cr-phone').value='+7';
+      document.getElementById('cr-comment').value='';
+      document.querySelectorAll('.cr-reason').forEach(function(c){c.checked=false;});
+      document.getElementById('cr-studio').value='';
+    } else {
+      msg.textContent = '⚠ Ошибка сохранения. Попробуйте ещё раз.';
+      msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b'; msg.style.display = 'block';
+    }
+  } catch(e) {
+    msg.textContent = '⚠ Ошибка: ' + e.message;
+    msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b'; msg.style.display = 'block';
+  }
+}
 </script>
 </body>
 </html>
