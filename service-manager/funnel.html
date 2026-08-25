@@ -293,19 +293,54 @@ header p{color:var(--sub);font-size:13px}
           <span class="when">в течение 3 дней</span>
           <div class="actions">
             <button class="btn" data-t="p12">📞 Скрипт</button>
+            <button class="btn" data-t="p12form" style="background:var(--c);color:#fff;border-color:var(--c)">📋 Зафиксировать причину</button>
           </div>
           <div class="panel" id="p12">
-            <p style="background:#fff9e6;border:1px solid #f5d87a;border-radius:6px;padding:7px 10px;font-size:11.5px;color:#7a5c00;margin-bottom:8px">📋 <b>Перед звонком:</b> открыть карточку в 1С — посмотреть сколько занятий было использовано, как давно последний визит, у какого тренера занималась.</p>
+            <p style="background:#fff9e6;border:1px solid #f5d87a;border-radius:6px;padding:7px 10px;font-size:11.5px;color:#7a5c00;margin-bottom:8px">📋 <b>Перед звонком:</b> открыть карточку в 1С — посмотреть сколько занятий использовано, как давно последний визит, у какого тренера занималась.</p>
             <p>«Здравствуйте, [Имя]! Это [Имя] из Lady Stretch 💜 Заметила, что ваш абонемент подошёл к концу — хотела узнать, всё ли хорошо, как вам занятия в целом? Может, что-то не устраивало или просто не нашлось времени?»</p>
-            <p class="note">Выявить причину: расписание, тренер, цена, мотивация, пауза (болезнь / отпуск / переезд).</p>
             <button class="copy-btn">Скопировать</button>
+          </div>
+          <div class="panel" id="p12form">
+            <div style="display:grid;gap:8px">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Имя клиента</div>
+                <input id="cr-name" type="text" placeholder="Иванова Анна" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Номер телефона</div>
+                <input id="cr-phone" type="tel" value="+7" placeholder="+7 900 000 00 00" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit" onfocus="if(this.value==='+7')this.setSelectionRange(2,2)">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Студия</div>
+                <select id="cr-studio" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
+                  <option value="">Выбрать...</option>
+                  <option value="Империал">Империал</option>
+                  <option value="Мечта">Мечта</option>
+                </select>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:5px">Причина (можно несколько)</div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Расписание" class="cr-reason"> Расписание</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Тренер" class="cr-reason"> Тренер</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Цена" class="cr-reason"> Цена</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Мотивация" class="cr-reason"> Мотивация / нет результата</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Пауза — болезнь/отпуск/переезд" class="cr-reason"> Пауза (болезнь / отпуск / переезд)</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Не успела отходить абонемент" class="cr-reason"> Не успела отходить абонемент</label>
+                  <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer"><input type="checkbox" value="Остался платёж рассрочки" class="cr-reason"> Остался платёж рассрочки, абонемент закончился</label>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Комментарий</div>
+                <textarea id="cr-comment" rows="2" placeholder="Дополнительные детали..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div id="cr-msg" style="display:none;padding:8px 10px;border-radius:6px;font-size:12px"></div>
+              <button onclick="submitChurnReason()" style="width:100%;padding:9px;background:var(--c);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Сохранить причину</button>
+            </div>
           </div>
         </div>
 
-        <div class="stage">
-          <span class="n">13.</span>Причина зафиксирована
-          <span class="say">График / тренер / цена / мотивация / пауза</span>
-        </div>
+
 
         <div class="stage">
           <span class="n">14.</span>Персональный оффер
@@ -313,8 +348,38 @@ header p{color:var(--sub);font-size:13px}
             <button class="btn" data-t="p14">📞 Скрипт</button>
           </div>
           <div class="panel" id="p14">
-            <p>«Я вас понимаю 💜 У нас как раз есть [конкретный оффер под причину] — мне кажется, это могло бы вам подойти. Может, попробуем ещё раз — [условие], и посмотрим, станет ли удобнее?»</p>
-            <p class="note"><b>Расписание</b> → другие слоты/группы. <b>Тренер</b> → смена или пробное с другим. <b>Цена</b> → скидка/рассрочка/короткий абонемент. <b>Мотивация</b> → консультация по прогрессу. <b>Пауза</b> → заморозка. <b>Не сейчас</b> → звонок через 1–2 мес.</p>
+            <p style="background:#fff9e6;border:1px solid #f5d87a;border-radius:6px;padding:7px 10px;font-size:11.5px;color:#7a5c00;margin-bottom:8px">📋 Выбрать нужный ответ исходя из причины клиента</p>
+
+            <p style="font-weight:700;margin-bottom:4px">Расписание</p>
+            <p>«Понимаю вас 💜 К сожалению, подстроить расписание под каждого клиента мы не можем — оно формируется под большинство. Но давайте посмотрим вместе — возможно, есть слот, который вы ещё не рассматривали?»</p>
+            <p class="note">Если подходящего слота нет — принять это честно, не давить. Зафиксировать дату следующего звонка через 1–2 месяца.</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Тренер</p>
+            <p>«Понимаю, терять любимого тренера обидно 💜 Но знаете — у нас больше 10 тренеров, и многие клиенты, которые думали что не смогут заниматься без своего тренера, находили нового и уже не представляют жизни без него. Это не повод прекращать заботиться о своём теле и здоровье. Хотите попробуем подобрать кого-то подходящего?»</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Цена</p>
+            <p>«На продление у нас действуют специальные условия — как правило, это повышенная скидка для тех, кто уже занимался. Давайте я расскажу, что сейчас есть?»</p>
+            <p class="note">Если не устраивает — спросить: «А какие условия по абонементу вы бы хотели? Попробую согласовать что-нибудь с руководителем.»</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Мотивация / нет результата</p>
+            <p>«Понимаю это ощущение 💜 Результат не всегда виден сразу — тело меняется постепенно, и часто это замечают окружающие раньше, чем мы сами. Расскажите — с какой целью вы начинали заниматься? Давайте вернёмся к ней и посмотрим, что можно скорректировать, чтобы прогресс стал заметнее.»</p>
+            <p class="note">Предложить бесплатную консультацию с тренером по прогрессу.</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Пауза (болезнь / отпуск / переезд)</p>
+            <p>«Всё понимаю 💜 Именно поэтому у нас длинные по сроку абонементы — чтобы в таких ситуациях занятия не сгорали. Абонемент вас ждёт. Когда примерно планируете вернуться?»</p>
+            <p class="note">Поставить задачу — позвонить клиенту в нужную дату.</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Не успела отходить абонемент</p>
+            <p>«Давайте сделаем так — мы предложим вам продление на специальных условиях, и все неиспользованные занятия перенесём в новый абонемент. До 15 занятий можно перенести. Это честно — вы за них заплатили, они должны вам достаться.»</p>
+            <button class="copy-btn">Скопировать</button>
+
+            <p style="font-weight:700;margin:10px 0 4px">Остался платёж рассрочки, абонемент закончился</p>
+            <p>«Понимаю ситуацию 💜 Предлагаю докупить занятия — это самый выгодный вариант: при докупке цена за одно занятие выходит минимальной. Занятия появятся сразу, и вы продолжите заниматься без перерыва.»</p>
             <button class="copy-btn">Скопировать</button>
           </div>
         </div>
