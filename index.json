@@ -458,6 +458,20 @@
       ],
       "updated": "2026-10-02",
       "isNew": true
+    },
+    {
+      "id": "dir003",
+      "title": "Степы",
+      "category": "directions",
+      "file": "directions/all-directions.md",
+      "tags": [
+        "степы",
+        "кардио",
+        "аэробика",
+        "степ-платформа"
+      ],
+      "updated": "2026-10-02",
+      "isNew": true
     }
   ],
   "videos": [],
