@@ -444,6 +444,20 @@
       "updated": "2026-07-09",
       "isNew": true,
       "url": "https://pbwork41.github.io/ls_baza_znaniy/service-manager/funnel.html"
+    },
+    {
+      "id": "s007",
+      "title": "Подтверждение записи на пробное занятие",
+      "category": "scripts",
+      "file": "scripts/confirmation-message.md",
+      "tags": [
+        "подтверждение",
+        "запись",
+        "пробное",
+        "сообщение"
+      ],
+      "updated": "2026-10-02",
+      "isNew": true
     }
   ],
   "videos": [],
