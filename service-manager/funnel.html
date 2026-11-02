@@ -565,14 +565,14 @@ async function npsLoadCollectors() {
   _npsCollectorsLoaded = true;
   var sel = document.getElementById('nps-collector');
   try {
-    var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/profiles?select=id,name,motivation_type&active=eq.true&order=name', {
+    var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/profiles?select=id,name,role&active=eq.true&order=name', {
       headers: {
         'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ'
       }
     });
     var all = await res.json();
-    var list = all.filter(function(p){ return p.motivation_type === 'service_manager'; });
+    var list = all.filter(function(p){ return p.role === 'service_manager'; });
     var saved = localStorage.getItem('nps_collector_id') || '';
     sel.innerHTML = '<option value="">— выберите себя —</option>' +
       list.map(function(p){ return '<option value="'+p.id+'"'+(String(p.id)===saved?' selected':'')+'>'+p.name+'</option>'; }).join('');
