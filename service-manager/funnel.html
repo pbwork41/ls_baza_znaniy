@@ -182,16 +182,12 @@ header p{color:var(--sub);font-size:13px}
           <div class="actions">
             <button class="btn" data-t="p3" style="background:var(--a);color:#fff;border-color:var(--a)">📋 Заполнить</button>
           </div>
-          <div class="panel" id="p3">
+          <div class="panel" id="p3" onmouseenter="npsLoadCollectors()">
             <div style="display:grid;gap:8px">
               <div>
-                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Кто заполняет НПС</div>
-                <select id="nps-who" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:#3a2d36">
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Менеджер</div>
+                <select id="nps-collector" onchange="npsSetCollector(this.value)" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:#3a2d36">
                   <option value="">— выбрать —</option>
-                  <option value="sm">Сервис-менеджер</option>
-                  <option value="trainer">Тренер</option>
-                  <option value="admin">Администратор</option>
-                  <option value="client">Клиент (самостоятельно)</option>
                 </select>
               </div>
               <div>
@@ -238,6 +234,19 @@ header p{color:var(--sub);font-size:13px}
               <div>
                 <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Есть ли особые пожелания или предложения? (Любые мысли приветствуются! 💜)</div>
                 <textarea id="nps-wishes" rows="2" placeholder="..." style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical"></textarea>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Сколько месяцев клиент посещает студию?</div>
+                <select id="nps-months" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:#3a2d36">
+                  <option value="">— выбрать —</option>
+                  <option value="1">1 месяц</option>
+                  <option value="2">2 месяца</option>
+                  <option value="3">3 месяца</option>
+                  <option value="6">4–6 месяцев</option>
+                  <option value="12">7–12 месяцев</option>
+                  <option value="24">1–2 года</option>
+                  <option value="36">Более 2 лет</option>
+                </select>
               </div>
               <div>
                 <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Какой продукт, услугу или тренировку хотели бы видеть в студии?</div>
@@ -550,7 +559,38 @@ function npsPickScore(n, el) {
   });
 }
 
+var _npsCollectorsLoaded = false;
+async function npsLoadCollectors() {
+  if (_npsCollectorsLoaded) return;
+  _npsCollectorsLoaded = true;
+  var sel = document.getElementById('nps-collector');
+  try {
+    var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/profiles?select=id,name,motivation_type&active=eq.true&order=name', {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oaXlvaWxmZWdtbXZkdHFzZ2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDc0MTMsImV4cCI6MjA5NjE4MzQxM30.VL7a64jalOvhGC3yLMdeR-qR1Jlffht-uYcYmwDn7oQ'
+      }
+    });
+    var all = await res.json();
+    var list = all.filter(function(p){ return p.motivation_type === 'service_manager'; });
+    var saved = localStorage.getItem('nps_collector_id') || '';
+    sel.innerHTML = '<option value="">— выберите себя —</option>' +
+      list.map(function(p){ return '<option value="'+p.id+'"'+(String(p.id)===saved?' selected':'')+'>'+p.name+'</option>'; }).join('');
+    if (saved && list.find(function(p){return String(p.id)===saved;})) {
+      sel.style.background = '#eaf6f2';
+    }
+  } catch(e) {
+    sel.innerHTML = '<option value="">⚠ Ошибка загрузки</option>';
+  }
+}
+function npsSetCollector(val) {
+  localStorage.setItem('nps_collector_id', val);
+  var sel = document.getElementById('nps-collector');
+  sel.style.background = val ? '#eaf6f2' : '#fff';
+}
+
 async function submitNPS() {
+  var collector = document.getElementById('nps-collector').value;
   var name = document.getElementById('nps-name').value.trim();
   var phone = document.getElementById('nps-phone').value.trim();
   var studio = document.getElementById('nps-studio').value;
@@ -561,18 +601,35 @@ async function submitNPS() {
   var product = document.getElementById('nps-product').value.trim();
   var msg = document.getElementById('nps-msg');
 
+  if (!collector) {
+    msg.textContent = '⚠ Сначала выберите себя в поле "Кто вы?"';
+    msg.style.background = '#f3e8ff'; msg.style.color = '#9333ea';
+    msg.style.display = 'block'; return;
+  }
   if (!name || !phone || !studio || score === '') {
     msg.textContent = '⚠ Заполните имя, телефон, студию и выберите оценку';
     msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b';
     msg.style.display = 'block'; return;
   }
 
+  var months = document.getElementById('nps-months').value;
   var comment = [
+    months ? 'Посещает студию: ' + document.getElementById('nps-months').options[document.getElementById('nps-months').selectedIndex].text : '',
     why ? 'Почему такой балл: ' + why : '',
     improve ? 'Что улучшить: ' + improve : '',
     wishes ? 'Пожелания: ' + wishes : '',
     product ? 'Хотели бы видеть: ' + product : ''
   ].filter(Boolean).join(' | ');
+
+  var body = {
+    client_name: name,
+    client_phone: phone,
+    studio: studio,
+    score: parseInt(score),
+    comment: comment,
+    collected_by: parseInt(collector),
+    survey_date: new Date().toISOString().slice(0, 10)
+  };
 
   try {
     var res = await fetch('https://nhiyoilfegmmvdtqsgkm.supabase.co/rest/v1/nps_responses', {
@@ -583,28 +640,23 @@ async function submitNPS() {
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({
-        client_name: name,
-        client_phone: phone,
-        studio: studio,
-        score: parseInt(score),
-        comment: comment,
-        survey_date: new Date().toISOString().slice(0, 10)
-      })
+      body: JSON.stringify(body)
     });
     if (res.ok) {
       msg.textContent = '✓ Оценка сохранена! Спасибо 💜';
       msg.style.background = '#eaf6f2'; msg.style.color = '#3f8f7a';
       msg.style.display = 'block';
-      ['nps-name','nps-phone','nps-studio','nps-score','nps-why','nps-improve','nps-wishes','nps-product'].forEach(function(id){
+      // Сбрасываем только поля клиента — менеджер остаётся выбранным
+      ['nps-name','nps-phone','nps-studio','nps-score','nps-why','nps-improve','nps-wishes','nps-product','nps-months'].forEach(function(id){
         var el = document.getElementById(id);
-        if (el) el.value = '';
+        if (el) el.value = id === 'nps-phone' ? '+7' : '';
       });
       document.querySelectorAll('#nps-score-btns button').forEach(function(b){
         b.style.background='#fff'; b.style.color='inherit'; b.style.borderColor='#e3d9de';
       });
     } else {
-      msg.textContent = '⚠ Ошибка сохранения. Попробуйте ещё раз.';
+      var err = await res.text();
+      msg.textContent = '⚠ Ошибка сохранения: ' + err;
       msg.style.background = '#fbeaea'; msg.style.color = '#9a3b3b';
       msg.style.display = 'block';
     }
