@@ -185,6 +185,16 @@ header p{color:var(--sub);font-size:13px}
           <div class="panel" id="p3">
             <div style="display:grid;gap:8px">
               <div>
+                <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Кто заполняет НПС</div>
+                <select id="nps-who" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:#3a2d36">
+                  <option value="">— выбрать —</option>
+                  <option value="sm">Сервис-менеджер</option>
+                  <option value="trainer">Тренер</option>
+                  <option value="admin">Администратор</option>
+                  <option value="client">Клиент (самостоятельно)</option>
+                </select>
+              </div>
+              <div>
                 <div style="font-size:11px;font-weight:600;color:#6b5b66;margin-bottom:3px">Имя клиента</div>
                 <input id="nps-name" type="text" placeholder="Иванова Анна" style="width:100%;padding:7px 10px;border:1px solid #e3d9de;border-radius:6px;font-size:13px;font-family:inherit">
               </div>
